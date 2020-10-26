@@ -1,16 +1,5 @@
 # production
 /build
-/src
-/webpack
-.babelrc
-.browserslistrc
-.editorconfig
-.prettierrc
-eslintrc
-package.json
-package-lock.json
-postcss.config.js
-prettierrc
 
 
 # Logs
