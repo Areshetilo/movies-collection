@@ -77,16 +77,16 @@ const showLibrary = e => {
 }
 
 const showSavedMovieFromGrade = e =>{
+  updateMoviesMarkup.reset();
+  globalVars.activeTab = e.target.value;
 
   if (e.target.value === 'watched') {
-    globalVars.activeTab = e.target.value;
-
+    console.log(updateMoviesLocalStorage.getWatchedMovies());
     updateMoviesLocalStorage.getWatchedMovies() ?
       updateMoviesMarkup.show(updateMoviesLocalStorage.getWatchedMovies()) :
       updateMoviesMarkup.defaultMsg("Вы не просмотрели ни одного фильма")
 
-  }else{
-    globalVars.activeTab = e.target.value;
+  }else if(e.target.value === 'queue'){
     updateMoviesLocalStorage.getQueueMovies()?
       updateMoviesMarkup.show(updateMoviesLocalStorage.getQueueMovies()) :
       updateMoviesMarkup.defaultMsg("У вас нет очереди к просмотру")
