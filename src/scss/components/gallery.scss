@@ -97,14 +97,16 @@
     right: 2.2rem;
     top: 1.1rem;
     font-size: 1.3rem;
-
+    box-shadow: inset 0 0 0.3rem 0.1rem rgba(0, 0, 0, 0.35),
+      inset 0 0 0.3rem 0.1rem rgba(0, 0, 0, 0.35);
+    border-radius: 0.6rem;
+    background-color: $primary-white;
+    padding: 0.4rem 1.4rem;
     @include for-size(tablet) {
       font-size: 1.5rem;
-      right: 2.5rem;
     }
     @include for-size(tablet-landscape) {
       font-size: 2rem;
-      right: 3rem;
     }
   }
 }
