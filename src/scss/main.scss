@@ -37,6 +37,10 @@ body {
   height: 30px;
 }
 
+@import './components/header';
+@import './components/watched';
+@import './visibility';
+
 @import './components/form';
 @import './components/gallery';
 @import './components/loader';
