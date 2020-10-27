@@ -3,8 +3,8 @@ import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
 import throttle from 'lodash.throttle';
 import refs from './js/refs';
-import imagesService from './js/imagesAPI-service';
-import updateImagesMarkup from './js/updateImagesMarkup';
+import imagesService from './js/moviesAPI-service';
+import updateMoviesMarkup from './js/updateMoviesMarkup';
 import Loader from './js/components/Loader';
 import lazyLoad from './js/components/lazyLoad';
 import loadOnScroll from './js/components/loadOnScroll';
@@ -15,23 +15,22 @@ import showLightbox from './js/showLightbox';
 
 const loader = new Loader('.js-loader', 'is-hidden');
 
-imagesService.fetchImages().then((images) => {
-  updateImagesMarkup.show(images);
+imagesService.fetchPopularMovies().then((movies) => {
+  console.log(movies);
+  updateMoviesMarkup.show(movies);
   lazyLoad();
-  imagesService.editors = false;
-  imagesService.imagesPerPage = 12;
 });
 
 const submitHandler = (e) => {
   e.preventDefault();
-  updateImagesMarkup.reset();
+  updateMoviesMarkup.reset();
   loader.show();
   imagesService.query = e.currentTarget.elements.query.value;
   imagesService.resetPage();
   imagesService
-    .fetchImages()
-    .then((images) => {
-      updateImagesMarkup.show(images);
+    .fetchPopularMovies()
+    .then((movies) => {
+      updateMoviesMarkup.show(movies);
       lazyLoad();
       loadOnScroll();
     })
