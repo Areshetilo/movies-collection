@@ -19,9 +19,9 @@
     }
   }
 
-  //>992px
+  //>1024px
   @else if $size==tablet-landscape {
-    @media (min-width: 62em) {
+    @media (min-width: 64em) {
       @content;
     }
   }
