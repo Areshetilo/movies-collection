@@ -8,32 +8,38 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <title>Movies collection</title>
+    <link
+      rel="shortcut icon"
+      href="./images/video-camera.png"
+      type="image/png"
+    />
+    <title>Movies</title>
   </head>
   <body>
     <header class="main-header">
       <div class="main__container">
         <div class="header-wrap">
           <a href="#" class="link-logo">
-            <img src="./images/logo.png" alt="logo" width="23" height="19" class="link-logo__img">
-            <h2 class="link-logo__title">
-                Filmoteka
-            </h2>
+            <img
+              src="./images/video-camera.png"
+              alt="logo"
+              width="24"
+              height="24"
+              class="link-logo__img"
+            />
+            <h2 class="link-logo__title">MovieLibrary</h2>
           </a>
 
           <div class="head_toggle">
             <div class="toggle-item item">
-              <input id="home" type="radio" name="radio" value="home" checked>
+              <input id="home" type="radio" name="radio" value="home" checked />
               <label for="home">HOME</label>
             </div>
             <div class="toggle-item item">
-              <input id="library" type="radio" name="radio" value="library">
+              <input id="library" type="radio" name="radio" value="library" />
               <label for="library">my library</label>
             </div>
           </div>
-
-
-
         </div>
       </div>
     </header>
@@ -41,16 +47,15 @@
       <div class="main__container">
         <div class="head_toggle">
           <div class="toggle-item item">
-            <input id="watched" type="radio" name="radioW" value="watched">
+            <input id="watched" type="radio" name="radioW" value="watched" />
             <label for="watched">Watched</label>
           </div>
           <div class="toggle-item item">
-            <input id="queue" type="radio" name="radioW" value="queue">
+            <input id="queue" type="radio" name="radioW" value="queue" />
             <label for="queue">Queue</label>
           </div>
         </div>
       </div>
-
     </section>
     <div class="container">
       <div id="up"></div>
@@ -61,8 +66,9 @@
               class="search-input"
               type="search"
               name="query"
+              autofocus
               autocomplete="off"
-              placeholder="Search images..."
+              placeholder="Enter movie you like ;)"
             />
             <button class="submit-button" type="submit">
               <i class="material-icons">search</i>
