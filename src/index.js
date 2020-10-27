@@ -23,9 +23,12 @@ imagesService.fetchPopularMovies().then((movies) => {
 
 const submitHandler = (e) => {
   e.preventDefault();
+  const reg = /^[a-zа-яё\s]+$/iu;
+  const inputValue = e.currentTarget.elements.query.value.match(reg).input;
+  //TODO check if inputValue is not a null
   updateMoviesMarkup.reset();
   loader.show();
-  imagesService.query = e.currentTarget.elements.query.value;
+  imagesService.query = inputValue;
   imagesService.resetPage();
   imagesService
     .fetchPopularMovies()
@@ -54,6 +57,6 @@ const galleryClickHandler = ({ target }) => {
 refs.searchForm.addEventListener('submit', submitHandler);
 refs.gallery.addEventListener('click', galleryClickHandler);
 refs.toTop.addEventListener('click', function () {
-  scrollToTop(1);
+  scrollToTop(30);
 });
 window.addEventListener('scroll', throttle(isVisible, 500));

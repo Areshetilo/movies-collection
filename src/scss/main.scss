@@ -1,6 +1,6 @@
 @import 'minireset.scss';
 @import 'normalize.scss';
-//@import 'fonts.scss';
+@import 'fonts.scss';
 @import 'vars.scss';
 @import 'mixins.scss';
 
@@ -14,8 +14,8 @@ h1 {
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
-  @include font(20/11, 1.1rem, 400);
+  font-family: 'Roboto', sans-serif;
+  @include font(1.2, 1.6rem, 400);
   color: $main-text;
   background-color: #fff;
 }

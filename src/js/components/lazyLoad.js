@@ -1,5 +1,5 @@
 const lazyLoad = () => {
-  const imagesArr = Array.from(document.querySelectorAll('.gallery-image'));
+  const imagesArr = Array.from(document.querySelectorAll('.movie-card__image'));
   const options = { rootMargin: '100px' };
   const onEntry = (entries, observer) => {
     entries.forEach((entry) => {
