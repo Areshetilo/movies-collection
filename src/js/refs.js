@@ -1,9 +1,7 @@
-
-const  refs ={
-  imagesList: document.querySelector('.images-list'),
-  form: document.querySelector('.form'),
-  imageListItem: document.querySelectorAll('.images-list__item'),
-
-}
-
+const refs = {
+  gallery: document.querySelector('.gallery'),
+  searchForm: document.querySelector('#search-form'),
+  toTop: document.getElementById('goto-topJS'),
+  bottom: document.querySelector('.bottom')
+};
 export default refs;

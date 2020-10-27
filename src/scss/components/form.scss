@@ -1,0 +1,30 @@
+.search-form {
+  padding-top: 30px;
+  position: relative;
+  width: 50%;
+
+  @media (max-width: 576px) {
+    width: 100%;
+  }
+}
+
+.search-input {
+  width: 100%;
+  min-height: 42px;
+  border-radius: 4px;
+  border: 2px solid #3b5998;
+  margin-bottom: 20px;
+  padding-left: 10px;
+}
+
+.submit-button {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: #3b5998;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}

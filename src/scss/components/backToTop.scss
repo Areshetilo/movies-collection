@@ -1,0 +1,21 @@
+#goto-topJS {
+  font-size: 52px;
+  color: #3b5998;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 100;
+  transition: transform 1s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.simplescrollup__button--show {
+  transform: translateX(0);
+}
+
+.simplescrollup__button--hide {
+  transform: translateX(130px);
+}

@@ -1,63 +1,60 @@
-import './styles.css';
+import './scss/main.scss';
+import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/core/dist/BrightTheme.css';
+import throttle from 'lodash.throttle';
+import refs from './js/refs';
+import imagesService from './js/imagesAPI-service';
+import updateImagesMarkup from './js/updateImagesMarkup';
+import Loader from './js/components/Loader';
+import lazyLoad from './js/components/lazyLoad';
+import loadOnScroll from './js/components/loadOnScroll';
+import scrollToTop from './js/components/scrollToTop';
+import isVisible from './js/components/isScrollBtnVisible';
 
-import 'basicLightbox/dist/basicLightbox.min.css';
-import makeFetch from "./js/createFetchFind";
-import refs from "./js/refs";
-import render from "./js/renerViewResult";
-import infinityScroll from "./js/infinityScroll";
-import 'fslightbox';
-import spinner from "./js/spinner";
+import showLightbox from './js/showLightbox';
 
+const loader = new Loader('.js-loader', 'is-hidden');
 
+imagesService.fetchImages().then((images) => {
+  updateImagesMarkup.show(images);
+  lazyLoad();
+  imagesService.editors = false;
+  imagesService.imagesPerPage = 12;
+});
 
+const submitHandler = (e) => {
+  e.preventDefault();
+  updateImagesMarkup.reset();
+  loader.show();
+  imagesService.query = e.currentTarget.elements.query.value;
+  imagesService.resetPage();
+  imagesService
+    .fetchImages()
+    .then((images) => {
+      updateImagesMarkup.show(images);
+      lazyLoad();
+      loadOnScroll();
+    })
+    .finally(() => loader.hide());
+  e.currentTarget.reset();
+};
 
+const galleryClickHandler = ({ target }) => {
+  if (target.nodeName === 'IMG') {
+    const imageElArr = Array.from(
+      refs.gallery.querySelectorAll('.gallery-image')
+    );
+    const imageSrcArr = imageElArr.map((image) => image.dataset.source);
+    const currentTargetId = imageSrcArr.findIndex(
+      (value) => value === target.dataset.source
+    );
+    showLightbox(imageSrcArr, currentTargetId);
+  }
+};
 
-
-
-
-
-refs.form.addEventListener('submit',searchForSubmit );
-
-
-
-
-
-
-function searchForSubmit(event) {
-  event.preventDefault();
-  spinner.show();
-
-  makeFetch.targetSearch = event.currentTarget.elements.query.value;
-  refs.imagesList.innerHTML = '';
-  makeFetch.resetPage();
-  makeFetch.crateFetchFind().then(data=>{
-    render.renderResult(data)
-    refreshFsLightbox();
-    lazyLoadImg();
-
-  }).finally(()=>{
-    spinner.hide();
-  });
-
-
-}
-
-
-function lazyLoadImg() {
-  refreshFsLightbox();
-  const imageListItem = document.querySelectorAll('.images-list__item');
-  infinityScroll.observe(imageListItem[imageListItem.length-1]);
-
-
-}
-
-
-export default lazyLoadImg;
-
-
-
-
-
-
-
-
+refs.searchForm.addEventListener('submit', submitHandler);
+refs.gallery.addEventListener('click', galleryClickHandler);
+refs.toTop.addEventListener('click', function () {
+  scrollToTop(1);
+});
+window.addEventListener('scroll', throttle(isVisible, 500));
