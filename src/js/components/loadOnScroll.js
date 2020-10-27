@@ -1,6 +1,6 @@
 import refs from '../refs';
-import imagesService from '../imagesAPI-service';
-import updateImagesMarkup from '../updateImagesMarkup';
+import imagesService from '../moviesAPI-service';
+import updateImagesMarkup from '../updateMoviesMarkup';
 import lazyLoad from './lazyLoad';
 
 const loadOnScroll = () => {
