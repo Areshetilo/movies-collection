@@ -80,7 +80,7 @@ const showSavedMovieFromGrade = e =>{
 
   if (e.target.value === 'watched') {
     globalVars.activeTab = e.target.value;
-    updateMoviesLocalStorage.setWatchedMovie(filmsList.arr);
+
     updateMoviesLocalStorage.getWatchedMovies() ?
       updateMoviesMarkup.show(updateMoviesLocalStorage.getWatchedMovies()) :
       updateMoviesMarkup.defaultMsg("Вы не просмотрели ни одного фильма")
