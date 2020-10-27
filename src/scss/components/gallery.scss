@@ -1,24 +1,58 @@
-.stats {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.stats-item {
-  color: #3b5998;
-}
+@import '../vars.scss';
+@import '../mixins.scss';
 
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
   padding-left: 0;
+  @media (max-width: 576px) {
+    gap: 10px;
+  }
 }
 
-.gallery-image {
-  min-height: 300px;
-  object-fit: cover;
-  cursor: pointer;
-  @media (max-width: 576px) {
-    min-height: 200px;
+.movie-card {
+  position: relative;
+
+  &__image {
+    border-radius: 10px;
+    background-color: #b3b3b3;
+    min-height: 300px;
+    object-fit: cover;
+    cursor: pointer;
+    @media (max-width: 576px) {
+      min-height: 200px;
+    }
+  }
+
+  &__title,
+  &__vote {
+    position: absolute;
+    @include font(14.76/12, 1.2rem, 500);
+  }
+
+  &__title {
+    left: 1rem;
+    bottom: 1rem;
+    color: #b3b3b3;
+  }
+
+  &__plate {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    display: inline-block;
+    width: 3.4rem;
+    height: 1.7rem;
+    box-shadow: inset 0 0 0.3rem 0.1rem rgba(0, 0, 0, 0.35),
+      inset 0 0 0.3rem 0.1rem rgba(0, 0, 0, 0.35);
+    border-radius: 0.6rem;
+    background-color: #fff;
+  }
+
+  &__vote {
+    right: 2.2rem;
+    top: 1.1rem;
+    font-size: 1.3rem;
   }
 }
