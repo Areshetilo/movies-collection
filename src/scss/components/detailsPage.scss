@@ -1,0 +1,111 @@
+.main__details-page {
+    width: 100%;
+    display: none;
+}
+.main__details-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.main__image-container{
+    width: 270px;
+    height: 400px;
+    background-color: rgb(201, 200, 200);
+}
+
+.main__text-container{
+    width: 48%;
+}
+
+.main__details-title{
+    text-align: center;
+    font-size: 30px;
+    margin: 1rem 0;
+    text-align: left;
+}
+
+.main__details-table{
+    width: 100%;
+    &>td{
+        padding: 0.5rem;
+    }
+}
+
+.main__details-text-string{
+    width: 100%;
+    &:nth-child(odd){
+        background-color: #77c1bb;
+    }
+}
+
+.main__details-about{
+    margin-bottom: 0.5rem;
+}
+
+.main_added-list{
+    list-style: none;
+    display: flex;
+    margin-top: 1rem;
+    &>li:first-child{
+        margin-right: 2rem;
+    }
+}
+
+.main_added-button{
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+@media (max-width: 767px){
+    .main__details-page{
+        width: 300px;
+        margin: 20px auto;
+    }
+    .main__details-container{
+        width: 300px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .main__text-container{
+        width: 90%;
+    }
+    
+    .main_added-list{
+        justify-content: center;
+    }
+    .main_added-button{
+        display: none;
+    }
+    .main__details-title{
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.2;
+        color: #372c48;
+    }
+    .main__details-text-string{
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.8;
+        color: #678280;
+    }
+    .main__details-about{
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.2;
+        color: #372c48;
+    }
+    .main__details-about-text{
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.28;
+        color: #678280;
+    }
+}
+
+
