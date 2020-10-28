@@ -85,6 +85,7 @@ const showSavedMovieFromGrade = e =>{
   updateMoviesMarkup.reset();
   globalVars.activeTab = e.target.value;
   if (e.target.value === 'watched') {
+
     showSavedMovieWatched();
   }else if(e.target.value === 'queue'){
     showSavedMovieQueue();
@@ -92,6 +93,11 @@ const showSavedMovieFromGrade = e =>{
 
   lazyLoad();
   loadOnScroll();
+}
+
+
+const runLoadScroll = () => {
+
 }
 
 const showSavedMovieWatched = ()=>{
