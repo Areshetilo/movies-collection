@@ -43,23 +43,22 @@
         </div>
       </div>
     </header>
-    <section class="main-watched">
-      <div class="main__container">
-        <div class="head_toggle">
-          <div class="toggle-item item">
-            <input id="watched" type="radio" name="radioW" value="watched" />
-            <label for="watched">Watched</label>
-          </div>
-          <div class="toggle-item item">
-            <input id="queue" type="radio" name="radioW" value="queue" />
-            <label for="queue">Queue</label>
-          </div>
-        </div>
-      </div>
-    </section>
+
     <div class="container">
       <div id="up"></div>
       <main>
+        <div class="main-watched">
+          <div class="head_toggle">
+            <div class="toggle-item item">
+              <input id="watched" type="radio" name="radioW" value="watched" checked />
+              <label for="watched">Watched</label>
+            </div>
+            <div class="toggle-item item">
+              <input id="queue" type="radio" name="radioW" value="queue" />
+              <label for="queue">Queue</label>
+            </div>
+          </div>
+        </div>
         <div class="main__container">
           <form class="search-form" id="search-form">
             <input
@@ -78,6 +77,7 @@
           <ul class="gallery"></ul>
         </div>
       </main>
+
       <i
         class="material-icons back-to-top simplescrollup__button--hide"
         id="goto-topJS"
@@ -87,6 +87,13 @@
         <div class="lds-dual-ring js-loader is-hidden"></div>
       </div>
     </div>
+    <footer class="main-footer">
+      <div class="main__container">
+         <h3 class="footer-title">
+           ВАНЯ, ЧО КАВО :)
+         </h3>
+      </div>
+    </footer>
     <div class="bottom"></div>
   </body>
 </html>

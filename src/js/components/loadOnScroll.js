@@ -2,25 +2,31 @@ import refs from '../refs';
 import imagesService from '../moviesAPI-service';
 import updateImagesMarkup from '../updateMoviesMarkup';
 import lazyLoad from './lazyLoad';
+import globalVars from "../globalVars/vars";
 
 import updateMoviesLocalStorage from '../updateMoviesLocalStorage'
 
-const loadOnScroll = (activeTab) => {
-  const options = { rootMargin: '0px' };
+const loadOnScroll = () => {
+  const options = { rootMargin: '500px' };
   const onEntry = (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        if (activeTab==='homePage'){
+        console.log(globalVars.activeTab, "main")
+        if (globalVars.activeTab==='homePage'){
+          console.log(globalVars.activeTab)
           imagesService.fetchImages().then((images) => {
             updateImagesMarkup.show(images);
-            lazyLoad();
+
           });
-        }else if(activeTab==='watched'){
+        }else if(globalVars.activeTab==='watched'){
+          console.log(globalVars.activeTab, "  else if(globalVars.activeTab==='watched' ")
           updateImagesMarkup.show(updateMoviesLocalStorage.getWatchedMovies());
 
-        }else{
+        }else if(globalVars.activeTab==='queue'){
+          console.log(globalVars.activeTab)
           updateImagesMarkup.show(updateMoviesLocalStorage.getQueueMovies());
         }
+        lazyLoad();
 
       }
     });

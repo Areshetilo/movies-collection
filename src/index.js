@@ -10,7 +10,7 @@ import lazyLoad from './js/components/lazyLoad';
 import loadOnScroll from './js/components/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
-import filmsList from './js/currentFilmList'
+//import filmsList from './js/currentFilmList'
 import updateMoviesLocalStorage from './js/updateMoviesLocalStorage'
 import globalVars from "./js/globalVars/vars";
 
@@ -18,9 +18,11 @@ import showLightbox from './js/showLightbox';
 
 const loader = new Loader('.js-loader', 'is-hidden');
 
+
 imagesService.fetchPopularMovies().then((movies) => {
   console.log(movies);
-  filmsList.arr =  movies;
+  globalVars.popularMoviesArr =  movies;
+
   updateMoviesMarkup.show(movies);
   lazyLoad();
 });
@@ -62,14 +64,17 @@ const galleryClickHandler = ({ target }) => {
 
 const showLibrary = e => {
   if (e.target.value === 'library') {
-    globalVars.activeTab = e.target.value;
+    globalVars.activeTab = 'watched';
     refs.sectionWatched.classList.add('visibility');
+    refs.searchForm.classList.add('unVisibility');
+    showSavedMovieWatched();
   }else{
     globalVars.activeTab = e.target.value;
     refs.sectionWatched.classList.remove('visibility');
-    console.log(filmsList.arr)
+    refs.searchForm.classList.remove('unVisibility');
+
     updateMoviesMarkup.reset();
-    updateMoviesMarkup.show(filmsList.arr);
+    updateMoviesMarkup.show(globalVars.popularMoviesArr);
     lazyLoad();
     loadOnScroll();
   }
@@ -79,21 +84,28 @@ const showLibrary = e => {
 const showSavedMovieFromGrade = e =>{
   updateMoviesMarkup.reset();
   globalVars.activeTab = e.target.value;
-
   if (e.target.value === 'watched') {
-    console.log(updateMoviesLocalStorage.getWatchedMovies());
-    updateMoviesLocalStorage.getWatchedMovies() ?
-      updateMoviesMarkup.show(updateMoviesLocalStorage.getWatchedMovies()) :
-      updateMoviesMarkup.defaultMsg("Вы не просмотрели ни одного фильма")
-
+    showSavedMovieWatched();
   }else if(e.target.value === 'queue'){
-    updateMoviesLocalStorage.getQueueMovies()?
-      updateMoviesMarkup.show(updateMoviesLocalStorage.getQueueMovies()) :
-      updateMoviesMarkup.defaultMsg("У вас нет очереди к просмотру")
+    showSavedMovieQueue();
   }
 
   lazyLoad();
   loadOnScroll();
+}
+
+const showSavedMovieWatched = ()=>{
+  globalVars.activeTab = 'watched';
+  updateMoviesLocalStorage.getWatchedMovies() ?
+    updateMoviesMarkup.show(updateMoviesLocalStorage.getWatchedMovies()) :
+    updateMoviesMarkup.defaultMsg("Вы не просмотрели ни одного фильма")
+
+}
+
+const showSavedMovieQueue = ()=>{
+  updateMoviesLocalStorage.getQueueMovies()?
+    updateMoviesMarkup.show(updateMoviesLocalStorage.getQueueMovies()) :
+    updateMoviesMarkup.defaultMsg("У вас нет очереди к просмотру")
 }
 
 refs.searchForm.addEventListener('submit', submitHandler);

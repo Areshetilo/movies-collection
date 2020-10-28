@@ -1,6 +1,8 @@
 const globalVars = {
-  moviesArr: null,
+  popularMoviesArr: [],
   activeTab: 'homePage',
+  WATCHED: 'watched',
+  QUEUE : 'queue',
 
   setActiveTab(nameTab){
     this.activeTab = nameTab

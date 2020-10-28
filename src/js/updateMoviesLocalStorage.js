@@ -1,35 +1,61 @@
+import globalVars from "./globalVars/vars";
+
+
+
+
 
 const updateMoviesLocalStorage = {
 
 
-  setAllMovies(){
-
-
+  setAll(movie) {
+    localStorage.setItem('watchedMovies', JSON.stringify(movie))
   },
 
-  setWatchedMovie(arr){
-    localStorage.setItem('watchedMovies', JSON.stringify(arr));
+  setWatchedMovie(movie) {
+
+    if (this.getMovie(movie) === globalVars.WATCHED) {
+      return true
+    }
+    this.setQueueMovie(movie) &&
+    localStorage.setItem('queueMovies', JSON.stringify(this.getQueueMovies().filter(film => film.id !== movie.id)));
+
+
+    localStorage.setItem('watchedMovies', JSON.stringify([movie, ...this.getWatchedMovies()]));
   },
 
-  setQueueMovie(){
+  setQueueMovie(movie) {
+    if (this.getMovie(movie) === globalVars.QUEUE) {
+      return true
+    }
+    this.setWatchedMovie(movie) &&
+    localStorage.setItem('queueMovies', JSON.stringify(this.getWatchedMovies().filter(film => film.id !== movie.id)));
 
+    localStorage.setItem('queueMovies', JSON.stringify([movie, ...this.getQueueMovies()]));
   },
 
-  getAllMovies(){
-    return localStorage.getItem('allMovies')
-  },
-  getWatchedMovies(){
-    if(localStorage.getItem('watchedMovies')){
+
+  getWatchedMovies() {
+    if (localStorage.getItem('watchedMovies')) {
       return JSON.parse(localStorage.getItem('watchedMovies'))
     }
 
   },
-  getQueueMovies(){
-    if(localStorage.getItem('queueMovies')){
+  getQueueMovies() {
+    if (localStorage.getItem('queueMovies')) {
       return JSON.parse(localStorage.getItem('queueMovies'))
     }
-  }
+  },
 
+
+  getMovie(movie) {
+
+    if (this.getWatchedMovies().find(film => film.id === movie.id)) {
+      return globalVars.WATCHED;
+    } else if (this.getQueueMovies().find(film => film.id === movie.id)) {
+      return globalVars.QUEUE;
+    }
+
+  }
 }
 
 

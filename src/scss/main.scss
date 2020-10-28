@@ -26,6 +26,8 @@ main {
       rgba(119, 193, 187, 0.8)
     ),
     url(../images/background.jpg);
+  padding-bottom: 30px;
+
 }
 
 .main__container {
@@ -53,3 +55,4 @@ main {
 @import './components/gallery';
 @import './components/loader';
 @import './components/backToTop';
+@import './components/footer';
