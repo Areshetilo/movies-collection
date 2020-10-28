@@ -8,6 +8,11 @@ const updateMoviesMarkup = {
   },
   reset() {
     refs.gallery.innerHTML = '';
+
+  },
+
+  defaultMsg(msg){
+    refs.gallery.innerHTML = `${msg}`;
   }
 };
 
