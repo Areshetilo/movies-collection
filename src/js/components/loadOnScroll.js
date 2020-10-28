@@ -1,33 +1,29 @@
 import refs from '../refs';
 import imagesService from '../moviesAPI-service';
-import updateImagesMarkup from '../updateMoviesMarkup';
+import updateMoviesMarkup from '../updateMoviesMarkup';
 import lazyLoad from './lazyLoad';
-import globalVars from "../globalVars/vars";
+import globalVars from '../globalVars/vars';
 
-import updateMoviesLocalStorage from '../updateMoviesLocalStorage'
+import updateMoviesLocalStorage from '../updateMoviesLocalStorage';
 
 const loadOnScroll = () => {
+  const activeTab = globalVars.activeTab;
   const options = { rootMargin: '500px' };
   const onEntry = (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        console.log(globalVars.activeTab, "main")
-        if (globalVars.activeTab==='homePage'){
-          console.log(globalVars.activeTab)
-          imagesService.fetchImages().then((images) => {
-            updateImagesMarkup.show(images);
-
+        if (activeTab === 'homePage') {
+          console.log('мы на главной');
+          imagesService.fetchPopularMovies().then((movies) => {
+            updateMoviesMarkup.show(movies);
+            lazyLoad();
           });
-        }else if(globalVars.activeTab==='watched'){
-          console.log(globalVars.activeTab, "  else if(globalVars.activeTab==='watched' ")
-          updateImagesMarkup.show(updateMoviesLocalStorage.getWatchedMovies());
-
-        }else if(globalVars.activeTab==='queue'){
-          console.log(globalVars.activeTab)
-          updateImagesMarkup.show(updateMoviesLocalStorage.getQueueMovies());
+        } else if (activeTab === 'watched') {
+          console.log('переходим на watched');
+          updateMoviesMarkup.show(updateMoviesLocalStorage.getWatchedMovies());
+        } else {
+          updateMoviesMarkup.show(updateMoviesLocalStorage.getQueueMovies());
         }
-        lazyLoad();
-
       }
     });
   };

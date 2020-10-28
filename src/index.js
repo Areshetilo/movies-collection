@@ -10,22 +10,24 @@ import lazyLoad from './js/components/lazyLoad';
 import loadOnScroll from './js/components/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
-//import filmsList from './js/currentFilmList'
-import updateMoviesLocalStorage from './js/updateMoviesLocalStorage'
-import globalVars from "./js/globalVars/vars";
+import filmsList from './js/currentFilmList';
+import updateMoviesLocalStorage from './js/updateMoviesLocalStorage';
+import globalVars from './js/globalVars/vars';
 
 import showLightbox from './js/showLightbox';
 
 const loader = new Loader('.js-loader', 'is-hidden');
-
-
-imagesService.fetchPopularMovies().then((movies) => {
-  console.log(movies);
-  globalVars.popularMoviesArr =  movies;
-
-  updateMoviesMarkup.show(movies);
-  lazyLoad();
-});
+loader.show();
+imagesService
+  .fetchPopularMovies()
+  .then((movies) => {
+    console.log(movies);
+    globalVars.popularMoviesArr =  movies;
+    updateMoviesMarkup.show(movies);
+    lazyLoad();
+    loadOnScroll();
+  })
+  .finally(() => loader.hide());
 
 const submitHandler = (e) => {
   e.preventDefault();
@@ -61,16 +63,16 @@ const galleryClickHandler = ({ target }) => {
   }
 };
 
-
-const showLibrary = e => {
+const showLibrary = (e) => {
   if (e.target.value === 'library') {
     globalVars.activeTab = 'watched';
     refs.sectionWatched.classList.add('visibility');
     refs.searchForm.classList.add('unVisibility');
     showSavedMovieWatched();
-  }else{
+  } else {
     globalVars.activeTab = e.target.value;
     refs.sectionWatched.classList.remove('visibility');
+    console.log(filmsList.arr);
     refs.searchForm.classList.remove('unVisibility');
 
     updateMoviesMarkup.reset();
@@ -78,16 +80,14 @@ const showLibrary = e => {
     lazyLoad();
     loadOnScroll();
   }
-
 }
 
-const showSavedMovieFromGrade = e =>{
+const showSavedMovieFromGrade = (e) => {
   updateMoviesMarkup.reset();
   globalVars.activeTab = e.target.value;
   if (e.target.value === 'watched') {
-
     showSavedMovieWatched();
-  }else if(e.target.value === 'queue'){
+  } else if (e.target.value === 'queue') {
     showSavedMovieQueue();
   }
 
@@ -114,6 +114,9 @@ const showSavedMovieQueue = ()=>{
     updateMoviesMarkup.defaultMsg("У вас нет очереди к просмотру")
 }
 
+
+
+
 refs.searchForm.addEventListener('submit', submitHandler);
 refs.gallery.addEventListener('click', galleryClickHandler);
 refs.toTop.addEventListener('click', function () {
@@ -121,6 +124,6 @@ refs.toTop.addEventListener('click', function () {
 });
 
 refs.headNav.addEventListener('click', showLibrary);
-refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade)
+refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
 
 window.addEventListener('scroll', throttle(isVisible, 500));

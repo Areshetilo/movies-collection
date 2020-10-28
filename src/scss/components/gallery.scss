@@ -3,15 +3,16 @@
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 520px));
   gap: 20px;
   padding-left: 0;
 
-  @include for-size(phone-only) {
-    gap: 10px;
+  @include for-size(tablet) {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 46%));
   }
   @include for-size(tablet-landscape) {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 48%));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 46%));
     gap: 3.8rem 4%;
   }
   @include for-size(large-desktop) {
@@ -22,6 +23,7 @@
 
 .movie-card {
   position: relative;
+  cursor: pointer;
 
   &::before {
     content: '';
