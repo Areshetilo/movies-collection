@@ -13,7 +13,7 @@ const updateMoviesLocalStorage = {
 
   setWatchedMovie(movie) {
 
-    if (this.getMovie(movie) === globalVars.WATCHED) {
+    if (this.getMovie(movie) === globalVars.watched) {
       return true
     }
     this.setQueueMovie(movie) &&
@@ -24,7 +24,7 @@ const updateMoviesLocalStorage = {
   },
 
   setQueueMovie(movie) {
-    if (this.getMovie(movie) === globalVars.QUEUE) {
+    if (this.getMovie(movie) === globalVars.queue) {
       return true
     }
     this.setWatchedMovie(movie) &&
@@ -50,9 +50,9 @@ const updateMoviesLocalStorage = {
   getMovie(movie) {
 
     if (this.getWatchedMovies().find(film => film.id === movie.id)) {
-      return globalVars.WATCHED;
+      return globalVars.watched;
     } else if (this.getQueueMovies().find(film => film.id === movie.id)) {
-      return globalVars.QUEUE;
+      return globalVars.queue;
     }
 
   }
