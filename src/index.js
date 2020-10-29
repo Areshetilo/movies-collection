@@ -11,10 +11,12 @@ import loadOnScroll from './js/components/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
 // import filmsList from './js/currentFilmList';
-import updateMoviesLocalStorage from './js/updateMoviesLocalStorage';
+import localStorageAPI from './js/localStorageAPI';
 import globalVars from './js/globalVars/vars';
 
 import showLightbox from './js/showLightbox';
+
+
 
 const loader = new Loader('.js-loader', 'is-hidden');
 loader.show();
@@ -66,10 +68,11 @@ const galleryClickHandler = ({ target }) => {
 
 const showLibrary = (e) => {
   if (e.target.value === 'library') {
-    globalVars.activeTab = 'queue';
     refs.sectionWatched.classList.add('visibility');
     refs.searchForm.classList.add('unVisibility');
-    showSavedMovieQueue();
+    updateMoviesMarkup.reset();
+    refs.queueTab.checked ? showSavedMovieQueue() : showSavedMovieWatched();
+
   } else if (e.target.value === 'homePage') {
     globalVars.activeTab = e.target.value;
 
@@ -77,9 +80,11 @@ const showLibrary = (e) => {
     refs.searchForm.classList.remove('unVisibility');
     updateMoviesMarkup.reset();
     updateMoviesMarkup.show(globalVars.moviesArr);
-    lazyLoad();
-    //loadOnScroll();
+
   }
+
+  lazyLoad();
+  //loadOnScroll();
 };
 
 const showSavedMovieFromGrade = (e) => {
@@ -98,18 +103,21 @@ const showSavedMovieFromGrade = (e) => {
   }
 };
 
+
+
 const runLoadScroll = () => {};
 
 const showSavedMovieWatched = () => {
   globalVars.activeTab = 'watched';
-  updateMoviesLocalStorage.getWatchedMovies()
-    ? updateMoviesMarkup.show(updateMoviesLocalStorage.getWatchedMovies())
+  localStorageAPI.getWatchedMovies()
+    ? updateMoviesMarkup.show(localStorageAPI.getWatchedMovies())
     : updateMoviesMarkup.defaultMsg('Вы не просмотрели ни одного фильма');
 };
 
 const showSavedMovieQueue = () => {
-  updateMoviesLocalStorage.getQueueMovies()
-    ? updateMoviesMarkup.show(updateMoviesLocalStorage.getQueueMovies())
+  globalVars.activeTab = 'queue';
+  localStorageAPI.getQueueMovies()
+    ? updateMoviesMarkup.show(localStorageAPI.getQueueMovies())
     : updateMoviesMarkup.defaultMsg('У вас нет очереди к просмотру');
 };
 

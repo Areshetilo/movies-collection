@@ -4,7 +4,7 @@ import globalVars from "./globalVars/vars";
 
 
 
-const updateMoviesLocalStorage = {
+const localStorageAPI = {
 
 
   setAll(movie) {
@@ -59,4 +59,4 @@ const updateMoviesLocalStorage = {
 }
 
 
-export default  updateMoviesLocalStorage;
+export default  localStorageAPI;

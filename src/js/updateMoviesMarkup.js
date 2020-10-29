@@ -1,5 +1,7 @@
+
 import movieCardTemplate from '../templates/movieCard.hbs';
 import refs from './refs';
+
 
 const updateMoviesMarkup = {
   show(movies) {
@@ -16,5 +18,7 @@ const updateMoviesMarkup = {
     refs.gallery.innerHTML = `${msg}`;
   }
 };
+
+
 
 export default updateMoviesMarkup;

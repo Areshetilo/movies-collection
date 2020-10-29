@@ -3,7 +3,7 @@ import imagesService from '../moviesAPI-service';
 import updateMoviesMarkup from '../updateMoviesMarkup';
 import lazyLoad from './lazyLoad';
 import globalVars from '../globalVars/vars';
-import updateMoviesLocalStorage from '../updateMoviesLocalStorage';
+import localStorageAPI from '../localStorageAPI';
 
 const loadOnScroll = () => {
   const options = { rootMargin: '500px' };
