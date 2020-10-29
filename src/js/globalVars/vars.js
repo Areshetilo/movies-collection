@@ -1,5 +1,5 @@
 const globalVars = {
-  _moviesArr: null,
+  _moviesArr: [],
   _activeTab: 'homePage',
   _watched: 'watched',
   _queue: 'queue',

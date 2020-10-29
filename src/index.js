@@ -21,8 +21,7 @@ loader.show();
 imagesService
   .fetchPopularMovies()
   .then((movies) => {
-    console.log(movies);
-    globalVars.popularMoviesArr =  movies;
+    globalVars.moviesArr = [...movies];
     updateMoviesMarkup.show(movies);
     lazyLoad();
     loadOnScroll();
@@ -32,17 +31,19 @@ imagesService
 const submitHandler = (e) => {
   e.preventDefault();
   const reg = /^[a-zа-яё\s]+$/iu;
-  const inputValue = e.currentTarget.elements.query.value.match(reg).input;
+  globalVars.queue = e.currentTarget.elements.query.value.match(reg).input;
   //TODO check if inputValue is not a null
   updateMoviesMarkup.reset();
   loader.show();
-  imagesService.query = inputValue;
+  imagesService.query = globalVars.queue;
   imagesService.resetPage();
   imagesService
-    .fetchPopularMovies()
+    .fetchMovies()
     .then((movies) => {
-
+      console.log(globalVars.moviesArr);
+      // globalVars.moviesArr = [...movies];
       updateMoviesMarkup.show(movies);
+      console.log(globalVars.moviesArr);
       lazyLoad();
       loadOnScroll();
     })
@@ -64,31 +65,26 @@ const galleryClickHandler = ({ target }) => {
 };
 
 const showLibrary = (e) => {
-
   if (e.target.value === 'library') {
     globalVars.activeTab = 'queue';
     refs.sectionWatched.classList.add('visibility');
     refs.searchForm.classList.add('unVisibility');
     showSavedMovieQueue();
-  } else if (e.target.value === 'homePage'){
+  } else if (e.target.value === 'homePage') {
     globalVars.activeTab = e.target.value;
 
     refs.sectionWatched.classList.remove('visibility');
     refs.searchForm.classList.remove('unVisibility');
     updateMoviesMarkup.reset();
-    updateMoviesMarkup.show(globalVars.popularMoviesArr);
-   lazyLoad();
+    updateMoviesMarkup.show(globalVars.moviesArr);
+    lazyLoad();
     //loadOnScroll();
   }
-}
+};
 
 const showSavedMovieFromGrade = (e) => {
-
-  if(e.target.tagName === 'INPUT'){
-    console.log(e.target)
+  if (e.target.tagName === 'INPUT') {
     updateMoviesMarkup.reset();
-    console.log('два раза')
-
     globalVars.activeTab = e.target.value;
 
     if (e.target.value === 'watched') {
@@ -100,30 +96,22 @@ const showSavedMovieFromGrade = (e) => {
     lazyLoad();
     //loadOnScroll();
   }
+};
 
-}
+const runLoadScroll = () => {};
 
-
-const runLoadScroll = () => {
-
-}
-
-const showSavedMovieWatched = ()=>{
+const showSavedMovieWatched = () => {
   globalVars.activeTab = 'watched';
-  updateMoviesLocalStorage.getWatchedMovies() ?
-    updateMoviesMarkup.show(updateMoviesLocalStorage.getWatchedMovies()) :
-    updateMoviesMarkup.defaultMsg("Вы не просмотрели ни одного фильма")
+  updateMoviesLocalStorage.getWatchedMovies()
+    ? updateMoviesMarkup.show(updateMoviesLocalStorage.getWatchedMovies())
+    : updateMoviesMarkup.defaultMsg('Вы не просмотрели ни одного фильма');
+};
 
-}
-
-const showSavedMovieQueue = ()=>{
-  updateMoviesLocalStorage.getQueueMovies()?
-    updateMoviesMarkup.show(updateMoviesLocalStorage.getQueueMovies()) :
-    updateMoviesMarkup.defaultMsg("У вас нет очереди к просмотру")
-}
-
-
-
+const showSavedMovieQueue = () => {
+  updateMoviesLocalStorage.getQueueMovies()
+    ? updateMoviesMarkup.show(updateMoviesLocalStorage.getQueueMovies())
+    : updateMoviesMarkup.defaultMsg('У вас нет очереди к просмотру');
+};
 
 refs.searchForm.addEventListener('submit', submitHandler);
 refs.gallery.addEventListener('click', galleryClickHandler);
