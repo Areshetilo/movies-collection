@@ -36,14 +36,29 @@ const moviesAPI = {
 };
 
 const imagesService = {
-  searchQuery: '',
-  page: 1,
+  _searchQuery: '',
+  _page: 1,
+  _totalPages: 1,
 
   get query() {
-    return this.searchQuery;
+    return this._searchQuery;
   },
   set query(value) {
-    this.searchQuery = value;
+    this._searchQuery = value;
+  },
+
+  get page() {
+    return this._page;
+  },
+  set page(value) {
+    this._page = value;
+  },
+
+  get totalPages() {
+    return this._totalPages;
+  },
+  set totalPages(value) {
+    this._totalPages = value;
   },
 
   resetPage() {
@@ -57,12 +72,12 @@ const imagesService = {
   fetchPopularMovies() {
     return fetch(`${popularURL}&page=${this.page}`, options)
       .then((res) => res.json())
-      .then(({ results }) => {
-        if (!results.length) {
+      .then((res) => {
+        if (!res.results.length) {
           throw new Error('Oops, something went wrong');
         }
         this.incrementPage();
-        return results;
+        return res.results;
       })
       .catch((err) => {
         searchErrorNotFound(err);
@@ -70,17 +85,15 @@ const imagesService = {
   },
 
   fetchMovies() {
-    return fetch(
-      `${searchURL}&query=${this.searchQuery}&page=${this.page}`,
-      options
-    )
+    return fetch(`${searchURL}&query=${this.query}&page=${this.page}`, options)
       .then((res) => res.json())
-      .then(({ hits: images }) => {
-        if (!images.length) {
+      .then((res) => {
+        if (!res.results.length) {
           throw new Error('Unfortunately, your request not found.');
         }
+        console.log(res);
         this.incrementPage();
-        return images;
+        return res.results;
       })
       .catch((err) => {
         searchErrorNotFound(err);
