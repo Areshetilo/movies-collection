@@ -10,7 +10,7 @@ import lazyLoad from './js/components/lazyLoad';
 import loadOnScroll from './js/components/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
-import filmsList from './js/currentFilmList';
+// import filmsList from './js/currentFilmList';
 import updateMoviesLocalStorage from './js/updateMoviesLocalStorage';
 import globalVars from './js/globalVars/vars';
 
@@ -22,7 +22,7 @@ imagesService
   .fetchPopularMovies()
   .then((movies) => {
     console.log(movies);
-    filmsList.arr = movies;
+    globalVars.popularMoviesArr =  movies;
     updateMoviesMarkup.show(movies);
     lazyLoad();
     loadOnScroll();
@@ -41,6 +41,7 @@ const submitHandler = (e) => {
   imagesService
     .fetchPopularMovies()
     .then((movies) => {
+
       updateMoviesMarkup.show(movies);
       lazyLoad();
       loadOnScroll();
@@ -63,38 +64,66 @@ const galleryClickHandler = ({ target }) => {
 };
 
 const showLibrary = (e) => {
+
   if (e.target.value === 'library') {
-    globalVars.activeTab = e.target.value;
+    globalVars.activeTab = 'queue';
     refs.sectionWatched.classList.add('visibility');
-  } else {
+    refs.searchForm.classList.add('unVisibility');
+    showSavedMovieQueue();
+  } else if (e.target.value === 'homePage'){
     globalVars.activeTab = e.target.value;
+
     refs.sectionWatched.classList.remove('visibility');
-    console.log(filmsList.arr);
+    refs.searchForm.classList.remove('unVisibility');
     updateMoviesMarkup.reset();
-    updateMoviesMarkup.show(filmsList.arr);
-    lazyLoad();
-    loadOnScroll();
+    updateMoviesMarkup.show(globalVars.popularMoviesArr);
+   lazyLoad();
+    //loadOnScroll();
   }
-};
+}
 
 const showSavedMovieFromGrade = (e) => {
-  updateMoviesMarkup.reset();
-  globalVars.activeTab = e.target.value;
 
-  if (e.target.value === 'watched') {
-    console.log(updateMoviesLocalStorage.getWatchedMovies());
-    updateMoviesLocalStorage.getWatchedMovies()
-      ? updateMoviesMarkup.show(updateMoviesLocalStorage.getWatchedMovies())
-      : updateMoviesMarkup.defaultMsg('Вы не просмотрели ни одного фильма');
-  } else if (e.target.value === 'queue') {
-    updateMoviesLocalStorage.getQueueMovies()
-      ? updateMoviesMarkup.show(updateMoviesLocalStorage.getQueueMovies())
-      : updateMoviesMarkup.defaultMsg('У вас нет очереди к просмотру');
+  if(e.target.tagName === 'INPUT'){
+    console.log(e.target)
+    updateMoviesMarkup.reset();
+    console.log('два раза')
+
+    globalVars.activeTab = e.target.value;
+
+    if (e.target.value === 'watched') {
+      showSavedMovieWatched();
+    } else if (e.target.value === 'queue') {
+      showSavedMovieQueue();
+    }
+
+    lazyLoad();
+    //loadOnScroll();
   }
 
-  lazyLoad();
-  loadOnScroll();
-};
+}
+
+
+const runLoadScroll = () => {
+
+}
+
+const showSavedMovieWatched = ()=>{
+  globalVars.activeTab = 'watched';
+  updateMoviesLocalStorage.getWatchedMovies() ?
+    updateMoviesMarkup.show(updateMoviesLocalStorage.getWatchedMovies()) :
+    updateMoviesMarkup.defaultMsg("Вы не просмотрели ни одного фильма")
+
+}
+
+const showSavedMovieQueue = ()=>{
+  updateMoviesLocalStorage.getQueueMovies()?
+    updateMoviesMarkup.show(updateMoviesLocalStorage.getQueueMovies()) :
+    updateMoviesMarkup.defaultMsg("У вас нет очереди к просмотру")
+}
+
+
+
 
 refs.searchForm.addEventListener('submit', submitHandler);
 refs.gallery.addEventListener('click', galleryClickHandler);
