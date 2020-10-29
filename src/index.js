@@ -22,6 +22,7 @@ imagesService
   .fetchPopularMovies()
   .then((movies) => {
     globalVars.moviesArr = [...movies];
+    console.log(globalVars.moviesArr);
     updateMoviesMarkup.show(movies);
     lazyLoad();
     loadOnScroll();
@@ -31,17 +32,17 @@ imagesService
 const submitHandler = (e) => {
   e.preventDefault();
   const reg = /^[a-zа-яё\s]+$/iu;
-  globalVars.queue = e.currentTarget.elements.query.value.match(reg).input;
+  globalVars.searchQuery = e.currentTarget.elements.query.value.match(
+    reg
+  ).input;
   //TODO check if inputValue is not a null
   updateMoviesMarkup.reset();
   loader.show();
-  imagesService.query = globalVars.queue;
   imagesService.resetPage();
   imagesService
     .fetchMovies()
     .then((movies) => {
-      console.log(globalVars.moviesArr);
-      // globalVars.moviesArr = [...movies];
+      globalVars.moviesArr = [...movies];
       updateMoviesMarkup.show(movies);
       console.log(globalVars.moviesArr);
       lazyLoad();

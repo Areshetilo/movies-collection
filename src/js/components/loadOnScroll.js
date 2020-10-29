@@ -9,16 +9,23 @@ const loadOnScroll = () => {
   const options = { rootMargin: '500px' };
   const onEntry = (entries) => {
     entries.forEach((entry) => {
+      if (imagesService.totalPages === imagesService.page) {
+        intersectionObserver.disconnect();
+        console.log('observer disconnected');
+      }
       if (entry.isIntersecting) {
         if (globalVars.activeTab === 'homePage') {
-          if (globalVars.queue) {
+          if (globalVars.searchQuery) {
+            console.log('running user search fetch');
             imagesService.fetchMovies().then((movies) => {
-              globalVars.moviesArr = [...movies];
+              globalVars.moviesArr = [...globalVars.moviesArr, ...movies];
+              console.log(globalVars.moviesArr);
               updateMoviesMarkup.show(movies);
               lazyLoad();
-              loadOnScroll();
+              // loadOnScroll();
             });
           } else {
+            console.log('running populars fetch');
             imagesService.fetchPopularMovies().then((movies) => {
               updateMoviesMarkup.show(movies);
               globalVars.moviesArr = [...globalVars.moviesArr, ...movies];
