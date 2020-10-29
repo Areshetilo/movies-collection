@@ -8,6 +8,7 @@ const updateMoviesMarkup = {
   },
   reset() {
     refs.gallery.innerHTML = '';
+    console.log('убираем разметку')
 
   },
 
