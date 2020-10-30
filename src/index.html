@@ -32,7 +32,13 @@
 
           <div class="head_toggle">
             <div class="toggle-item item">
-              <input id="home" type="radio" name="radio" value="homePage" checked />
+              <input
+                id="home"
+                type="radio"
+                name="radio"
+                value="homePage"
+                checked
+              />
               <label for="home">HOME</label>
             </div>
             <div class="toggle-item item">
@@ -50,11 +56,17 @@
         <div class="main-watched">
           <div class="head_toggle">
             <div class="toggle-item item">
-              <input id="watched" type="radio" name="radioW" value="watched"  />
+              <input id="watched" type="radio" name="radioW" value="watched" />
               <label for="watched">Watched</label>
             </div>
             <div class="toggle-item item">
-              <input id="queue" type="radio" name="radioW" value="queue" checked/>
+              <input
+                id="queue"
+                type="radio"
+                name="radioW"
+                value="queue"
+                checked
+              />
               <label for="queue">Queue</label>
             </div>
           </div>
@@ -67,6 +79,8 @@
               name="query"
               autofocus
               autocomplete="off"
+              required
+              minlength="2"
               placeholder="Enter the movie you like ;)"
             />
             <button class="submit-button" type="submit">
@@ -75,11 +89,12 @@
           </form>
 
           <ul class="gallery"></ul>
+          <div class="bottom"></div>
         </div>
         <section class="main__details-page js-details-page">
           <div class="main__details-container">
             <div class="main__image-container">
-              <img class="main__details-image js-details-image">
+              <img class="main__details-image js-details-image" />
             </div>
             <div class="main__text-container">
               <h2 class="main__details-title js-details-title">dsffd</h2>
@@ -105,10 +120,14 @@
               <p class="main__details-about-text js-details-about-text"></p>
               <ul class="main_added-list">
                 <li>
-                  <button class="main_added-button js-added-watched-button">Add to watched</button>
+                  <button class="main_added-button js-added-watched-button">
+                    Add to watched
+                  </button>
                 </li>
                 <li>
-                  <button class="main_added-button js-added-queue-button">Add to queue</button>
+                  <button class="main_added-button js-added-queue-button">
+                    Add to queue
+                  </button>
                 </li>
               </ul>
             </div>
@@ -127,11 +146,8 @@
     </div>
     <footer class="main-footer">
       <div class="main__container">
-         <h3 class="footer-title">
-           ВАНЯ, ЧО КАВО :)
-         </h3>
+        <h3 class="footer-title">ВАНЯ, ЧО КАВО :)</h3>
       </div>
     </footer>
-    <div class="bottom"></div>
   </body>
 </html>

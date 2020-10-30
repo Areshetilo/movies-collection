@@ -1,30 +1,20 @@
 import refs from '../refs';
-import imagesService from '../moviesAPI-service';
-import updateMoviesMarkup from '../updateMoviesMarkup';
-import lazyLoad from './lazyLoad';
 import globalVars from '../globalVars/vars';
+import fetchedMoviesHandler from '../fetchedMoviesHandler';
 import localStorageAPI from '../localStorageAPI';
 
-
-const options = { rootMargin: '500px' };
-
+const options = { rootMargin: '400px' };
 const onEntry = (entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
+      console.log('intersecting!');
       if (globalVars.activeTab === 'homePage') {
-        if (globalVars.queue) {
-          imagesService.fetchMovies().then((movies) => {
-            globalVars.moviesArr = [...movies];
-            updateMoviesMarkup.show(movies);
-            lazyLoad();
-          });
+        if (globalVars.searchQuery) {
+          console.log('running user search fetch');
+          fetchedMoviesHandler('search');
         } else {
-          imagesService.fetchPopularMovies().then((movies) => {
-            updateMoviesMarkup.show(movies);
-            globalVars.moviesArr = [...globalVars.moviesArr, ...movies];
-            console.log(globalVars.moviesArr);
-            lazyLoad();
-          });
+          console.log('running populars fetch');
+          fetchedMoviesHandler('popular');
         }
       } else if (globalVars.activeTab === 'watched') {
         //updateMoviesMarkup.show(updateMoviesLocalStorage.getWatchedMovies());
@@ -34,13 +24,10 @@ const onEntry = (entries) => {
     }
   });
 };
-
 const intersectionObserver = new IntersectionObserver(onEntry, options);
-
 const loadOnScroll = () => {
-
   intersectionObserver.observe(refs.bottom);
+  console.log('observer is running');
 };
-
 
 export default loadOnScroll;
