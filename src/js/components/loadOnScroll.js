@@ -1,6 +1,7 @@
 import refs from '../refs';
 import globalVars from '../globalVars/vars';
 import fetchedMoviesHandler from '../fetchedMoviesHandler';
+import localStorageAPI from '../localStorageAPI';
 
 const options = { rootMargin: '400px' };
 const onEntry = (entries) => {

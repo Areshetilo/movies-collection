@@ -7,6 +7,7 @@ const API_V4 =
 const url = 'https://api.themoviedb.org/3';
 const popularURL = `${url}/movie/popular?language=en-US`;
 const searchURL = `${url}/search/movie?language=en-US&include_adult=true`;
+const targetURL=`${url}/find`;
 
 const options = {
   method: 'GET',
@@ -86,6 +87,15 @@ const imagesService = {
           searchErrorNotFound(err);
         });
     }
+  },
+
+  fetchForID(targetID){
+    return fetch( `https://api.themoviedb.org/3/movie/${targetID}?api_key=${API_V4}>>&language=en-US`,
+      options)
+      .then((res)=>res.json());
+
+
+
   }
 };
 
