@@ -1,0 +1,172 @@
+@import '../vars.scss';
+@import '../mixins.scss';
+
+.lightbox--visible {
+  opacity: 1;
+}
+
+.lightbox {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0,0,0,.8);
+  opacity: .01;
+  transition: opacity .4s ease;
+  z-index: 1000;
+  will-change: opacity;
+}
+
+.details-card {
+  max-width: 100%;
+
+  &__wrapper {
+    width: 290px;
+    background-color: $primary-white;
+    color: $main-text;
+    @include font(1.2, 1.2rem, 500);
+    text-align: left;
+    padding: 10px 20px 5px;
+
+    @include for-size(tablet) {
+      display: flex;
+      justify-content: space-between;
+      width: 640px;
+    }
+    @include for-size(tablet-landscape) {
+      width: 920px;
+      padding: 10px 40px;
+    }
+  }
+}
+
+.card-img {
+  width: 250px;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 0 3px;
+  @include for-size(tablet) {
+    width: 260px;
+  }
+  @include for-size(tablet-landscape) {
+    width: 350px;
+  }
+  &__wrapper {
+    text-align: center;
+    @include for-size(tablet) {
+      padding: 10px 0;
+    }
+    @include for-size(tablet-landscape) {
+      margin-right: 30px;
+    }
+  }
+}
+.card-info__wrapper {
+  padding: 10px 0;
+  @include for-size(tablet) {
+    max-width: 320px;
+  }
+  @include for-size(tablet-landscape) {
+    max-width: 470px;
+    padding: 20px 0;
+  }
+}
+.card-title {
+  @include font(1.2, 2rem, 500);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  @include for-size(tablet) {
+    @include font(1.1, 3rem, 500);
+  }
+  @include for-size(tablet-landscape) {
+    @include font(1.1, 4rem, 500);
+    margin-bottom: 40px;
+  }
+}
+.movie-info__list {
+  margin-bottom: 10px;
+  font-size: 12px;
+  @include for-size(tablet-landscape) {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+}
+.movie-info__item {
+  display: flex;
+  &:not(:last-child) {
+    margin-bottom: 5px;
+  }
+}
+.item_about {
+  color: $additional-text;
+  @include for-size(tablet) {
+    margin-right: 30px;
+  }
+  @include for-size(tablet-landscape){
+    width: 90px;
+  }
+}
+.item_description {
+  text-transform: uppercase;
+  width: 155px;
+}
+.about-description__title {
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  font-size: 12px;
+  @include for-size(tablet-landscape) {
+    font-size: 16px;
+  }
+}
+.description__about {
+  margin-bottom: 10px;
+  @include font(1.6, 1.2rem, 400);
+  max-height: 80px;
+  overflow: auto;
+  box-shadow: 0 0 1px;
+  padding-left: 5px;
+  @include for-size(tablet-landscape) {
+    @include font(1.6, 1.4rem, 400);
+    overflow: hidden;
+    box-shadow: none;
+    padding-left: 0;
+  }
+}
+.card-button__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  @include for-size(tablet) {
+    padding: 5px 0;
+  }
+  @include for-size(tablet-landscape){
+    padding: 30px 0;
+    justify-content: flex-start;
+  }
+}
+.modal-btn {
+  border: 1px solid $additional-text;
+  color: $main-text;
+  background-color: transparent;
+  text-transform: uppercase;
+  border-radius: 5px;
+  outline: none;
+  padding: 10px 5px;
+  width: 120px;
+  cursor: pointer;
+  @include font(1.1, 1.2rem, 400);
+  box-shadow: 0 0 1px;
+  transition: all .3s ease-in;
+  &:hover {
+    color: $primary-white;
+    background-color: #77c1bb;
+    border: 1px solid #77c1bb;
+  }
+  @include for-size(tablet) {
+    margin-right: 10px;
+  }
+}
