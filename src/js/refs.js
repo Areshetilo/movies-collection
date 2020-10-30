@@ -5,6 +5,7 @@ const refs = {
   bottom: document.querySelector('.bottom'),
   headNav: document.querySelector('.head_toggle'),
   sectionWatched: document.querySelector('.main-watched'),
+  queueTab: document.querySelector('#queue')
 
 
 };

@@ -1,6 +1,7 @@
 import './scss/main.scss';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
+import "basiclightbox/dist/basicLightbox.min.css";
 import throttle from 'lodash.throttle';
 import refs from './js/refs';
 import imagesService from './js/moviesAPI-service';
@@ -9,8 +10,10 @@ import lazyLoad from './js/components/lazyLoad';
 import loadOnScroll from './js/components/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
+import * as basicLightbox from 'basiclightbox'
+
 // import filmsList from './js/currentFilmList';
-import updateMoviesLocalStorage from './js/updateMoviesLocalStorage';
+import localStorageAPI from './js/localStorageAPI';
 import globalVars from './js/globalVars/vars';
 import showLightbox from './js/showLightbox';
 import fetchedMoviesHandler from './js/fetchedMoviesHandler';
@@ -54,31 +57,41 @@ const submitHandler = (e) => {
 
 const galleryClickHandler = ({ target }) => {
   if (target.nodeName === 'DIV') {
-    const imageElArr = Array.from(
-      refs.gallery.querySelectorAll('.gallery-image')
-    );
-    const imageSrcArr = imageElArr.map((image) => image.dataset.source);
-    const currentTargetId = imageSrcArr.findIndex(
-      (value) => value === target.dataset.source
-    );
-    showLightbox(imageSrcArr, currentTargetId);
+    const  movieID =  target.children[0].dataset.id;
+    console.log(movieID +' movieID')
+
+    fetchedMoviesHandler(movieID);
+    const instance = basicLightbox.create(`
+    <div class="modal">
+        <p>
+            Your first lightbox with just a few lines of code.
+            Yes, it's really that simple.
+        </p>
+    </div>`)
+
+    instance.show()
+
+
   }
 };
 
 const showLibrary = (e) => {
   if (e.target.value === 'library') {
-    globalVars.activeTab = 'queue';
     refs.sectionWatched.classList.add('visibility');
     refs.searchForm.classList.add('unVisibility');
-    showSavedMovieQueue();
+    updateMoviesMarkup.reset();
+    refs.queueTab.checked ? showSavedMovieQueue() : showSavedMovieWatched();
+
   } else if (e.target.value === 'homePage') {
     globalVars.activeTab = e.target.value;
     refs.sectionWatched.classList.remove('visibility');
     refs.searchForm.classList.remove('unVisibility');
     updateMoviesMarkup.reset();
     updateMoviesMarkup.show(globalVars.moviesArr);
-    lazyLoad();
+
   }
+  lazyLoad();
+
 };
 
 const showSavedMovieFromGrade = (e) => {
@@ -99,14 +112,15 @@ const runLoadScroll = () => {};
 
 const showSavedMovieWatched = () => {
   globalVars.activeTab = 'watched';
-  updateMoviesLocalStorage.getWatchedMovies()
-    ? updateMoviesMarkup.show(updateMoviesLocalStorage.getWatchedMovies())
+  localStorageAPI.getWatchedMovies()
+    ? updateMoviesMarkup.show(localStorageAPI.getWatchedMovies())
     : updateMoviesMarkup.defaultMsg('Вы не просмотрели ни одного фильма');
 };
 
 const showSavedMovieQueue = () => {
-  updateMoviesLocalStorage.getQueueMovies()
-    ? updateMoviesMarkup.show(updateMoviesLocalStorage.getQueueMovies())
+  globalVars.activeTab = 'queue';
+  localStorageAPI.getQueueMovies()
+    ? updateMoviesMarkup.show(localStorageAPI.getQueueMovies())
     : updateMoviesMarkup.defaultMsg('У вас нет очереди к просмотру');
 };
 
