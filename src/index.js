@@ -46,14 +46,13 @@ const submitHandler = (e) => {
       updateMoviesMarkup.show(movies);
       console.log(globalVars.moviesArr);
       lazyLoad();
-      loadOnScroll();
     })
     .finally(() => loader.hide());
   e.currentTarget.reset();
 };
 
 const galleryClickHandler = ({ target }) => {
-  if (target.nodeName === 'IMG') {
+  if (target.nodeName === 'DIV') {
     const imageElArr = Array.from(
       refs.gallery.querySelectorAll('.gallery-image')
     );
@@ -73,13 +72,11 @@ const showLibrary = (e) => {
     showSavedMovieQueue();
   } else if (e.target.value === 'homePage') {
     globalVars.activeTab = e.target.value;
-
     refs.sectionWatched.classList.remove('visibility');
     refs.searchForm.classList.remove('unVisibility');
     updateMoviesMarkup.reset();
     updateMoviesMarkup.show(globalVars.moviesArr);
     lazyLoad();
-    //loadOnScroll();
   }
 };
 
@@ -93,9 +90,7 @@ const showSavedMovieFromGrade = (e) => {
     } else if (e.target.value === 'queue') {
       showSavedMovieQueue();
     }
-
     lazyLoad();
-    //loadOnScroll();
   }
 };
 
