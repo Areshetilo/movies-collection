@@ -31,7 +31,6 @@
     "css-loader": "^3.6.0",
     "file-loader": "^6.1.1",
     "friendly-errors-webpack-plugin": "^1.7.0",
-    "fslightbox": "^3.2.2",
     "gh-pages": "^2.2.0",
     "handlebars-loader": "^1.7.1",
     "html-loader": "^0.5.5",

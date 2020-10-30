@@ -4,31 +4,33 @@ import globalVars from "./globalVars/vars";
 
 
 
-const updateMoviesLocalStorage = {
+const localStorageAPI = {
 
 
   setAll(movie) {
     localStorage.setItem('watchedMovies', JSON.stringify(movie))
   },
 
-  setWatchedMovie(movie) {
+  toggleWatchedMovie(movie) {
 
     if (this.getMovie(movie) === globalVars.watched) {
+      localStorage.setItem('watchedMovies', JSON.stringify(this.getWatchedMovies().filter(film => film.id !== movie.id)));
       return true
     }
-    this.setQueueMovie(movie) &&
+    this.toggleQueueMovie(movie) &&
     localStorage.setItem('queueMovies', JSON.stringify(this.getQueueMovies().filter(film => film.id !== movie.id)));
 
 
     localStorage.setItem('watchedMovies', JSON.stringify([movie, ...this.getWatchedMovies()]));
   },
 
-  setQueueMovie(movie) {
+  toggleQueueMovie(movie) {
     if (this.getMovie(movie) === globalVars.queue) {
+      localStorage.setItem('queueMovies', JSON.stringify(this.getQueueMovies().filter(film => film.id !== movie.id)));
       return true
     }
-    this.setWatchedMovie(movie) &&
-    localStorage.setItem('queueMovies', JSON.stringify(this.getWatchedMovies().filter(film => film.id !== movie.id)));
+    this.toggleWatchedMovie(movie) &&
+    localStorage.setItem('watchedMovies', JSON.stringify(this.getWatchedMovies().filter(film => film.id !== movie.id)));
 
     localStorage.setItem('queueMovies', JSON.stringify([movie, ...this.getQueueMovies()]));
   },
@@ -59,4 +61,4 @@ const updateMoviesLocalStorage = {
 }
 
 
-export default  updateMoviesLocalStorage;
+export default  localStorageAPI;

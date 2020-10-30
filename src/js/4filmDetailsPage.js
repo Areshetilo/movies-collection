@@ -10,12 +10,12 @@ const refs = {
 
 function monitorButtonStatusText(){
     let storageFilmWatched = localStorage.getItem('filmsWatched');
-    storageFilmWatched === null ? 
+    storageFilmWatched === null ?
     addedWatchedButton.textContent = "Add to watched" : JSON.parse(storageFilmWatched).find(el => el.id === selectFilm.id) ?
     addedWatchedButton.textContent = "Delete from watched" : addedWatchedButton.textContent = "Add to watched";
 
     let storageFilmQueue = localStorage.getItem('filmsQueue');
-    storageFilmQueue === null ? 
+    storageFilmQueue === null ?
     addedQueueButton.textContent = "Add to queue" : JSON.parse(storageFilmQueue).find(el => el.id === selectFilm.id) ?
     addedQueueButton.textContent = "Delete from queue" : addedQueueButton.textContent = "Add to queue";
 }
@@ -34,7 +34,7 @@ function toggleToQueue () {
     }
     localStorage.setItem('filmsQueue', JSON.stringify(filmsQueueArray));
     monitorButtonStatusText();
-};
+}
 
 function toggleToWatched () {
     let filmsWatchedArray = [];
@@ -50,7 +50,7 @@ function toggleToWatched () {
     }
     localStorage.setItem('filmsWatched', JSON.stringify(filmsWatchedArray));
     monitorButtonStatusText();
-};
+}
 
 function showDetails(selectFilm){
     refs.image.setAttribute('src', `https://image.tmdb.org/t/p/w500/${selectFilm.poster_path}`);
@@ -58,9 +58,9 @@ function showDetails(selectFilm){
     refs.vote.textContent = selectFilm.vote_average;
     refs.popularity.textContent = selectFilm.popularity;
     refs.originalTitle.textContent = selectFilm.original_title;
-    refs.genre.textContent = String(genres.filter(el => selectFilm.genre_ids.find(item => el.id === item) ? 
+    refs.genre.textContent = String(genres.filter(el => selectFilm.genre_ids.find(item => el.id === item) ?
     true : false).reduce((acc, item) => acc + '${item.name}, ', '')).slice(0, -2);
     refs.detailsAboutText.textContent = selectFilm.overview;
 
     monitorButtonStatusText();
-};
+}
