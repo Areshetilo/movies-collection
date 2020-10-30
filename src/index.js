@@ -54,7 +54,9 @@ const submitHandler = (e) => {
 };
 
 const galleryClickHandler = ({ target }) => {
-  if (target.nodeName === 'IMG') {
+  console.log('galleryClickHandler')
+  if (target.nodeName === 'DIV') {
+    console.log(target);
     const imageElArr = Array.from(
       refs.gallery.querySelectorAll('.gallery-image')
     );
