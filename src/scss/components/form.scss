@@ -33,7 +33,8 @@
   width: 42px;
   height: 42px;
   border: none;
-  background: #77c1bb;
+  background: #77c1bb url(../images/search.svg) no-repeat center;
+  background-size: cover;
   border-radius: 5px;
   cursor: pointer;
 }

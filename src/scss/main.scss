@@ -20,16 +20,6 @@ body {
   background-color: #fff;
 }
 
-main {
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.6),
-      rgba(119, 193, 187, 0.8)
-    ),
-    url(../images/background.jpg);
-  padding-bottom: 30px;
-
-}
-
 .main__container {
   padding-left: 20px;
   padding-right: 20px;
@@ -50,9 +40,9 @@ main {
 @import './components/header';
 @import './components/watched';
 @import './visibility';
-
 @import './components/form';
 @import './components/gallery';
+@import './components/parallax';
 @import './components/loader';
 @import './components/backToTop';
 @import './components/detailsPage.scss';
