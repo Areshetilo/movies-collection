@@ -17,26 +17,6 @@ const options = {
   }
 };
 
-const moviesAPI = {
-  fetchPopularMovies() {
-    return fetch(`${popularURL}&page=${this.page}`, options)
-      .then((res) => res.json())
-      .then(({ results }) => {
-        return { results };
-      });
-  },
-  fetchQueryMovies(searchQuery = '', page = 1) {
-    return fetch(`${searchURL}&query=${searchQuery}&page=${page}`, options)
-      .then((res) => res.json())
-      .then(({ results, total_results: total }) => {
-        if (!results.length) {
-          throw new Error('Unfortunately, your request not found.');
-        }
-        return { total, results };
-      });
-  }
-};
-
 const imagesService = {
   _searchQuery: '',
   _page: 1,
@@ -69,39 +49,43 @@ const imagesService = {
   },
 
   fetchPopularMovies() {
-    return fetch(`${popularURL}&page=${this.page}`, options)
-      .then((res) => res.json())
-      .then((res) => {
-        if (!res.results.length) {
-          throw new Error('Oops, something went wrong');
-        }
-        this.totalPages = res.total_pages;
-        this.incrementPage();
-        return res.results;
-      })
-      .catch((err) => {
-        searchErrorNotFound(err);
-      });
+    if (this.page <= this.totalPages) {
+      return fetch(`${popularURL}&page=${this.page}`, options)
+        .then((res) => res.json())
+        .then((res) => {
+          if (!res.results.length) {
+            throw new Error('Oops, something went wrong');
+          }
+          this.totalPages = res.total_pages;
+          this.incrementPage();
+          return res.results;
+        })
+        .catch((err) => {
+          searchErrorNotFound(err);
+        });
+    }
   },
 
   fetchMovies() {
-    return fetch(
-      `${searchURL}&query=${globalVars.searchQuery}&page=${this.page}`,
-      options
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        if (!res.results.length) {
-          throw new Error('Unfortunately, your request not found.');
-        }
-        console.log(res);
-        this.totalPages = res.total_pages;
-        this.incrementPage();
-        return res.results;
-      })
-      .catch((err) => {
-        searchErrorNotFound(err);
-      });
+    if (this.page <= this.totalPages) {
+      return fetch(
+        `${searchURL}&query=${globalVars.searchQuery}&page=${this.page}`,
+        options
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          if (!res.results.length) {
+            throw new Error('Unfortunately, your request not found.');
+          }
+          console.log(res);
+          this.totalPages = res.total_pages;
+          this.incrementPage();
+          return res.results;
+        })
+        .catch((err) => {
+          searchErrorNotFound(err);
+        });
+    }
   }
 };
 
