@@ -5,7 +5,6 @@ import throttle from 'lodash.throttle';
 import refs from './js/refs';
 import imagesService from './js/moviesAPI-service';
 import updateMoviesMarkup from './js/updateMoviesMarkup';
-import Loader from './js/components/Loader';
 import lazyLoad from './js/components/lazyLoad';
 import loadOnScroll from './js/components/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
@@ -13,46 +12,34 @@ import isVisible from './js/components/isScrollBtnVisible';
 // import filmsList from './js/currentFilmList';
 import updateMoviesLocalStorage from './js/updateMoviesLocalStorage';
 import globalVars from './js/globalVars/vars';
-
 import showLightbox from './js/showLightbox';
+import fetchedMoviesHandler from './js/fetchedMoviesHandler';
+import searchErrorNotFound from './js/components/notifyErrors';
 
-const loader = new Loader('.js-loader', 'is-hidden');
-loader.show();
-imagesService
-  .fetchPopularMovies()
-  .then((movies) => {
-    globalVars.moviesArr = [...movies];
-    updateMoviesMarkup.show(movies);
-    lazyLoad();
-    loadOnScroll();
-  })
-  .finally(() => loader.hide());
+loadOnScroll();
+console.log('running populars fetch');
+fetchedMoviesHandler('popular');
 
 const submitHandler = (e) => {
   e.preventDefault();
-  const reg = /^[a-zа-яё\s]+$/iu;
-  globalVars.queue = e.currentTarget.elements.query.value.match(reg).input;
-  //TODO check if inputValue is not a null
+  const reg = /^[0-9a-zа-яё\s]+$/iu;
+  const inputValue = e.currentTarget.elements.query.value.trim().match(reg);
+  if (!inputValue) {
+    searchErrorNotFound(
+      'Please enter correct movie name (numbers, latin and cyrillic symbols are allowed)'
+    );
+    return;
+  }
+  globalVars.searchQuery = inputValue;
+  globalVars.moviesArr = [];
   updateMoviesMarkup.reset();
-  loader.show();
-  imagesService.query = globalVars.queue;
   imagesService.resetPage();
-  imagesService
-    .fetchMovies()
-    .then((movies) => {
-      console.log(globalVars.moviesArr);
-      // globalVars.moviesArr = [...movies];
-      updateMoviesMarkup.show(movies);
-      console.log(globalVars.moviesArr);
-      lazyLoad();
-      loadOnScroll();
-    })
-    .finally(() => loader.hide());
+  fetchedMoviesHandler('search');
   e.currentTarget.reset();
 };
 
 const galleryClickHandler = ({ target }) => {
-  if (target.nodeName === 'IMG') {
+  if (target.nodeName === 'DIV') {
     const imageElArr = Array.from(
       refs.gallery.querySelectorAll('.gallery-image')
     );
@@ -72,13 +59,11 @@ const showLibrary = (e) => {
     showSavedMovieQueue();
   } else if (e.target.value === 'homePage') {
     globalVars.activeTab = e.target.value;
-
     refs.sectionWatched.classList.remove('visibility');
     refs.searchForm.classList.remove('unVisibility');
     updateMoviesMarkup.reset();
     updateMoviesMarkup.show(globalVars.moviesArr);
     lazyLoad();
-    //loadOnScroll();
   }
 };
 
@@ -92,9 +77,7 @@ const showSavedMovieFromGrade = (e) => {
     } else if (e.target.value === 'queue') {
       showSavedMovieQueue();
     }
-
     lazyLoad();
-    //loadOnScroll();
   }
 };
 
