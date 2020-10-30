@@ -1,15 +1,9 @@
 const globalVars = {
-  _moviesArr: [],
   _activeTab: 'homePage',
-  _watched: 'watched',
+  _moviesArr: [],
   _queue: 'queue',
-
-  set moviesArr(arr) {
-    this._moviesArr = arr;
-  },
-  get moviesArr() {
-    return this._moviesArr;
-  },
+  _searchQuery: '',
+  _watched: 'watched',
 
   set activeTab(nameTab) {
     this._activeTab = nameTab;
@@ -18,11 +12,18 @@ const globalVars = {
     return this._activeTab;
   },
 
-  set watched(str) {
-    this._watched = str;
+  set moviesArr(arr) {
+    this._moviesArr = arr;
   },
-  get watched() {
-    return this._watched;
+  get moviesArr() {
+    return this._moviesArr;
+  },
+
+  set searchQuery(str) {
+    this._searchQuery = str;
+  },
+  get searchQuery() {
+    return this._searchQuery;
   },
 
   set queue(str) {
@@ -30,6 +31,13 @@ const globalVars = {
   },
   get queue() {
     return this._queue;
+  },
+
+  set watched(str) {
+    this._watched = str;
+  },
+  get watched() {
+    return this._watched;
   }
 };
 

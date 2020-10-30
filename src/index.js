@@ -22,6 +22,7 @@ imagesService
   .fetchPopularMovies()
   .then((movies) => {
     globalVars.moviesArr = [...movies];
+    console.log(globalVars.moviesArr);
     updateMoviesMarkup.show(movies);
     lazyLoad();
     loadOnScroll();
@@ -31,28 +32,27 @@ imagesService
 const submitHandler = (e) => {
   e.preventDefault();
   const reg = /^[a-zа-яё\s]+$/iu;
-  globalVars.queue = e.currentTarget.elements.query.value.match(reg).input;
+  globalVars.searchQuery = e.currentTarget.elements.query.value.match(
+    reg
+  ).input;
   //TODO check if inputValue is not a null
   updateMoviesMarkup.reset();
   loader.show();
-  imagesService.query = globalVars.queue;
   imagesService.resetPage();
   imagesService
     .fetchMovies()
     .then((movies) => {
-      console.log(globalVars.moviesArr);
-      // globalVars.moviesArr = [...movies];
+      globalVars.moviesArr = [...movies];
       updateMoviesMarkup.show(movies);
       console.log(globalVars.moviesArr);
       lazyLoad();
-      loadOnScroll();
     })
     .finally(() => loader.hide());
   e.currentTarget.reset();
 };
 
 const galleryClickHandler = ({ target }) => {
-  if (target.nodeName === 'IMG') {
+  if (target.nodeName === 'DIV') {
     const imageElArr = Array.from(
       refs.gallery.querySelectorAll('.gallery-image')
     );
@@ -72,13 +72,11 @@ const showLibrary = (e) => {
     showSavedMovieQueue();
   } else if (e.target.value === 'homePage') {
     globalVars.activeTab = e.target.value;
-
     refs.sectionWatched.classList.remove('visibility');
     refs.searchForm.classList.remove('unVisibility');
     updateMoviesMarkup.reset();
     updateMoviesMarkup.show(globalVars.moviesArr);
     lazyLoad();
-    //loadOnScroll();
   }
 };
 
@@ -92,9 +90,7 @@ const showSavedMovieFromGrade = (e) => {
     } else if (e.target.value === 'queue') {
       showSavedMovieQueue();
     }
-
     lazyLoad();
-    //loadOnScroll();
   }
 };
 
