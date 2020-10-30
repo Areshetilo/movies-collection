@@ -16,6 +16,20 @@ import showLightbox from './js/showLightbox';
 import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import searchErrorNotFound from './js/components/notifyErrors';
 
+function loadData() {
+  return new Promise((resolve, reject) => {
+    // setTimeout не является частью решения
+    // Код ниже должен быть заменен на логику подходящую для решения вашей задачи
+    setTimeout(resolve, 2000);
+  });
+}
+
+loadData().then(() => {
+  let preloaderEl = document.getElementById('preloader');
+  preloaderEl.classList.add('hidden');
+  preloaderEl.classList.remove('visible');
+});
+
 loadOnScroll();
 console.log('running populars fetch');
 fetchedMoviesHandler('popular');
