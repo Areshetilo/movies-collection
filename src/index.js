@@ -1,6 +1,7 @@
 import './scss/main.scss';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
+import 'basiclightbox/dist/basicLightbox.min.css';
 import throttle from 'lodash.throttle';
 import refs from './js/refs';
 import imagesService from './js/moviesAPI-service';
@@ -9,14 +10,25 @@ import lazyLoad from './js/components/lazyLoad';
 import loadOnScroll from './js/components/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
-
-
+import * as basicLightbox from 'basiclightbox';
 // import filmsList from './js/currentFilmList';
 import localStorageAPI from './js/localStorageAPI';
 import globalVars from './js/globalVars/vars';
 import showLightbox from './js/showLightbox';
 import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import searchErrorNotFound from './js/components/notifyErrors';
+
+function loadData() {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, 2000);
+  });
+}
+
+loadData().then(() => {
+  let preloaderEl = document.getElementById('preloader');
+  preloaderEl.classList.add('hidden');
+  preloaderEl.classList.remove('visible');
+});
 
 loadOnScroll();
 console.log('running populars fetch');
@@ -40,8 +52,6 @@ const submitHandler = (e) => {
   e.currentTarget.reset();
 };
 
-
-
 const galleryClickHandler = ({ target }) => {
   if (target.nodeName === 'DIV') {
     const  movieID =  target.children[0].dataset.id;
@@ -56,17 +66,14 @@ const showLibrary = (e) => {
     refs.searchForm.classList.add('unVisibility');
     updateMoviesMarkup.reset();
     refs.queueTab.checked ? showSavedMovieQueue() : showSavedMovieWatched();
-
   } else if (e.target.value === 'homePage') {
     globalVars.activeTab = e.target.value;
     refs.sectionWatched.classList.remove('visibility');
     refs.searchForm.classList.remove('unVisibility');
     updateMoviesMarkup.reset();
     updateMoviesMarkup.show(globalVars.moviesArr);
-
   }
   lazyLoad();
-
 };
 
 const showSavedMovieFromGrade = (e) => {
