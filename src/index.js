@@ -54,19 +54,9 @@ const submitHandler = (e) => {
 
 const galleryClickHandler = ({ target }) => {
   if (target.nodeName === 'DIV') {
-    const movieID = target.children[0].dataset.id;
-    console.log(movieID + ' movieID');
-
+    const  movieID =  target.children[0].dataset.id;
+    console.log(movieID +' movieID')
     fetchedMoviesHandler(movieID);
-    const instance = basicLightbox.create(`
-    <div class="modal">
-        <p>
-            Your first lightbox with just a few lines of code.
-            Yes, it's really that simple.
-        </p>
-    </div>`);
-
-    instance.show();
   }
 };
 

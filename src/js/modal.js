@@ -33,11 +33,7 @@ export function openModal(event) {
   }
 }
 
-function checkBodyScroll() {
-  document.body.classList.toggle("modal-open");
-  const scrollBtn = document.querySelector(".back_to_top");
-  scrollBtn.classList.toggle("btn-hidden");
-}
+
 
 function getCurrentObj(id) {
   const getInfo = pullData();
