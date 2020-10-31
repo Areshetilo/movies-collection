@@ -7,21 +7,19 @@ import Loader from './components/Loader';
 const loader = new Loader('.js-loader', 'is-hidden');
 const fetchedMoviesHandler = (queryType) => {
   const getMovies = async () => {
-     return  queryType === 'search' ?
-      imagesService.fetchMovies() :
-      imagesService.fetchPopularMovies()
-    }
+    return queryType === 'search'
+      ? imagesService.fetchMovies()
+      : imagesService.fetchPopularMovies();
+  };
 
   const getMovieFromID = async (queryType) => {
     return imagesService.fetchForID(queryType);
-  }
+  };
 
   loader.show();
 
   (function () {
-    if (queryType === 'search' || queryType === 'popular'){
-
-
+    if (queryType === 'search' || queryType === 'popular') {
       getMovies()
         .then((movies) => {
           movies = movies ?? [];
@@ -36,12 +34,14 @@ const fetchedMoviesHandler = (queryType) => {
         .finally(() => {
           loader.hide();
         });
-    }else{
-      getMovieFromID(queryType).then(console.log)
+    } else {
+      getMovieFromID(queryType)
+        .then(console.log)
+        .finally(() => {
+          loader.hide();
+        });
     }
-  }())
-
-
+  })();
 };
 
 export default fetchedMoviesHandler;
