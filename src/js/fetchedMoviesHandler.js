@@ -1,6 +1,9 @@
+import "basiclightbox/dist/basicLightbox.min.css";
+import * as basicLightbox from 'basiclightbox'
 import imagesService from './moviesAPI-service';
 import globalVars from './globalVars/vars';
 import updateMoviesMarkup from './updateMoviesMarkup';
+import modalOptions from "./modalOptions";
 import lazyLoad from './components/lazyLoad';
 import Loader from './components/Loader';
 
@@ -16,10 +19,12 @@ const fetchedMoviesHandler = (queryType) => {
     return imagesService.fetchForID(queryType);
   };
 
-  loader.show();
+
 
   (function () {
-    if (queryType === 'search' || queryType === 'popular') {
+    if (queryType === 'search' || queryType === 'popular'){
+
+      loader.show();
       getMovies()
         .then((movies) => {
           movies = movies ?? [];
@@ -35,13 +40,17 @@ const fetchedMoviesHandler = (queryType) => {
           loader.hide();
         });
     } else {
-      getMovieFromID(queryType)
-        .then(console.log)
-        .finally(() => {
-          loader.hide();
-        });
+      getMovieFromID(queryType).then(movie=>{
+        const instance = basicLightbox.create(updateMoviesMarkup.showModalTemplate(movie), modalOptions);
+        instance.show()
+      }).finally(()=>{
+        loader.hide()
+      })
     }
-  })();
+  }())
+
 };
+
+
 
 export default fetchedMoviesHandler;
