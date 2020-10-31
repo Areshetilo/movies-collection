@@ -1,7 +1,7 @@
 import './scss/main.scss';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
-import "basiclightbox/dist/basicLightbox.min.css";
+import 'basiclightbox/dist/basicLightbox.min.css';
 import throttle from 'lodash.throttle';
 import refs from './js/refs';
 import imagesService from './js/moviesAPI-service';
@@ -10,8 +10,7 @@ import lazyLoad from './js/components/lazyLoad';
 import loadOnScroll from './js/components/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
-import * as basicLightbox from 'basiclightbox'
-
+import * as basicLightbox from 'basiclightbox';
 // import filmsList from './js/currentFilmList';
 import localStorageAPI from './js/localStorageAPI';
 import globalVars from './js/globalVars/vars';
@@ -21,8 +20,6 @@ import searchErrorNotFound from './js/components/notifyErrors';
 
 function loadData() {
   return new Promise((resolve, reject) => {
-    // setTimeout не является частью решения
-    // Код ниже должен быть заменен на логику подходящую для решения вашей задачи
     setTimeout(resolve, 2000);
   });
 }
@@ -57,8 +54,8 @@ const submitHandler = (e) => {
 
 const galleryClickHandler = ({ target }) => {
   if (target.nodeName === 'DIV') {
-    const  movieID =  target.children[0].dataset.id;
-    console.log(movieID +' movieID')
+    const movieID = target.children[0].dataset.id;
+    console.log(movieID + ' movieID');
 
     fetchedMoviesHandler(movieID);
     const instance = basicLightbox.create(`
@@ -67,11 +64,9 @@ const galleryClickHandler = ({ target }) => {
             Your first lightbox with just a few lines of code.
             Yes, it's really that simple.
         </p>
-    </div>`)
+    </div>`);
 
-    instance.show()
-
-
+    instance.show();
   }
 };
 
@@ -81,17 +76,14 @@ const showLibrary = (e) => {
     refs.searchForm.classList.add('unVisibility');
     updateMoviesMarkup.reset();
     refs.queueTab.checked ? showSavedMovieQueue() : showSavedMovieWatched();
-
   } else if (e.target.value === 'homePage') {
     globalVars.activeTab = e.target.value;
     refs.sectionWatched.classList.remove('visibility');
     refs.searchForm.classList.remove('unVisibility');
     updateMoviesMarkup.reset();
     updateMoviesMarkup.show(globalVars.moviesArr);
-
   }
   lazyLoad();
-
 };
 
 const showSavedMovieFromGrade = (e) => {
