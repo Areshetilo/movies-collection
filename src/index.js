@@ -1,7 +1,6 @@
 import './scss/main.scss';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
-import "basiclightbox/dist/basicLightbox.min.css";
 import throttle from 'lodash.throttle';
 import refs from './js/refs';
 import imagesService from './js/moviesAPI-service';
@@ -10,7 +9,7 @@ import lazyLoad from './js/components/lazyLoad';
 import loadOnScroll from './js/components/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
-import * as basicLightbox from 'basiclightbox'
+
 
 // import filmsList from './js/currentFilmList';
 import localStorageAPI from './js/localStorageAPI';
@@ -41,23 +40,13 @@ const submitHandler = (e) => {
   e.currentTarget.reset();
 };
 
+
+
 const galleryClickHandler = ({ target }) => {
   if (target.nodeName === 'DIV') {
     const  movieID =  target.children[0].dataset.id;
     console.log(movieID +' movieID')
-
     fetchedMoviesHandler(movieID);
-    const instance = basicLightbox.create(`
-    <div class="modal">
-        <p>
-            Your first lightbox with just a few lines of code.
-            Yes, it's really that simple.
-        </p>
-    </div>`)
-
-    instance.show()
-
-
   }
 };
 

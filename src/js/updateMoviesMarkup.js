@@ -1,5 +1,6 @@
 
 import movieCardTemplate from '../templates/movieCard.hbs';
+import movieModalTemplate from '../templates/imageLightbox.hbs'
 import refs from './refs';
 
 
@@ -16,6 +17,13 @@ const updateMoviesMarkup = {
 
   defaultMsg(msg){
     refs.gallery.innerHTML = `${msg}`;
+  },
+
+  showModalTemplate(movie){
+    console.log(movie);
+    const  make = movieModalTemplate(movie)
+    console.log(make)
+    return  make;
   }
 };
 
