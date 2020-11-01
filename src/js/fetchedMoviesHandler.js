@@ -40,18 +40,21 @@ const fetchedMoviesHandler = (queryType) => {
         .finally(() => {
           loader.hide();
         });
-    }else{
-      getMovieFromID(queryType).then(movie=>{
-        globalVars.currentMovie = movie;
-        const instance = basicLightbox.create(updateMoviesMarkup.showModalTemplate(movie), modalOptions);
-        instance.show()
+    } else {
+      getMovieFromID(queryType)
+        .then((movie) => {
+          globalVars.currentMovie = movie;
 
-      }).finally(()=>{
+          const instance = basicLightbox.create(
+            updateMoviesMarkup.showModalTemplate(movie),
+            modalOptions
+          );
 
-      })
+          instance.show();
+        })
+        .finally(() => {});
     }
-  }())
-
+  })();
 };
 
 export default fetchedMoviesHandler;

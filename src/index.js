@@ -10,9 +10,7 @@ import lazyLoad from './js/components/lazyLoad';
 import loadOnScroll from './js/components/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
-import localStorageAPI from './js/localStorageAPI';
 import * as basicLightbox from 'basiclightbox';
-
 
 import globalVars from './js/globalVars/vars';
 import fetchedMoviesHandler from './js/fetchedMoviesHandler';
@@ -21,11 +19,8 @@ import fetchRequestToken from './js/APIService/requestToken';
 import fetchSessionID from './js/APIService/getSessionID';
 import showLibraryTabs from './js/libraryTabs/showLibraryTabs';
 import hideLibraryTabs from './js/libraryTabs/hideLibraryTabs';
-import LocalStorageAPI from "./js/localStorageAPI";
-import modalOptions from "./js/modalOptions";
-
-
-
+import LocalStorageAPI from './js/localStorageAPI';
+import modalOptions from './js/modalOptions';
 
 function loadData() {
   return new Promise((resolve, reject) => {
@@ -63,16 +58,18 @@ const submitHandler = (e) => {
   e.currentTarget.reset();
 };
 
-const galleryClickHandler = ({ target}) => {
+const galleryClickHandler = ({ target }) => {
   if (target.nodeName === 'DIV') {
-    const  movieID =  target.children[0].dataset.id;
-    if(localStorageAPI.checkMovie(movieID)){
-      const instance = basicLightbox.create(updateMoviesMarkup.showModalTemplate(globalVars.currentMovie), modalOptions);
-      instance.show()
-    }else{
+    const movieID = target.children[0].dataset.id;
+    if (localStorageAPI.checkMovie(movieID)) {
+      const instance = basicLightbox.create(
+        updateMoviesMarkup.showModalTemplate(globalVars.currentMovie),
+        modalOptions
+      );
+      instance.show();
+    } else {
       fetchedMoviesHandler(movieID);
     }
-
   }
 };
 
@@ -116,14 +113,14 @@ const showSavedMovieFromGrade = (e) => {
 
 const showSavedMovieWatched = () => {
   globalVars.activeTab = 'watched';
-  localStorageAPI.getMovies('watchedMovies').length>0
+  localStorageAPI.getMovies('watchedMovies').length > 0
     ? updateMoviesMarkup.show(localStorageAPI.getMovies('watchedMovies'))
     : updateMoviesMarkup.defaultMsg('Вы не просмотрели ни одного фильма');
 };
 
 const showSavedMovieQueue = () => {
   globalVars.activeTab = 'queue';
-  localStorageAPI.getMovies('queueMovies').length>0
+  localStorageAPI.getMovies('queueMovies').length > 0
     ? updateMoviesMarkup.show(localStorageAPI.getMovies('queueMovies'))
     : updateMoviesMarkup.defaultMsg('У вас нет очереди к просмотру');
 };
@@ -143,31 +140,7 @@ refs.toTop.addEventListener('click', function () {
   scrollToTop(30);
 });
 
-refs.headNav.addEventListener('click', showLibrary);
+refs.headNav.addEventListener('click', showLibraryHandler);
 refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
-
-
-document.addEventListener("click", event => {
-
-  if (event.target.id === 'btnW') {
-    localStorageAPI.toggleMovie(globalVars.watched)
-    if (event.target.textContent ==="add to watched"){
-      document.querySelector('#btnW').innerHTML = "delete from watched"
-      document.querySelector('#btnQ').innerHTML = "add to queue";
-    }else{
-      document.querySelector('#btnW').innerHTML = "add to watched";
-    }
-  }else if(event.target.id === 'btnQ'){
-    localStorageAPI.toggleMovie(globalVars.queue)
-    if (event.target.textContent ==="add to queue"){
-      document.querySelector('#btnQ').innerHTML = "delete from queue"
-      document.querySelector('#btnW').innerHTML = "add to watched";
-    }else{
-      document.querySelector('#btnQ').innerHTML = "add to queue";
-    }
-
-  }
-}, false);
-
 
 window.addEventListener('scroll', throttle(isVisible, 500));
