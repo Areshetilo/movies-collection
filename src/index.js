@@ -10,8 +10,6 @@ import lazyLoad from './js/components/lazyLoad';
 import loadOnScroll from './js/components/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
-import * as basicLightbox from 'basiclightbox';
-// import filmsList from './js/currentFilmList';
 import localStorageAPI from './js/localStorageAPI';
 import globalVars from './js/globalVars/vars';
 import fetchedMoviesHandler from './js/fetchedMoviesHandler';
@@ -100,8 +98,6 @@ const showSavedMovieFromGrade = (e) => {
     lazyLoad();
   }
 };
-
-const runLoadScroll = () => {};
 
 const showSavedMovieWatched = () => {
   globalVars.activeTab = 'watched';
