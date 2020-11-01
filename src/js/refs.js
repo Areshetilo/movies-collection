@@ -7,5 +7,10 @@ const refs = {
   searchForm: document.querySelector('#search-form'),
   sectionWatched: document.querySelector('.main-watched'),
   toTop: document.getElementById('goto-topJS'),
+  modalWrap:document.querySelector('.modal-wrap'),
+  btnWatched:document.querySelector('#btnW'),
+  btnQueue:document.querySelector('#btnQ')
+
+
 };
 export default refs;

@@ -1,3 +1,7 @@
+import refs from "./refs";
+import localStorageAPI from "./localStorageAPI";
+import globalVars from "./globalVars/vars";
+
 const modalOptions = {
   onShow: () => {
     checkBodyScroll();
@@ -6,6 +10,10 @@ const modalOptions = {
 };
 
 function checkBodyScroll() {
+  if(!globalVars.isOpenModal){
+    globalVars.isOpenModal = true;
+    console.log("модалка " + globalVars.isOpenModal);
+  }
   document.body.classList.toggle("modal-open");
 
 }
