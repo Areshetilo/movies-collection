@@ -3,12 +3,10 @@ import * as basicLightbox from 'basiclightbox';
 import moviesService from './APIService/moviesAPI-service';
 import globalVars from './globalVars/vars';
 import updateMoviesMarkup from './updateMoviesMarkup';
-import modalOptions from './modalOptions';
+import modalOptions from './components/modal/modalOptions';
 import lazyLoad from './components/lazyLoad';
 import Loader from './components/Loader';
 import searchErrorNotFound from './components/notifyErrors';
-import refs from './refs';
-import localStorageAPI from './localStorageAPI';
 
 const loader = new Loader('.js-loader', 'is-hidden');
 const fetchedMoviesHandler = (queryType) => {
@@ -44,12 +42,10 @@ const fetchedMoviesHandler = (queryType) => {
       getMovieFromID(queryType)
         .then((movie) => {
           globalVars.currentMovie = movie;
-
           const instance = basicLightbox.create(
             updateMoviesMarkup.showModalTemplate(movie),
             modalOptions
           );
-
           instance.show();
         })
         .finally(() => {});

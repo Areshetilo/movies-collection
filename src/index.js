@@ -18,8 +18,12 @@ import fetchRequestToken from './js/APIService/requestToken';
 import fetchSessionID from './js/APIService/getSessionID';
 import showLibraryTabs from './js/libraryTabs/showLibraryTabs';
 import hideLibraryTabs from './js/libraryTabs/hideLibraryTabs';
-import LocalStorageAPI from './js/localStorageAPI';
-import modalOptions from './js/modalOptions';
+import localStorageAPI from './js/localStorageAPI';
+import modalOptions from './js/components/modal/modalOptions';
+import {
+  checkFilmHandler,
+  closeModalEscapeHandler,
+} from './js/components/modal/modalListener';
 
 function loadData() {
   return new Promise((resolve, reject) => {
@@ -33,7 +37,7 @@ loadData().then(() => {
   preloaderEl.classList.remove('visible');
 });
 
-const localStorageAPI = new LocalStorageAPI();
+// const localStorageAPI = new LocalStorageAPI();
 
 loadOnScroll();
 console.log('running populars fetch');
@@ -66,9 +70,20 @@ const galleryClickHandler = ({ target }) => {
         modalOptions
       );
       instance.show();
+      window.addEventListener('keydown', closeModalEscapeHandler);
     } else {
       fetchedMoviesHandler(movieID);
     }
+  }
+};
+
+const showSavedMovie = (idTab) => {
+  if (localStorageAPI.getMovies(idTab).length > 0) {
+    updateMoviesMarkup.show(localStorageAPI.getMovies(idTab));
+  } else if (idTab === 'watchedMovies') {
+    updateMoviesMarkup.defaultMsg('Вы не просмотрели ни одного фильма');
+  } else {
+    updateMoviesMarkup.defaultMsg('У вас нет очереди к просмотру');
   }
 };
 
@@ -76,7 +91,9 @@ const showLibraryHandler = ({ target: { value } }) => {
   if (value === 'library') {
     showLibraryTabs();
     updateMoviesMarkup.reset();
-    refs.queueTab.checked ? showSavedMovieQueue() : showSavedMovieWatched();
+    refs.queueTab.checked
+      ? showSavedMovie('queueMovies')
+      : showSavedMovie('watchedMovies');
   }
   if (value === 'tmdb') {
     showLibraryTabs();
@@ -101,28 +118,28 @@ const showSavedMovieFromGrade = (e) => {
     updateMoviesMarkup.reset();
     globalVars.activeTab = e.target.value;
 
-    if (e.target.value === 'watched') {
-      showSavedMovieWatched();
-    } else if (e.target.value === 'queue') {
-      showSavedMovieQueue();
+    if (e.target.value === 'watchedMovies') {
+      showSavedMovie(e.target.value);
+    } else if (e.target.value === 'queueMovies') {
+      showSavedMovie(e.target.value);
     }
     lazyLoad();
   }
 };
 
-const showSavedMovieWatched = () => {
-  globalVars.activeTab = 'watched';
-  localStorageAPI.getMovies('watchedMovies').length > 0
-    ? updateMoviesMarkup.show(localStorageAPI.getMovies('watchedMovies'))
-    : updateMoviesMarkup.defaultMsg('Вы не просмотрели ни одного фильма');
-};
-
-const showSavedMovieQueue = () => {
-  globalVars.activeTab = 'queue';
-  localStorageAPI.getMovies('queueMovies').length > 0
-    ? updateMoviesMarkup.show(localStorageAPI.getMovies('queueMovies'))
-    : updateMoviesMarkup.defaultMsg('У вас нет очереди к просмотру');
-};
+// const showSavedMovieWatched = () => {
+//   globalVars.activeTab = 'watched';
+//   localStorageAPI.getMovies('watchedMovies').length > 0
+//     ? updateMoviesMarkup.show(localStorageAPI.getMovies('watchedMovies'))
+//     : updateMoviesMarkup.defaultMsg('Вы не просмотрели ни одного фильма');
+// };
+//
+// const showSavedMovieQueue = () => {
+//   globalVars.activeTab = 'queue';
+//   localStorageAPI.getMovies('queueMovies').length > 0
+//     ? updateMoviesMarkup.show(localStorageAPI.getMovies('queueMovies'))
+//     : updateMoviesMarkup.defaultMsg('У вас нет очереди к просмотру');
+// };
 
 const tmdbButtonHandler = () => {
   fetchSessionID(globalVars.requestToken).then(
@@ -141,29 +158,5 @@ refs.toTop.addEventListener('click', function () {
 
 refs.headNav.addEventListener('click', showLibraryHandler);
 refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
-
-document.addEventListener(
-  'click',
-  (event) => {
-    if (event.target.id === 'btnW') {
-      localStorageAPI.toggleMovie(globalVars.watched);
-      if (event.target.textContent === 'add to watched') {
-        document.querySelector('#btnW').innerHTML = 'delete from watched';
-        document.querySelector('#btnQ').innerHTML = 'add to queue';
-      } else {
-        document.querySelector('#btnW').innerHTML = 'add to watched';
-      }
-    } else if (event.target.id === 'btnQ') {
-      localStorageAPI.toggleMovie(globalVars.queue);
-      if (event.target.textContent === 'add to queue') {
-        document.querySelector('#btnQ').innerHTML = 'delete from queue';
-        document.querySelector('#btnW').innerHTML = 'add to watched';
-      } else {
-        document.querySelector('#btnQ').innerHTML = 'add to queue';
-      }
-    }
-  },
-  false
-);
-
+document.addEventListener('click', checkFilmHandler);
 window.addEventListener('scroll', throttle(isVisible, 500));
