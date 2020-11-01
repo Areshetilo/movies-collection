@@ -40,14 +40,16 @@ class LocalStorageAPI{
   }
 
   deleteMovie(keyStorage, movieID) {
-    keyStorage === "watchedMovies" ?
-      localStorage.setItem('watchedMovies', JSON.stringify(this.getMovies('watchedMovies').filter(film => film.id !== movieID))) :
-      localStorage.setItem('queueMovies', JSON.stringify(this.getMovies('queueMovies').filter(film => film.id !== movieID)));
+    if(keyStorage === "watchedMovies"){
+      localStorage.setItem('watchedMovies', JSON.stringify(this.getMovies('watchedMovies').filter(film => film.id !== movieID)));
+      return;
+    }
+    localStorage.setItem('queueMovies', JSON.stringify(this.getMovies('queueMovies').filter(film => film.id !== movieID)));
   }
 
 
   getMovies(keyStorage) {
-    return localStorage.getItem(keyStorage) ? JSON.parse(localStorage.getItem(keyStorage)) : []
+    return localStorage.getItem(keyStorage) ? JSON.parse(localStorage.getItem(keyStorage)) : [];
 
   }
 

@@ -1,34 +1,29 @@
-import "basiclightbox/dist/basicLightbox.min.css";
-import * as basicLightbox from 'basiclightbox'
-import imagesService from './moviesAPI-service';
+import 'basiclightbox/dist/basicLightbox.min.css';
+import * as basicLightbox from 'basiclightbox';
+import moviesService from './APIService/moviesAPI-service';
 import globalVars from './globalVars/vars';
 import updateMoviesMarkup from './updateMoviesMarkup';
-import modalOptions from "./modalOptions";
+import modalOptions from './modalOptions';
 import lazyLoad from './components/lazyLoad';
 import Loader from './components/Loader';
-import refs from "./refs";
-import localStorageAPI from "./localStorageAPI";
+import searchErrorNotFound from './components/notifyErrors';
+import refs from './refs';
+import localStorageAPI from './localStorageAPI';
 
 const loader = new Loader('.js-loader', 'is-hidden');
-
-
-
-
 const fetchedMoviesHandler = (queryType) => {
   const getMovies = async () => {
-     return  queryType === 'search' ?
-      imagesService.fetchMovies() :
-      imagesService.fetchPopularMovies()
-    }
+    return queryType === 'search'
+      ? moviesService.fetchMovies()
+      : moviesService.fetchPopularMovies();
+  };
 
   const getMovieFromID = async (queryType) => {
-    return imagesService.fetchForID(queryType);
-  }
-
+    return moviesService.fetchForID(queryType);
+  };
 
   (function () {
-    if (queryType === 'search' || queryType === 'popular'){
-
+    if (queryType === 'search' || queryType === 'popular') {
       loader.show();
       getMovies()
         .then((movies) => {
@@ -41,6 +36,7 @@ const fetchedMoviesHandler = (queryType) => {
             lazyLoad();
           }
         })
+        .catch((err) => searchErrorNotFound(err))
         .finally(() => {
           loader.hide();
         });
@@ -57,7 +53,5 @@ const fetchedMoviesHandler = (queryType) => {
   }())
 
 };
-
-
 
 export default fetchedMoviesHandler;
