@@ -4,7 +4,7 @@ import '@pnotify/core/dist/BrightTheme.css';
 import 'basiclightbox/dist/basicLightbox.min.css';
 import throttle from 'lodash.throttle';
 import refs from './js/refs';
-import imagesService from './js/moviesAPI-service';
+import moviesService from './js/APIService/moviesAPI-service';
 import updateMoviesMarkup from './js/updateMoviesMarkup';
 import lazyLoad from './js/components/lazyLoad';
 import loadOnScroll from './js/components/loadOnScroll';
@@ -14,9 +14,12 @@ import * as basicLightbox from 'basiclightbox';
 // import filmsList from './js/currentFilmList';
 import localStorageAPI from './js/localStorageAPI';
 import globalVars from './js/globalVars/vars';
-import showLightbox from './js/showLightbox';
 import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import searchErrorNotFound from './js/components/notifyErrors';
+import fetchRequestToken from './js/APIService/requestToken';
+import fetchSessionID from './js/APIService/getSessionID';
+import showLibraryTabs from './js/libraryTabs/showLibraryTabs';
+import hideLibraryTabs from './js/libraryTabs/hideLibraryTabs';
 
 function loadData() {
   return new Promise((resolve, reject) => {
@@ -47,29 +50,37 @@ const submitHandler = (e) => {
   globalVars.searchQuery = inputValue;
   globalVars.moviesArr = [];
   updateMoviesMarkup.reset();
-  imagesService.resetPage();
+  moviesService.resetPage();
   fetchedMoviesHandler('search');
   e.currentTarget.reset();
 };
 
 const galleryClickHandler = ({ target }) => {
   if (target.nodeName === 'DIV') {
-    const  movieID =  target.children[0].dataset.id;
-    console.log(movieID +' movieID')
+    const movieID = target.children[0].dataset.id;
+    console.log(movieID + ' movieID');
     fetchedMoviesHandler(movieID);
   }
 };
 
-const showLibrary = (e) => {
-  if (e.target.value === 'library') {
-    refs.sectionWatched.classList.add('visibility');
-    refs.searchForm.classList.add('unVisibility');
+const showLibraryHandler = ({ target: { value } }) => {
+  if (value === 'library') {
+    showLibraryTabs();
     updateMoviesMarkup.reset();
     refs.queueTab.checked ? showSavedMovieQueue() : showSavedMovieWatched();
-  } else if (e.target.value === 'homePage') {
-    globalVars.activeTab = e.target.value;
-    refs.sectionWatched.classList.remove('visibility');
-    refs.searchForm.classList.remove('unVisibility');
+  }
+  if (value === 'tmdb') {
+    showLibraryTabs();
+    updateMoviesMarkup.reset();
+    fetchRequestToken().then((requestToken) => {
+      console.log(requestToken);
+      refs.tmdbLink.href = `https://www.themoviedb.org/authenticate/${requestToken}`;
+      globalVars.requestToken = requestToken;
+    });
+  }
+  if (value === 'homePage') {
+    globalVars.activeTab = value;
+    hideLibraryTabs();
     updateMoviesMarkup.reset();
     updateMoviesMarkup.show(globalVars.moviesArr);
   }
@@ -106,13 +117,19 @@ const showSavedMovieQueue = () => {
     : updateMoviesMarkup.defaultMsg('У вас нет очереди к просмотру');
 };
 
-refs.searchForm.addEventListener('submit', submitHandler);
+const tmdbButtonHandler = () => {
+  fetchSessionID(globalVars.requestToken).then(
+    (sessionID) => (globalVars.sessionID = sessionID)
+  );
+};
+
 refs.gallery.addEventListener('click', galleryClickHandler);
+refs.headNav.addEventListener('click', showLibraryHandler);
+refs.searchForm.addEventListener('submit', submitHandler);
+refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
+refs.tmdbButton.addEventListener('click', tmdbButtonHandler);
 refs.toTop.addEventListener('click', function () {
   scrollToTop(30);
 });
-
-refs.headNav.addEventListener('click', showLibrary);
-refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
 
 window.addEventListener('scroll', throttle(isVisible, 500));

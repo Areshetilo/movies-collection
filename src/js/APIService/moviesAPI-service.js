@@ -1,5 +1,5 @@
-import searchErrorNotFound from './components/notifyErrors';
-import globalVars from './globalVars/vars';
+import searchErrorNotFound from '../components/notifyErrors';
+import globalVars from '../globalVars/vars';
 
 const API_V3 = 'fbc3bc6c91e2bf410b7bbf6ff5567525';
 const API_V4 =
@@ -7,18 +7,18 @@ const API_V4 =
 const url = 'https://api.themoviedb.org/3';
 const popularURL = `${url}/movie/popular?language=en-US`;
 const searchURL = `${url}/search/movie?language=en-US&include_adult=true`;
-const targetURL=`${url}/find`;
+const targetURL = `${url}/find`;
 
 const options = {
   method: 'GET',
   headers: {
     Authorization: `Bearer ${API_V4}`,
     'Content-Type': 'application/json',
-    'Accept-Charset': 'utf-8'
-  }
+    'Accept-Charset': 'utf-8',
+  },
 };
 
-const imagesService = {
+const moviesService = {
   _searchQuery: '',
   _page: 1,
   _totalPages: 1,
@@ -49,21 +49,26 @@ const imagesService = {
     console.log('increment page:', this._page);
   },
 
-  fetchPopularMovies() {
+  async fetchPopularMovies() {
     if (this.page <= this.totalPages) {
-      return fetch(`${popularURL}&page=${this.page}`, options)
-        .then((res) => res.json())
-        .then((res) => {
-          if (!res.results.length) {
-            throw new Error('Oops, something went wrong');
+      try {
+        const popularMovies = await fetch(
+          `${popularURL}&page=${this.page}`,
+          options
+        ).then((res) => {
+          if (res.status === 200) {
+            return res.json();
+          } else {
+            throw new Error("Oops, something happened, we're are fixing it");
           }
-          this.totalPages = res.total_pages;
-          this.incrementPage();
-          return res.results;
-        })
-        .catch((err) => {
-          searchErrorNotFound(err);
         });
+        console.log(popularMovies);
+        this.totalPages = popularMovies.total_pages;
+        this.incrementPage();
+        return popularMovies.results;
+      } catch (err) {
+        throw err;
+      }
     }
   },
 
@@ -89,14 +94,12 @@ const imagesService = {
     }
   },
 
-  fetchForID(targetID){
-    return fetch( `https://api.themoviedb.org/3/movie/${targetID}?api_key=${API_V4}>>&language=en-US`,
-      options)
-      .then((res)=>res.json());
-
-
-
-  }
+  fetchForID(targetID) {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${targetID}?api_key=${API_V4}>>&language=en-US`,
+      options
+    ).then((res) => res.json());
+  },
 };
 
-export default imagesService;
+export default moviesService;

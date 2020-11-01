@@ -1,13 +1,13 @@
 const refs = {
-  gallery: document.querySelector('.gallery'),
-  searchForm: document.querySelector('#search-form'),
-  toTop: document.getElementById('goto-topJS'),
   bottom: document.querySelector('.bottom'),
+  gallery: document.querySelector('.gallery'),
   headNav: document.querySelector('.head_toggle'),
-  sectionWatched: document.querySelector('.main-watched'),
+  modalWrap: document.querySelector('.modal-wrap'),
   queueTab: document.querySelector('#queue'),
-  modalWrap:document.querySelector('.modal-wrap')
-
-
+  searchForm: document.querySelector('#search-form'),
+  sectionWatched: document.querySelector('.main-watched'),
+  tmdbButton: document.querySelector('.tmdb-button'),
+  tmdbLink: document.querySelector('.tmdb-link'),
+  toTop: document.getElementById('goto-topJS'),
 };
 export default refs;
