@@ -6,7 +6,9 @@ const refs = {
   headNav: document.querySelector('.head_toggle'),
   sectionWatched: document.querySelector('.main-watched'),
   queueTab: document.querySelector('#queue'),
-  modalWrap:document.querySelector('.modal-wrap')
+  modalWrap:document.querySelector('.modal-wrap'),
+  btnWatched:document.querySelector('#btnW'),
+  btnQueue:document.querySelector('#btnQ')
 
 
 };

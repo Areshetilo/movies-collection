@@ -12,11 +12,16 @@ import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
 import * as basicLightbox from 'basiclightbox';
 // import filmsList from './js/currentFilmList';
-import localStorageAPI from './js/localStorageAPI';
+
 import globalVars from './js/globalVars/vars';
 import showLightbox from './js/showLightbox';
 import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import searchErrorNotFound from './js/components/notifyErrors';
+import LocalStorageAPI from "./js/localStorageAPI";
+import modalOptions from "./js/modalOptions";
+
+
+
 
 function loadData() {
   return new Promise((resolve, reject) => {
@@ -29,6 +34,8 @@ loadData().then(() => {
   preloaderEl.classList.add('hidden');
   preloaderEl.classList.remove('visible');
 });
+
+const localStorageAPI = new LocalStorageAPI();
 
 loadOnScroll();
 console.log('running populars fetch');
@@ -52,11 +59,16 @@ const submitHandler = (e) => {
   e.currentTarget.reset();
 };
 
-const galleryClickHandler = ({ target }) => {
+const galleryClickHandler = ({ target}) => {
   if (target.nodeName === 'DIV') {
     const  movieID =  target.children[0].dataset.id;
-    console.log(movieID +' movieID')
-    fetchedMoviesHandler(movieID);
+    if(localStorageAPI.checkMovie(movieID)){
+      const instance = basicLightbox.create(updateMoviesMarkup.showModalTemplate(globalVars.currentMovie), modalOptions);
+      instance.show()
+    }else{
+      fetchedMoviesHandler(movieID);
+    }
+
   }
 };
 
@@ -94,15 +106,15 @@ const runLoadScroll = () => {};
 
 const showSavedMovieWatched = () => {
   globalVars.activeTab = 'watched';
-  localStorageAPI.getWatchedMovies()
-    ? updateMoviesMarkup.show(localStorageAPI.getWatchedMovies())
+  localStorageAPI.getMovies('watchedMovies').length>0
+    ? updateMoviesMarkup.show(localStorageAPI.getMovies('watchedMovies'))
     : updateMoviesMarkup.defaultMsg('Вы не просмотрели ни одного фильма');
 };
 
 const showSavedMovieQueue = () => {
   globalVars.activeTab = 'queue';
-  localStorageAPI.getQueueMovies()
-    ? updateMoviesMarkup.show(localStorageAPI.getQueueMovies())
+  localStorageAPI.getMovies('queueMovies').length>0
+    ? updateMoviesMarkup.show(localStorageAPI.getMovies('queueMovies'))
     : updateMoviesMarkup.defaultMsg('У вас нет очереди к просмотру');
 };
 
@@ -115,4 +127,33 @@ refs.toTop.addEventListener('click', function () {
 refs.headNav.addEventListener('click', showLibrary);
 refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
 
+
+document.addEventListener("click", event => {
+
+  if (event.target.id === 'btnW') {
+    localStorageAPI.toggleMovie(globalVars.watched)
+    if (event.target.textContent ==="add to watched"){
+      document.querySelector('#btnW').innerHTML = "delete from watched"
+      document.querySelector('#btnQ').innerHTML = "add to queue";
+    }else{
+      document.querySelector('#btnW').innerHTML = "add to watched";
+    }
+  }else if(event.target.id === 'btnQ'){
+    localStorageAPI.toggleMovie(globalVars.queue)
+    if (event.target.textContent ==="add to queue"){
+      document.querySelector('#btnQ').innerHTML = "delete from queue"
+      document.querySelector('#btnW').innerHTML = "add to watched";
+    }else{
+      document.querySelector('#btnQ').innerHTML = "add to queue";
+    }
+
+  }
+}, false);
+
+
 window.addEventListener('scroll', throttle(isVisible, 500));
+
+
+
+
+

@@ -6,6 +6,8 @@ import updateMoviesMarkup from './updateMoviesMarkup';
 import modalOptions from "./modalOptions";
 import lazyLoad from './components/lazyLoad';
 import Loader from './components/Loader';
+import refs from "./refs";
+import localStorageAPI from "./localStorageAPI";
 
 const loader = new Loader('.js-loader', 'is-hidden');
 
@@ -22,7 +24,6 @@ const fetchedMoviesHandler = (queryType) => {
   const getMovieFromID = async (queryType) => {
     return imagesService.fetchForID(queryType);
   }
-
 
 
   (function () {
@@ -45,10 +46,12 @@ const fetchedMoviesHandler = (queryType) => {
         });
     }else{
       getMovieFromID(queryType).then(movie=>{
+        globalVars.currentMovie = movie;
         const instance = basicLightbox.create(updateMoviesMarkup.showModalTemplate(movie), modalOptions);
         instance.show()
+
       }).finally(()=>{
-        loader.hide()
+
       })
     }
   }())

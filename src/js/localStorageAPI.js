@@ -1,64 +1,73 @@
 import globalVars from "./globalVars/vars";
 
 
+class LocalStorageAPI{
 
+  constructor() {
+    this.toggleMovie = this.toggleMovie.bind(this);
+    this.checkMovie = this.checkMovie.bind(this);
+  }
 
+  toggleMovie(flagMovie) {
+    let movie = globalVars.currentMovie;
 
-const localStorageAPI = {
-
-
-  setAll(movie) {
-    localStorage.setItem('watchedMovies', JSON.stringify(movie))
-  },
-
-  toggleWatchedMovie(movie) {
-
-    if (this.getMovie(movie) === globalVars.watched) {
-      localStorage.setItem('watchedMovies', JSON.stringify(this.getWatchedMovies().filter(film => film.id !== movie.id)));
-      return true
+    if (this.checkMovie(movie.id) === globalVars.watched) {
+      this.deleteMovie('watchedMovies', movie.id);
+      if (flagMovie === globalVars.queue) {
+        this.addMovie(flagMovie, movie);
+      }
+      return;
+    } else if (this.checkMovie(movie.id) === globalVars.queue) {
+      this.deleteMovie('queueMovies', movie.id);
+      if (flagMovie === globalVars.watched) {
+        this.addMovie(flagMovie, movie);
+      }
+      return;
     }
-    this.toggleQueueMovie(movie) &&
-    localStorage.setItem('queueMovies', JSON.stringify(this.getQueueMovies().filter(film => film.id !== movie.id)));
+    this.addMovie(flagMovie, movie);
+  }
 
-
-    localStorage.setItem('watchedMovies', JSON.stringify([movie, ...this.getWatchedMovies()]));
-  },
-
-  toggleQueueMovie(movie) {
-    if (this.getMovie(movie) === globalVars.queue) {
-      localStorage.setItem('queueMovies', JSON.stringify(this.getQueueMovies().filter(film => film.id !== movie.id)));
-      return true
+  addMovie(flagMovie, movie) {
+    if (flagMovie === globalVars.watched) {
+      movie.watched = true;
+      movie.queue = null;
+      localStorage.setItem('watchedMovies', JSON.stringify([movie, ...this.getMovies('watchedMovies')]));
+    } else {
+      movie.queue = true;
+      movie.watched = null;
+      localStorage.setItem('queueMovies', JSON.stringify([movie, ...this.getMovies('queueMovies')]));
     }
-    this.toggleWatchedMovie(movie) &&
-    localStorage.setItem('watchedMovies', JSON.stringify(this.getWatchedMovies().filter(film => film.id !== movie.id)));
+  }
 
-    localStorage.setItem('queueMovies', JSON.stringify([movie, ...this.getQueueMovies()]));
-  },
+  deleteMovie(keyStorage, movieID) {
+    keyStorage === "watchedMovies" ?
+      localStorage.setItem('watchedMovies', JSON.stringify(this.getMovies('watchedMovies').filter(film => film.id !== movieID))) :
+      localStorage.setItem('queueMovies', JSON.stringify(this.getMovies('queueMovies').filter(film => film.id !== movieID)));
+  }
 
 
-  getWatchedMovies() {
-    if (localStorage.getItem('watchedMovies')) {
-      return JSON.parse(localStorage.getItem('watchedMovies'))
+  getMovies(keyStorage) {
+    return localStorage.getItem(keyStorage) ? JSON.parse(localStorage.getItem(keyStorage)) : []
+
+  }
+
+  findForID(ID, key) {
+    return this.getMovies(key).find(film => film.id === +ID);
+  }
+
+
+  checkMovie(movieID) {
+    if (this.getMovies('watchedMovies').length > 0 || this.getMovies('queueMovies').length > 0) {
+      if (this.findForID(movieID, 'watchedMovies')) {
+        globalVars.currentMovie = this.getMovies('watchedMovies').find(film => film.id === +movieID)
+        return globalVars.watched;
+      } else if (this.findForID(movieID, 'queueMovies')) {
+        globalVars.currentMovie = this.getMovies('queueMovies').find(film => film.id === +movieID)
+        return globalVars.queue;
+      }
     }
-
-  },
-  getQueueMovies() {
-    if (localStorage.getItem('queueMovies')) {
-      return JSON.parse(localStorage.getItem('queueMovies'))
-    }
-  },
-
-
-  getMovie(movie) {
-
-    if (this.getWatchedMovies().find(film => film.id === movie.id)) {
-      return globalVars.watched;
-    } else if (this.getQueueMovies().find(film => film.id === movie.id)) {
-      return globalVars.queue;
-    }
-
   }
 }
 
 
-export default  localStorageAPI;
+export default LocalStorageAPI;
