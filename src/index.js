@@ -20,7 +20,7 @@ import LocalStorageAPI from './js/localStorageAPI';
 import modalOptions from './js/modalOptions';
 
 function loadData() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(resolve, 2000);
   });
 }
@@ -56,8 +56,9 @@ const submitHandler = (e) => {
 };
 
 const galleryClickHandler = ({ target }) => {
-  if (target.nodeName === 'DIV') {
-    const movieID = target.children[0].dataset.id;
+  const card = target.closest('.movie-card');
+  if (target.closest('.movie-card').nodeName === 'DIV') {
+    const movieID = card.children[0].dataset.id;
     if (localStorageAPI.checkMovie(movieID)) {
       const instance = basicLightbox.create(
         updateMoviesMarkup.showModalTemplate(globalVars.currentMovie),
@@ -68,6 +69,20 @@ const galleryClickHandler = ({ target }) => {
       fetchedMoviesHandler(movieID);
     }
   }
+};
+
+const showSavedMovieWatched = () => {
+  globalVars.activeTab = 'watched';
+  localStorageAPI.getMovies('watchedMovies').length > 0
+    ? updateMoviesMarkup.show(localStorageAPI.getMovies('watchedMovies'))
+    : updateMoviesMarkup.defaultMsg('Вы не просмотрели ни одного фильма');
+};
+
+const showSavedMovieQueue = () => {
+  globalVars.activeTab = 'queue';
+  localStorageAPI.getMovies('queueMovies').length > 0
+    ? updateMoviesMarkup.show(localStorageAPI.getMovies('queueMovies'))
+    : updateMoviesMarkup.defaultMsg('У вас нет очереди к просмотру');
 };
 
 const showLibraryHandler = ({ target: { value } }) => {
@@ -98,20 +113,6 @@ const showSavedMovieFromGrade = (e) => {
     }
     lazyLoad();
   }
-};
-
-const showSavedMovieWatched = () => {
-  globalVars.activeTab = 'watched';
-  localStorageAPI.getMovies('watchedMovies').length > 0
-    ? updateMoviesMarkup.show(localStorageAPI.getMovies('watchedMovies'))
-    : updateMoviesMarkup.defaultMsg('Вы не просмотрели ни одного фильма');
-};
-
-const showSavedMovieQueue = () => {
-  globalVars.activeTab = 'queue';
-  localStorageAPI.getMovies('queueMovies').length > 0
-    ? updateMoviesMarkup.show(localStorageAPI.getMovies('queueMovies'))
-    : updateMoviesMarkup.defaultMsg('У вас нет очереди к просмотру');
 };
 
 refs.gallery.addEventListener('click', galleryClickHandler);

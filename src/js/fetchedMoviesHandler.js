@@ -7,8 +7,6 @@ import modalOptions from './modalOptions';
 import lazyLoad from './components/lazyLoad';
 import Loader from './components/Loader';
 import searchErrorNotFound from './components/notifyErrors';
-import refs from './refs';
-import localStorageAPI from './localStorageAPI';
 
 const loader = new Loader('.js-loader', 'is-hidden');
 const fetchedMoviesHandler = (queryType) => {
@@ -18,6 +16,7 @@ const fetchedMoviesHandler = (queryType) => {
       : moviesService.fetchPopularMovies();
   };
 
+  // eslint-disable-next-line no-shadow
   const getMovieFromID = async (queryType) => {
     return moviesService.fetchForID(queryType);
   };
@@ -26,8 +25,8 @@ const fetchedMoviesHandler = (queryType) => {
     if (queryType === 'search' || queryType === 'popular') {
       loader.show();
       getMovies()
-        .then((movies) => {
-          movies = movies ?? [];
+        .then((moviesArr) => {
+          const movies = moviesArr ?? [];
           console.log('movies:', movies);
           if (movies.length) {
             globalVars.moviesArr = [...globalVars.moviesArr, ...movies];
@@ -40,18 +39,19 @@ const fetchedMoviesHandler = (queryType) => {
         .finally(() => {
           loader.hide();
         });
-    }else{
-      getMovieFromID(queryType).then(movie=>{
-        globalVars.currentMovie = movie;
-        const instance = basicLightbox.create(updateMoviesMarkup.showModalTemplate(movie), modalOptions);
-        instance.show()
-
-      }).finally(()=>{
-
-      })
+    } else {
+      getMovieFromID(queryType)
+        .then((movie) => {
+          globalVars.currentMovie = movie;
+          const instance = basicLightbox.create(
+            updateMoviesMarkup.showModalTemplate(movie),
+            modalOptions
+          );
+          instance.show();
+        })
+        .finally(() => {});
     }
-  }())
-
+  })();
 };
 
 export default fetchedMoviesHandler;
