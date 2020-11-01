@@ -20,9 +20,7 @@ const updateMoviesMarkup = {
   },
 
   showModalTemplate(movie){
-    console.log(movie);
     const  make = movieModalTemplate(movie)
-    console.log(make)
     return  make;
   }
 };

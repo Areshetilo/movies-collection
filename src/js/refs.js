@@ -9,5 +9,10 @@ const refs = {
   tmdbButton: document.querySelector('.tmdb-button'),
   tmdbLink: document.querySelector('.tmdb-link'),
   toTop: document.getElementById('goto-topJS'),
+  modalWrap:document.querySelector('.modal-wrap'),
+  btnWatched:document.querySelector('#btnW'),
+  btnQueue:document.querySelector('#btnQ')
+
+
 };
 export default refs;

@@ -6,6 +6,24 @@ const globalVars = {
   _searchQuery: '',
   _sessionID: '',
   _watched: 'watched',
+  _currentMovie: null,
+  _isOpenModal: false,
+
+
+  set isOpenModal(isOpen){
+    this._isOpenModal = true;
+  },
+  get isOpenModal(){
+    return this._isOpenModal
+  },
+
+
+  set currentMovie(movie){
+    this._currentMovie = movie;
+  },
+  get currentMovie(){
+    return this._currentMovie
+  },
 
   set activeTab(nameTab) {
     this._activeTab = nameTab;

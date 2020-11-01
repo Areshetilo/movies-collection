@@ -41,15 +41,30 @@
             {{overview}}
           </p>
           <div class="card-button__wrapper">
-            <button data-name="watched" class="modal-btn card-button__watched" type="button">add to watched</button>
-            <button data-name="queue" class="modal-btn card-button__queue" type="button">add to queue</button>
+
+
+
+            {{#if watched}}
+              <button data-name="watched" class="modal-btn card-button__watched" id="btnW" type="button">delete from watched</button>
+            {{else}}
+              <button data-name="watched" class="modal-btn card-button__watched" id="btnW" type="button">add to watched</button>
+            {{/if}}
+
+            {{#if queue}}
+              <button data-name="queue" class="modal-btn card-button__queue" id="btnQ" type="button">delete from queue</button>
+            {{else}}
+              <button data-name="queue" class="modal-btn card-button__queue" id="btnQ" type="button">add to queue</button>
+            {{/if}}
+
+
+
+
           </div>
         </div>
       </div>
 
     </div>
   </div>
-
 
 
 
