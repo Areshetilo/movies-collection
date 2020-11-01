@@ -11,7 +11,6 @@ import loadOnScroll from './js/components/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
 import * as basicLightbox from 'basiclightbox';
-
 import globalVars from './js/globalVars/vars';
 import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import searchErrorNotFound from './js/components/notifyErrors';
@@ -142,5 +141,29 @@ refs.toTop.addEventListener('click', function () {
 
 refs.headNav.addEventListener('click', showLibraryHandler);
 refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
+
+document.addEventListener(
+  'click',
+  (event) => {
+    if (event.target.id === 'btnW') {
+      localStorageAPI.toggleMovie(globalVars.watched);
+      if (event.target.textContent === 'add to watched') {
+        document.querySelector('#btnW').innerHTML = 'delete from watched';
+        document.querySelector('#btnQ').innerHTML = 'add to queue';
+      } else {
+        document.querySelector('#btnW').innerHTML = 'add to watched';
+      }
+    } else if (event.target.id === 'btnQ') {
+      localStorageAPI.toggleMovie(globalVars.queue);
+      if (event.target.textContent === 'add to queue') {
+        document.querySelector('#btnQ').innerHTML = 'delete from queue';
+        document.querySelector('#btnW').innerHTML = 'add to watched';
+      } else {
+        document.querySelector('#btnQ').innerHTML = 'add to queue';
+      }
+    }
+  },
+  false
+);
 
 window.addEventListener('scroll', throttle(isVisible, 500));
