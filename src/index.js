@@ -14,8 +14,6 @@ import localStorageAPI from './js/localStorageAPI';
 import globalVars from './js/globalVars/vars';
 import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import searchErrorNotFound from './js/components/notifyErrors';
-import fetchRequestToken from './js/APIService/requestToken';
-import fetchSessionID from './js/APIService/getSessionID';
 import showLibraryTabs from './js/libraryTabs/showLibraryTabs';
 import hideLibraryTabs from './js/libraryTabs/hideLibraryTabs';
 
@@ -67,15 +65,7 @@ const showLibraryHandler = ({ target: { value } }) => {
     updateMoviesMarkup.reset();
     refs.queueTab.checked ? showSavedMovieQueue() : showSavedMovieWatched();
   }
-  if (value === 'tmdb') {
-    showLibraryTabs();
-    updateMoviesMarkup.reset();
-    fetchRequestToken().then((requestToken) => {
-      console.log(requestToken);
-      refs.tmdbLink.href = `https://www.themoviedb.org/authenticate/${requestToken}`;
-      globalVars.requestToken = requestToken;
-    });
-  }
+
   if (value === 'homePage') {
     globalVars.activeTab = value;
     hideLibraryTabs();
@@ -113,17 +103,10 @@ const showSavedMovieQueue = () => {
     : updateMoviesMarkup.defaultMsg('У вас нет очереди к просмотру');
 };
 
-const tmdbButtonHandler = () => {
-  fetchSessionID(globalVars.requestToken).then(
-    (sessionID) => (globalVars.sessionID = sessionID)
-  );
-};
-
 refs.gallery.addEventListener('click', galleryClickHandler);
 refs.headNav.addEventListener('click', showLibraryHandler);
 refs.searchForm.addEventListener('submit', submitHandler);
 refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
-refs.tmdbButton.addEventListener('click', tmdbButtonHandler);
 refs.toTop.addEventListener('click', function () {
   scrollToTop(30);
 });
