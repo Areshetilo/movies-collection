@@ -7,6 +7,7 @@ import modalOptions from './components/modal/modalOptions';
 import lazyLoad from './components/lazyLoad';
 import Loader from './components/Loader';
 import searchErrorNotFound from './components/notifyErrors';
+import { updateSwiperMarkup } from './swiper';
 
 const loader = new Loader('.js-loader', 'is-hidden');
 const fetchedMoviesHandler = (queryType) => {
@@ -32,6 +33,7 @@ const fetchedMoviesHandler = (queryType) => {
             globalVars.moviesArr = [...globalVars.moviesArr, ...movies];
             console.log('moviesArr: ', globalVars.moviesArr);
             updateMoviesMarkup.show(movies);
+            updateSwiperMarkup.show(movies);
             lazyLoad();
           }
         })

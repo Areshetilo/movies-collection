@@ -18,7 +18,7 @@ import showLibraryTabs from './js/libraryTabs/showLibraryTabs';
 import hideLibraryTabs from './js/libraryTabs/hideLibraryTabs';
 import localStorageAPI from './js/localStorageAPI';
 import modalOptions from './js/components/modal/modalOptions';
-import { updateSwiperMarkup, mySwiper } from './js/swiper';
+import { mySwiper } from './js/swiper';
 import {
   checkFilmHandler,
   closeModalEscapeHandler,
@@ -77,7 +77,6 @@ const galleryClickHandler = ({ target }) => {
   }
 };
 
-updateSwiperMarkup.show('popular');
 mySwiper.init();
 
 const showSavedMovie = (idTab) => {
