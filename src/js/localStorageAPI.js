@@ -1,5 +1,5 @@
 import globalVars from './globalVars/vars';
-import updateMoviesMarkup from '../../../Новая папка/movies-collection/movies-collection/src/js/updateMoviesMarkup';
+import updateMoviesMarkup from './updateMoviesMarkup';
 
 const localStorageAPI = {
   toggleMovie(flagMovie) {

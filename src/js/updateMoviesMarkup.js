@@ -1,7 +1,7 @@
 import movieCardTemplate from '../templates/movieCard.hbs';
 import movieModalTemplate from '../templates/imageLightbox.hbs';
 import refs from './refs';
-import lazyLoad from '../../../Новая папка/movies-collection/movies-collection/src/js/components/lazyLoad';
+import lazyLoad from './components/lazyLoad';
 
 const updateMoviesMarkup = {
   show(movies) {

@@ -1,5 +1,5 @@
-import { destroyToasty, showToasty } from '../../updateToasyMarkup';
-import refs from '../../refs';
+import { destroyToasty, showToasty } from '../updateToasyMarkup';
+import refs from '../refs';
 
 const options = { rootMargin: '-60px' };
 const onEntry = (entries) => {

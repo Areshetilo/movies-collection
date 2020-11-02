@@ -24,7 +24,7 @@ import {
   closeModalEscapeHandler,
 } from './js/components/modal/modalListener';
 import showSavedMovie from './js/showSavedMovie';
-import footerObserver from './js/components/modal/footerObserver';
+import footerObserver from './js/components/footerObserver';
 
 loadOnScroll();
 footerObserver();
