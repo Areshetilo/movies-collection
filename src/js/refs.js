@@ -8,10 +8,8 @@ const refs = {
   queueTab: document.querySelector('#queue'),
   searchForm: document.querySelector('#search-form'),
   sectionWatched: document.querySelector('.main-watched'),
-  toTop: document.getElementById('goto-topJS'),
   toasty: document.querySelector('.toasty-wrap'),
-  toastySound: document.querySelector('#pocikAudo'),
-  footer: document.querySelector('.main-footer'),
-  btnW: document.querySelector('#btnW'),
+  toastySound: document.querySelector('#toastySound'),
+  toTop: document.getElementById('goto-topJS'),
 };
 export default refs;
