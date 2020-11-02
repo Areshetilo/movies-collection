@@ -131,6 +131,7 @@
 }
 .item_about {
   color: $additional-text;
+  margin-right: 10px;
   @include for-size(tablet) {
     margin-right: 30px;
   }
