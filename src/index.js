@@ -24,7 +24,7 @@ import {
   checkFilmHandler,
   closeModalEscapeHandler,
 } from './js/components/modal/modalListener';
-// import showSavedMovie from './js/showSavedMovie';
+import showSavedMovie from './js/showSavedMovie';
 
 loadOnScroll();
 console.log('running populars fetch');
@@ -66,17 +66,6 @@ const galleryClickHandler = ({ target }) => {
 };
 
 mySwiper.init();
-
-const showSavedMovie = (idTab) => {
-  globalVars.activeTab = idTab;
-  if (localStorageAPI.getMovies(idTab).length > 0) {
-    updateMoviesMarkup.show(localStorageAPI.getMovies(idTab));
-  } else if (idTab === 'watchedMovies') {
-    updateMoviesMarkup.defaultMsg('Вы не просмотрели ни одного фильма');
-  } else {
-    updateMoviesMarkup.defaultMsg('У вас нет очереди к просмотру');
-  }
-};
 
 const showLibraryHandler = ({ target: { value } }) => {
   if (value === 'library') {
