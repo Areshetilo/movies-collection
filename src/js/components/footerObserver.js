@@ -1,0 +1,20 @@
+import { destroyToasty, showToasty } from '../updateToasyMarkup';
+import refs from '../refs';
+
+const options = { rootMargin: '-60px' };
+const onEntry = (entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      showToasty();
+      destroyToasty();
+    }
+  });
+};
+const intersectionObserver = new IntersectionObserver(onEntry, options);
+
+const footerObserver = () => {
+  intersectionObserver.observe(refs.footer);
+  console.log('observer is running');
+};
+
+export default footerObserver;
