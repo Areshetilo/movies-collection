@@ -6,8 +6,6 @@ import throttle from 'lodash.throttle';
 import refs from './js/refs';
 import moviesService from './js/APIService/moviesAPI-service';
 import updateMoviesMarkup from './js/updateMoviesMarkup';
-import updateSwiperMarkup from './js/swiper';
-import mySwiper from './js/swiper';
 import lazyLoad from './js/components/lazyLoad';
 import loadOnScroll from './js/components/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
@@ -20,6 +18,7 @@ import showLibraryTabs from './js/libraryTabs/showLibraryTabs';
 import hideLibraryTabs from './js/libraryTabs/hideLibraryTabs';
 import localStorageAPI from './js/localStorageAPI';
 import modalOptions from './js/components/modal/modalOptions';
+import { updateSwiperMarkup, mySwiper } from './js/swiper';
 import {
   checkFilmHandler,
   closeModalEscapeHandler,
@@ -38,8 +37,6 @@ loadData().then(() => {
 });
 
 // const localStorageAPI = new LocalStorageAPI();
-updateSwiperMarkup.show('popular');
-mySwiper.init();
 
 loadOnScroll();
 console.log('running populars fetch');
@@ -79,6 +76,9 @@ const galleryClickHandler = ({ target }) => {
     }
   }
 };
+
+updateSwiperMarkup.show('popular');
+mySwiper.init();
 
 const showSavedMovie = (idTab) => {
   globalVars.activeTab = idTab;

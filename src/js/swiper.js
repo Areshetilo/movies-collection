@@ -3,18 +3,14 @@ import refs from './refs';
 import Swiper from 'swiper/bundle';
 import 'swiper/swiper-bundle.css';
 
-const updateSwiperMarkup = {
+export const updateSwiperMarkup = {
   show(movies) {
     const markup = swiperMarkup(movies);
     refs.swiperWrap.insertAdjacentHTML('beforeend', markup);
   },
-  reset() {
-    refs.swiperWrap.innerHTML = '';
-    console.log('убираем разметку');
-  },
 };
 
-const mySwiper = new Swiper('.swiper-container', {
+export const mySwiper = new Swiper('.swiper-container', {
   // Optional parameters
   direction: 'horizontal',
   effect: 'coverflow',
@@ -47,5 +43,3 @@ const mySwiper = new Swiper('.swiper-container', {
     prevEl: '.swiper-button-prev',
   },
 });
-
-export default { updateSwiperMarkup, mySwiper };
