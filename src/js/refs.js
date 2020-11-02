@@ -6,8 +6,6 @@ const refs = {
   queueTab: document.querySelector('#queue'),
   searchForm: document.querySelector('#search-form'),
   sectionWatched: document.querySelector('.main-watched'),
-  tmdbButton: document.querySelector('.tmdb-button'),
-  tmdbLink: document.querySelector('.tmdb-link'),
   toTop: document.getElementById('goto-topJS'),
   modalWrap:document.querySelector('.modal-wrap'),
   btnWatched:document.querySelector('#btnW'),

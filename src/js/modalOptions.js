@@ -1,6 +1,12 @@
-import refs from "./refs";
-import localStorageAPI from "./localStorageAPI";
-import globalVars from "./globalVars/vars";
+import globalVars from './globalVars/vars';
+
+function checkBodyScroll() {
+  if (!globalVars.isOpenModal) {
+    globalVars.isOpenModal = true;
+    console.log('модалка ' + globalVars.isOpenModal);
+  }
+  document.body.classList.toggle('modal-open');
+}
 
 const modalOptions = {
   onShow: () => {
@@ -9,14 +15,4 @@ const modalOptions = {
   onClose: () => checkBodyScroll(),
 };
 
-function checkBodyScroll() {
-  if(!globalVars.isOpenModal){
-    globalVars.isOpenModal = true;
-    console.log("модалка " + globalVars.isOpenModal);
-  }
-  document.body.classList.toggle("modal-open");
-
-}
-
-
-export default modalOptions
+export default modalOptions;

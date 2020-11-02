@@ -1,13 +1,11 @@
 import searchErrorNotFound from '../components/notifyErrors';
 import globalVars from '../globalVars/vars';
 
-const API_V3 = 'fbc3bc6c91e2bf410b7bbf6ff5567525';
 const API_V4 =
   'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmYmMzYmM2YzkxZTJiZjQxMGI3YmJmNmZmNTU2NzUyNSIsInN1YiI6IjVlY2U0YTQxYWFlYzcxMDAyMDY2ZTE3MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.slIvk3yfJxfRtir2YlHit8J3E08usmxRcmm8Plgt87I';
 const url = 'https://api.themoviedb.org/3';
 const popularURL = `${url}/movie/popular?language=en-US`;
 const searchURL = `${url}/search/movie?language=en-US&include_adult=true`;
-const targetURL = `${url}/find`;
 
 const options = {
   method: 'GET',
@@ -58,9 +56,8 @@ const moviesService = {
         ).then((res) => {
           if (res.status === 200) {
             return res.json();
-          } else {
-            throw new Error("Oops, something happened, we're are fixing it");
           }
+          throw new Error("Oops, something happened, we're are fixing it");
         });
         console.log(popularMovies);
         this.totalPages = popularMovies.total_pages;

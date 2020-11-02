@@ -2,27 +2,15 @@ const globalVars = {
   _activeTab: 'homePage',
   _moviesArr: [],
   _queue: 'queue',
-  _requestToken: '',
   _searchQuery: '',
-  _sessionID: '',
   _watched: 'watched',
   _currentMovie: null,
-  _isOpenModal: false,
 
-
-  set isOpenModal(isOpen){
-    this._isOpenModal = true;
-  },
-  get isOpenModal(){
-    return this._isOpenModal
-  },
-
-
-  set currentMovie(movie){
+  set currentMovie(movie) {
     this._currentMovie = movie;
   },
-  get currentMovie(){
-    return this._currentMovie
+  get currentMovie() {
+    return this._currentMovie;
   },
 
   set activeTab(nameTab) {
@@ -46,25 +34,11 @@ const globalVars = {
     return this._queue;
   },
 
-  set requestToken(str) {
-    this._requestToken = str;
-  },
-  get requestToken() {
-    return this._requestToken;
-  },
-
   set searchQuery(str) {
     this._searchQuery = str;
   },
   get searchQuery() {
     return this._searchQuery;
-  },
-
-  set sessionID(str) {
-    this._sessionID = str;
-  },
-  get sessionID() {
-    return this._sessionID;
   },
 
   set watched(str) {

@@ -1,8 +1,6 @@
-
 import movieCardTemplate from '../templates/movieCard.hbs';
-import movieModalTemplate from '../templates/imageLightbox.hbs'
+import movieModalTemplate from '../templates/imageLightbox.hbs';
 import refs from './refs';
-
 
 const updateMoviesMarkup = {
   show(movies) {
@@ -11,20 +9,16 @@ const updateMoviesMarkup = {
   },
   reset() {
     refs.gallery.innerHTML = '';
-    console.log('убираем разметку')
-
+    console.log('убираем разметку');
   },
 
-  defaultMsg(msg){
+  defaultMsg(msg) {
     refs.gallery.innerHTML = `${msg}`;
   },
 
-  showModalTemplate(movie){
-    const  make = movieModalTemplate(movie)
-    return  make;
-  }
+  showModalTemplate(movie) {
+    return movieModalTemplate(movie);
+  },
 };
-
-
 
 export default updateMoviesMarkup;
