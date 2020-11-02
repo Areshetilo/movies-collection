@@ -20,6 +20,7 @@ import runPreloader from './js/components/preloader';
 import localStorageAPI from './js/localStorageAPI';
 import modalOptions from './js/components/modal/modalOptions';
 import { mySwiper } from './js/swiper';
+import fetchedTopRated from './js/fetchedTopRated';
 import {
   checkFilmHandler,
   closeModalEscapeHandler,
@@ -28,6 +29,7 @@ import showSavedMovie from './js/showSavedMovie';
 
 loadOnScroll();
 console.log('running populars fetch');
+fetchedTopRated('topRated');
 fetchedMoviesHandler('popular');
 
 const submitHandler = (e) => {

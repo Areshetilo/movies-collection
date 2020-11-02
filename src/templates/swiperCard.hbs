@@ -1,15 +1,8 @@
 {{#each this}}
     <div class="swiper-slide">
-      {{#if poster_path}}
         <img class="swiper-card__image" src="https://image.tmdb.org/t/p/w500{{poster_path}}"
-             data-id="{{id}}" alt="{{title}}"
-             data-lazy="https://image.tmdb.org/t/p/w500{{backdrop_path}}"/>
-<!--      {{else}}-->
-<!--        <img class="swiper-card__image" src="https://i114.fastpic.ru/big/2020/1029/1d/f806bccd6cf981cfdeb2b7c18629ad1d.jpg"-->
-<!--             data-id="{{id}}" alt="{{title}}"-->
-<!--             data-lazy="https://i114.fastpic.ru/big/2020/1029/1d/f806bccd6cf981cfdeb2b7c18629ad1d.jpg"/>-->
-<!--      {{/if}}-->
+             data-id="{{id}}" alt="{{title}}"/>
       <span class="movie-card__title">{{title}}</span>
-      <span class="movie-card__vote">{{vote_average}}</span>
+      <span class="movie-card__vote">{{popularity}}</span>
     </div>
 {{/each}}

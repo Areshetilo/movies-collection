@@ -6,6 +6,7 @@ const API_V4 =
 const url = 'https://api.themoviedb.org/3';
 const popularURL = `${url}/movie/popular?language=en-US`;
 const searchURL = `${url}/search/movie?language=en-US&include_adult=true`;
+const topRatedURL = `${url}/movie/top_rated?language=en-US`;
 
 const options = {
   method: 'GET',
@@ -75,6 +76,21 @@ const moviesService = {
       } catch (err) {
         throw err;
       }
+    }
+  },
+
+  async topRatedMovies() {
+    try {
+      const topRated = await fetch(`${topRatedURL}`, options).then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        }
+        throw new Error('Oops, something happened, we are fixing it');
+      });
+      console.log(topRated);
+      return topRated;
+    } catch (err) {
+      throw err;
     }
   },
 
