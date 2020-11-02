@@ -52,10 +52,10 @@
 }
 
 .card-img {
-  width: 250px;
+  width: 25rem;
   height: auto;
-  border-radius: 5px;
-  box-shadow: 0 0 3px;
+  border-radius: 1rem;
+  box-shadow: 0 0 12px 4px rgba(119, 193, 187, 1);
   @include for-size(tablet) {
     width: 260px;
   }
@@ -182,8 +182,8 @@
 
   &:hover {
     color: $primary-white;
-    background-color: #77c1bb;
-    border: 1px solid #77c1bb;
+    background-color: $accent-color;
+    border: 1px solid $accent-color;
   }
   @include for-size(tablet) {
     margin-right: 10px;

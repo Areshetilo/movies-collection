@@ -16,26 +16,14 @@ import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import searchErrorNotFound from './js/components/notifyErrors';
 import showLibraryTabs from './js/libraryTabs/showLibraryTabs';
 import hideLibraryTabs from './js/libraryTabs/hideLibraryTabs';
+import runPreloader from './js/components/preloader';
 import localStorageAPI from './js/localStorageAPI';
 import modalOptions from './js/components/modal/modalOptions';
 import {
   checkFilmHandler,
   closeModalEscapeHandler,
 } from './js/components/modal/modalListener';
-
-function loadData() {
-  return new Promise((resolve) => {
-    setTimeout(resolve, 2000);
-  });
-}
-
-loadData().then(() => {
-  let preloaderEl = document.getElementById('preloader');
-  preloaderEl.classList.add('hidden');
-  preloaderEl.classList.remove('visible');
-});
-
-// const localStorageAPI = new LocalStorageAPI();
+import showSavedMovie from './js/showSavedMovie';
 
 loadOnScroll();
 console.log('running populars fetch');
@@ -76,17 +64,6 @@ const galleryClickHandler = ({ target }) => {
   }
 };
 
-const showSavedMovie = (idTab) => {
-  globalVars.activeTab = idTab;
-  if (localStorageAPI.getMovies(idTab).length > 0) {
-    updateMoviesMarkup.show(localStorageAPI.getMovies(idTab));
-  } else if (idTab === 'watchedMovies') {
-    updateMoviesMarkup.defaultMsg('Вы не просмотрели ни одного фильма');
-  } else {
-    updateMoviesMarkup.defaultMsg('У вас нет очереди к просмотру');
-  }
-};
-
 const showLibraryHandler = ({ target: { value } }) => {
   if (value === 'library') {
     showLibraryTabs();
@@ -115,26 +92,6 @@ const showSavedMovieFromGrade = (e) => {
     }
     lazyLoad();
   }
-};
-
-// const showSavedMovieWatched = () => {
-//   globalVars.activeTab = 'watched';
-//   localStorageAPI.getMovies('watchedMovies').length > 0
-//     ? updateMoviesMarkup.show(localStorageAPI.getMovies('watchedMovies'))
-//     : updateMoviesMarkup.defaultMsg('Вы не просмотрели ни одного фильма');
-// };
-//
-// const showSavedMovieQueue = () => {
-//   globalVars.activeTab = 'queue';
-//   localStorageAPI.getMovies('queueMovies').length > 0
-//     ? updateMoviesMarkup.show(localStorageAPI.getMovies('queueMovies'))
-//     : updateMoviesMarkup.defaultMsg('У вас нет очереди к просмотру');
-// };
-
-const tmdbButtonHandler = () => {
-  fetchSessionID(globalVars.requestToken).then(
-    (sessionID) => (globalVars.sessionID = sessionID)
-  );
 };
 
 refs.gallery.addEventListener('click', galleryClickHandler);
