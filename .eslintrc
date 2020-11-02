@@ -10,7 +10,7 @@
     "es6": true
   },
   "parserOptions": {
-    "ecmaVersion": 2018,
+    "ecmaVersion": 2020,
     "sourceType": "module"
   },
 
@@ -22,7 +22,7 @@
     //
     // The following rules point out areas where you might have made mistakes.
     //
-    "comma-dangle": 2, // disallow or enforce trailing commas
+    "comma-dangle": 0, // disallow or enforce trailing commas
     "no-cond-assign": 2, // disallow assignment in conditional expressions
     "no-console": 1, // disallow use of console (off by default in the node environment)
     "no-constant-condition": 2, // disallow use of constant expressions in conditions
@@ -59,7 +59,7 @@
     //
     "block-scoped-var": 0, // treat var statements as if they were block scoped (off by default). 0: deep destructuring is not compatible https://github.com/eslint/eslint/issues/1863
     "complexity": 0, // specify the maximum cyclomatic complexity allowed in a program (off by default)
-    "consistent-return": 2, // require return statements to either always or never specify values
+    "consistent-return": 0, // require return statements to either always or never specify values
     "curly": 2, // specify curly brace conventions for all control statements
     "default-case": 2, // require default case in switch statements (off by default)
     "dot-notation": 2, // encourages use of dot notation whenever possible
@@ -97,7 +97,7 @@
     "no-self-compare": 2, // disallow comparisons where both sides are exactly the same (off by default)
     "no-sequences": 2, // disallow use of comma operator
     "no-throw-literal": 2, // restrict what can be thrown as an exception (off by default)
-    "no-unused-expressions": 2, // disallow usage of expressions in statement position
+    "no-unused-expressions": [2, { "allowTernary": true }], // disallow usage of expressions in statement position
     "no-void": 2, // disallow use of void operator (off by default)
     "no-warning-comments": [
       0,

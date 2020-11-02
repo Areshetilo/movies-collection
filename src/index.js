@@ -14,8 +14,6 @@ import * as basicLightbox from 'basiclightbox';
 import globalVars from './js/globalVars/vars';
 import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import searchErrorNotFound from './js/components/notifyErrors';
-import fetchRequestToken from './js/APIService/requestToken';
-import fetchSessionID from './js/APIService/getSessionID';
 import showLibraryTabs from './js/libraryTabs/showLibraryTabs';
 import hideLibraryTabs from './js/libraryTabs/hideLibraryTabs';
 import localStorageAPI from './js/localStorageAPI';
@@ -26,7 +24,7 @@ import {
 } from './js/components/modal/modalListener';
 
 function loadData() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(resolve, 2000);
   });
 }
@@ -62,8 +60,9 @@ const submitHandler = (e) => {
 };
 
 const galleryClickHandler = ({ target }) => {
-  if (target.nodeName === 'DIV') {
-    const movieID = target.children[0].dataset.id;
+  const card = target.closest('.movie-card');
+  if (target.closest('.movie-card').nodeName === 'DIV') {
+    const movieID = card.children[0].dataset.id;
     if (localStorageAPI.checkMovie(movieID)) {
       const instance = basicLightbox.create(
         updateMoviesMarkup.showModalTemplate(globalVars.currentMovie),
@@ -96,15 +95,7 @@ const showLibraryHandler = ({ target: { value } }) => {
       ? showSavedMovie('queueMovies')
       : showSavedMovie('watchedMovies');
   }
-  if (value === 'tmdb') {
-    showLibraryTabs();
-    updateMoviesMarkup.reset();
-    fetchRequestToken().then((requestToken) => {
-      console.log(requestToken);
-      refs.tmdbLink.href = `https://www.themoviedb.org/authenticate/${requestToken}`;
-      globalVars.requestToken = requestToken;
-    });
-  }
+
   if (value === 'homePage') {
     globalVars.activeTab = value;
     hideLibraryTabs();
@@ -117,7 +108,6 @@ const showLibraryHandler = ({ target: { value } }) => {
 const showSavedMovieFromGrade = (e) => {
   if (e.target.tagName === 'INPUT') {
     updateMoviesMarkup.reset();
-
     if (e.target.value === 'watchedMovies') {
       showSavedMovie(e.target.value);
     } else if (e.target.value === 'queueMovies') {
@@ -151,7 +141,6 @@ refs.gallery.addEventListener('click', galleryClickHandler);
 refs.headNav.addEventListener('click', showLibraryHandler);
 refs.searchForm.addEventListener('submit', submitHandler);
 refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
-refs.tmdbButton.addEventListener('click', tmdbButtonHandler);
 refs.toTop.addEventListener('click', function () {
   scrollToTop(30);
 });

@@ -16,6 +16,7 @@ const fetchedMoviesHandler = (queryType) => {
       : moviesService.fetchPopularMovies();
   };
 
+  // eslint-disable-next-line no-shadow
   const getMovieFromID = async (queryType) => {
     return moviesService.fetchForID(queryType);
   };
@@ -24,8 +25,8 @@ const fetchedMoviesHandler = (queryType) => {
     if (queryType === 'search' || queryType === 'popular') {
       loader.show();
       getMovies()
-        .then((movies) => {
-          movies = movies ?? [];
+        .then((moviesArr) => {
+          const movies = moviesArr ?? [];
           console.log('movies:', movies);
           if (movies.length) {
             globalVars.moviesArr = [...globalVars.moviesArr, ...movies];
