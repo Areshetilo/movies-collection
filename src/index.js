@@ -1,4 +1,5 @@
 import './scss/main.scss';
+import 'swiper/swiper-bundle.css';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
 import 'basiclightbox/dist/basicLightbox.min.css';
@@ -11,6 +12,7 @@ import loadOnScroll from './js/components/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
 import * as basicLightbox from 'basiclightbox';
+import Swiper from 'swiper';
 import globalVars from './js/globalVars/vars';
 import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import searchErrorNotFound from './js/components/notifyErrors';
@@ -22,7 +24,6 @@ import {
   checkFilmHandler,
   closeModalEscapeHandler,
 } from './js/components/modal/modalListener';
-import Swiper from 'swiper/bundle';
 
 function loadData() {
   return new Promise((resolve) => {
@@ -42,7 +43,7 @@ loadOnScroll();
 console.log('running populars fetch');
 fetchedMoviesHandler('popular');
 
-let mySwiper = new Swiper('.swiper-container', {
+const mySwiper = new Swiper('.swiper-container', {
   // Optional parameters
   direction: 'horizontal',
   effect: 'coverflow',
