@@ -22,6 +22,7 @@ import {
   checkFilmHandler,
   closeModalEscapeHandler,
 } from './js/components/modal/modalListener';
+import footerObserver from './js/components/footerObserver';
 
 function loadData() {
   return new Promise((resolve) => {
@@ -38,6 +39,7 @@ loadData().then(() => {
 // const localStorageAPI = new LocalStorageAPI();
 
 loadOnScroll();
+footerObserver();
 console.log('running populars fetch');
 fetchedMoviesHandler('popular');
 
@@ -70,6 +72,7 @@ const galleryClickHandler = ({ target }) => {
       );
       instance.show();
       window.addEventListener('keydown', closeModalEscapeHandler);
+      document.addEventListener('click', closeModalEscapeHandler);
     } else {
       fetchedMoviesHandler(movieID);
     }
