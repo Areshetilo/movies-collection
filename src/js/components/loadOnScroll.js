@@ -6,11 +6,7 @@ import fetchedMoviesHandler from '../fetchedMoviesHandler';
 const options = { rootMargin: '400px' };
 const onEntry = (entries) => {
   entries.forEach((entry) => {
-    console.log('зашли');
     if (entry.isIntersecting) {
-      console.log('зашли isIntersecting');
-      console.log(globalVars.activeTab);
-
       console.log('intersecting!');
       if (globalVars.activeTab === 'homePage') {
         if (globalVars.searchQuery) {
@@ -20,13 +16,9 @@ const onEntry = (entries) => {
           console.log('running populars fetch');
           fetchedMoviesHandler('popular');
         }
-      } else if (
-        globalVars.activeTab === 'watchedMovies' ||
-        globalVars.activeTab === 'queueMovies'
-      ) {
-        showToasty();
-        destroyToasty();
       }
+      showToasty();
+      destroyToasty();
     }
   });
 };

@@ -8,7 +8,7 @@ function showToasty() {
 function destroyToasty() {
   setTimeout(() => {
     refs.toasty.classList.remove('show-toasty');
-  }, 800);
+  }, 1200);
 }
 
 export { showToasty, destroyToasty };
