@@ -1,15 +1,16 @@
-.main-footer{
-  background-color: #77c1bb;
+@import '../vars';
+
+.main-footer {
+  background-color: $accent-color;
   padding: 3.6rem 0;
 }
 
-.footer-title{
-  color: #372c48;
+.footer-title {
+  color: $header-text;
   font-size: 16px;
   font-weight: 400;
   font-style: normal;
   letter-spacing: normal;
   line-height: 16px;
   text-align: center;
-
 }

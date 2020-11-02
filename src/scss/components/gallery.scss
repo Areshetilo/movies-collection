@@ -27,6 +27,8 @@
   position: relative;
   cursor: pointer;
   overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 10px 10px 12px 3px rgba(0, 0, 0, 0.7);
 
   &::before {
     content: '';
@@ -36,7 +38,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    border-radius: 10px;
     background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0) 0%,
@@ -49,11 +50,11 @@
   }
 
   &__image {
-    border-radius: 1rem;
     background-color: #b3b3b3;
     min-height: 300px;
     object-fit: cover;
     cursor: pointer;
+    border-radius: 1rem;
     transition: transform 0.3s ease-in-out;
     transform: skew(16deg, 10deg);
     @include for-size(phone-only) {

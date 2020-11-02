@@ -1,4 +1,5 @@
-.main-watched{
+@import '../vars';
+.main-watched {
   text-align: center;
   padding-top: 3rem;
   padding-bottom: 0.8rem;
@@ -9,11 +10,8 @@
   transition: 0.3s;
   margin-bottom: 1.8rem;
 
-
-
   .toggle-item label {
     display: inline-block;
-    padding: 0 1.5rem;
     padding-bottom: 1rem;
     padding-top: 1.2rem;
     text-align: center;
@@ -31,21 +29,11 @@
     font-style: normal;
     letter-spacing: normal;
     line-height: 1.6rem;
-
-
   }
 
-
-
-
-  .head_toggle .item input[type=radio]:checked + label {
+  .head_toggle .item input[type='radio']:checked + label {
     border-bottom: 2px solid #77c1bb;
     background-color: #77c1bb;
     color: $primary-white;
-
   }
-
 }
-
-
-

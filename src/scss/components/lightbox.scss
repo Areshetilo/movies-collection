@@ -1,6 +1,13 @@
 @import '../vars.scss';
 @import '../mixins.scss';
 
+.basicLightbox {
+  overflow: auto;
+  @include for-size(tablet-landscape) {
+    overflow: hidden;
+  }
+}
+
 .lightbox--visible {
   opacity: 1;
 }
@@ -14,9 +21,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,.8);
+  background: rgba(0, 0, 0, 0.8);
   opacity: 1;
-  transition: opacity .4s ease;
+  transition: opacity 0.4s ease;
   z-index: 1000;
   will-change: opacity;
 }
@@ -45,16 +52,17 @@
 }
 
 .card-img {
-  width: 250px;
+  width: 25rem;
   height: auto;
-  border-radius: 5px;
-  box-shadow: 0 0 3px;
+  border-radius: 1rem;
+  box-shadow: 0 0 12px 4px rgba(119, 193, 187, 1);
   @include for-size(tablet) {
     width: 260px;
   }
   @include for-size(tablet-landscape) {
     width: 350px;
   }
+
   &__wrapper {
     text-align: center;
     @include for-size(tablet) {
@@ -65,6 +73,7 @@
     }
   }
 }
+
 .card-info__wrapper {
   padding: 10px 0;
   @include for-size(tablet) {
@@ -75,6 +84,7 @@
     padding: 20px 0;
   }
 }
+
 .card-title {
   @include font(1.2, 2rem, 500);
   text-transform: uppercase;
@@ -87,6 +97,7 @@
     margin-bottom: 40px;
   }
 }
+
 .movie-info__list {
   margin-bottom: 10px;
   font-size: 12px;
@@ -95,25 +106,29 @@
     margin-bottom: 20px;
   }
 }
+
 .movie-info__item {
   display: flex;
   &:not(:last-child) {
     margin-bottom: 5px;
   }
 }
+
 .item_about {
   color: $additional-text;
   @include for-size(tablet) {
     margin-right: 30px;
   }
-  @include for-size(tablet-landscape){
+  @include for-size(tablet-landscape) {
     width: 90px;
   }
 }
+
 .item_description {
   text-transform: uppercase;
   width: 155px;
 }
+
 .about-description__title {
   text-transform: uppercase;
   margin-bottom: 5px;
@@ -122,6 +137,7 @@
     font-size: 16px;
   }
 }
+
 .description__about {
   margin-bottom: 10px;
   @include font(1.6, 1.2rem, 400);
@@ -131,23 +147,25 @@
   padding-left: 5px;
   @include for-size(tablet-landscape) {
     @include font(1.6, 1.4rem, 400);
-    overflow: hidden;
     box-shadow: none;
     padding-left: 0;
   }
 }
+
 .card-button__wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   @include for-size(tablet) {
     padding: 5px 0;
+    justify-content: space-evenly;
   }
-  @include for-size(tablet-landscape){
+  @include for-size(tablet-landscape) {
     padding: 30px 0;
     justify-content: flex-start;
   }
 }
+
 .modal-btn {
   border: 1px solid $additional-text;
   color: $main-text;
@@ -160,11 +178,12 @@
   cursor: pointer;
   @include font(1.1, 1.2rem, 400);
   box-shadow: 0 0 1px;
-  transition: all .3s ease-in;
+  transition: all 0.3s ease-in;
+
   &:hover {
     color: $primary-white;
-    background-color: #77c1bb;
-    border: 1px solid #77c1bb;
+    background-color: $accent-color;
+    border: 1px solid $accent-color;
   }
   @include for-size(tablet) {
     margin-right: 10px;

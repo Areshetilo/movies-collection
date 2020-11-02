@@ -1,3 +1,5 @@
+@import '../vars';
+
 .search-form {
   padding-top: 30px;
   position: relative;
@@ -13,16 +15,16 @@
   width: 100%;
   min-height: 42px;
   border-radius: 6px;
-  border-bottom: 2px solid #77c1bb;
+  border-bottom: 2px solid $accent-color;
   margin-bottom: 20px;
   padding-left: 60px;
   text-align: left;
   outline: none;
-  color: #372c48;
+  color: $header-text;
 
   &::placeholder {
     text-align: left;
-    color: #372c48;
+    color: $header-text;
   }
 }
 
@@ -33,7 +35,7 @@
   width: 42px;
   height: 42px;
   border: none;
-  background: #77c1bb url(../images/search.svg) no-repeat center;
+  background: $accent-color url(../images/search.svg) no-repeat center;
   background-size: cover;
   border-radius: 5px;
   cursor: pointer;
