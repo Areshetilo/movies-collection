@@ -24,8 +24,23 @@ import {
   closeModalEscapeHandler,
 } from './js/components/modal/modalListener';
 import showSavedMovie from './js/showSavedMovie';
+import footerObserver from './js/components/footerObserver';
+
+function loadData() {
+  return new Promise((resolve) => {
+    setTimeout(resolve, 2000);
+  });
+}
+
+loadData().then(() => {
+  let preloaderEl = document.getElementById('preloader');
+  preloaderEl.classList.add('hidden');
+  preloaderEl.classList.remove('visible');
+});
+
 
 loadOnScroll();
+footerObserver();
 console.log('running populars fetch');
 fetchedMoviesHandler('popular');
 
@@ -58,6 +73,7 @@ const galleryClickHandler = ({ target }) => {
       );
       instance.show();
       window.addEventListener('keydown', closeModalEscapeHandler);
+      document.addEventListener('click', closeModalEscapeHandler);
     } else {
       fetchedMoviesHandler(movieID);
     }

@@ -14,26 +14,30 @@
             <li class="movie-info__item">
               <p class="item_about">Vote / Votes</p>
               <p class="item_description">
-                <span class="item-vote"></span>
+                <span class="item-vote">{{vote_average}}</span>
                 <span style="color:rgb(140, 140, 140)">/</span>
-                <span class="item-votes"></span>
+                <span class="item-votes">{{vote_count}}</span>
               </p>
             </li>
             <li class="movie-info__item">
               <p class="item_about">Popularity</p>
-              <p class="item_description"></p>
+              <p class="item_description">{{popularity}}</p>
             </li>
             <li class="movie-info__item">
               <p class="item_about">Original Title</p>
-              <p class="item_description"></p>
+              <p class="item_description">{{original_title}}</p>
             </li>
             <li class="movie-info__item">
               <p class="item_about">Genre</p>
-              <p class="item_description"></p>
+              <p class="item_description">
+                  {{#each genres}}
+                    <span class="card-item__genre">{{name}}</span>
+                  {{/each}}
+              </p>
             </li>
             <li class="movie-info__item cast">
-              <p class="item_about">Cast</p>
-              <p class="item_description"></p>
+              <p class="item_about">Budget</p>
+              <p class="item_description">{{budget}}</p>
             </li>
           </ul>
           <p class="about-description__title">About</p>
