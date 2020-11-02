@@ -1,11 +1,6 @@
 import globalVars from './globalVars/vars';
 
-class LocalStorageAPI {
-  constructor() {
-    this.toggleMovie = this.toggleMovie.bind(this);
-    this.checkMovie = this.checkMovie.bind(this);
-  }
-
+const localStorageAPI = {
   toggleMovie(flagMovie) {
     let movie = globalVars.currentMovie;
 
@@ -23,7 +18,7 @@ class LocalStorageAPI {
       return;
     }
     this.addMovie(flagMovie, movie);
-  }
+  },
 
   addMovie(flagMovie, movie) {
     if (flagMovie === globalVars.watched) {
@@ -41,7 +36,7 @@ class LocalStorageAPI {
         JSON.stringify([movie, ...this.getMovies('queueMovies')])
       );
     }
-  }
+  },
 
   deleteMovie(keyStorage, movieID) {
     if (keyStorage === 'watchedMovies') {
@@ -59,17 +54,17 @@ class LocalStorageAPI {
         this.getMovies('queueMovies').filter((film) => film.id !== movieID)
       )
     );
-  }
+  },
 
   getMovies(keyStorage) {
     return localStorage.getItem(keyStorage)
       ? JSON.parse(localStorage.getItem(keyStorage))
       : [];
-  }
+  },
 
   findForID(ID, key) {
     return this.getMovies(key).find((film) => film.id === +ID);
-  }
+  },
 
   checkMovie(movieID) {
     if (
@@ -88,7 +83,7 @@ class LocalStorageAPI {
         return globalVars.queue;
       }
     }
-  }
-}
+  },
+};
 
-export default LocalStorageAPI;
+export default localStorageAPI;
