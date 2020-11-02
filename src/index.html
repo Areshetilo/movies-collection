@@ -106,7 +106,12 @@
         <div class="main-watched">
           <div class="head_toggle">
             <div class="toggle-item item">
-              <input id="watched" type="radio" name="radioW" value="watchedMovies" />
+              <input
+                id="watched"
+                type="radio"
+                name="radioW"
+                value="watchedMovies"
+              />
               <label for="watched">Watched</label>
             </div>
             <div class="toggle-item item">
@@ -139,8 +144,11 @@
             <div class="wrapper">
               <div class="lds-dual-ring js-loader is-hidden"></div>
             </div>
-            <ul class="gallery"></ul>
-            <div class="bottom"></div>
+            <div class="gallery-wrapper">
+              <div class="noMoviesMessage"></div>
+              <ul class="gallery"></ul>
+              <div class="bottom"></div>
+            </div>
           </div>
         </div>
       </main>
@@ -152,13 +160,15 @@
         <h3 class="footer-title">ВАНЯ, ЧО КАВО :)</h3>
       </div>
     </footer>
-    <audio id="pocikAudo">
-      <source src='https://mp3folderx.org.ua/download/11280/20091128.mp3 'type="audio/mpeg"><
+    <audio id="toastySound">
+      <source
+        src="https://mp3folderx.org.ua/download/11280/20091128.mp3 "
+        type="audio/mpeg"
+      />
+      <
     </audio>
     <div class="toasty-wrap">
-      <img src="./images/toasty.png" alt="Ваня, чо каво :)))">
+      <img src="./images/toasty.png" alt="Ваня, чо каво :)))" />
     </div>
-
-
   </body>
 </html>

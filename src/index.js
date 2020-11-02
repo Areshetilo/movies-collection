@@ -49,7 +49,7 @@ const submitHandler = (e) => {
 
 const galleryClickHandler = ({ target }) => {
   const card = target.closest('.movie-card');
-  if (target.closest('.movie-card').nodeName === 'DIV') {
+  if (card && card.nodeName === 'DIV') {
     const movieID = card.children[0].dataset.id;
     if (localStorageAPI.checkMovie(movieID)) {
       const instance = basicLightbox.create(
@@ -68,6 +68,7 @@ const showLibraryHandler = ({ target: { value } }) => {
   if (value === 'library') {
     showLibraryTabs();
     updateMoviesMarkup.reset();
+    refs.noMoviesMessage.textContent = '';
     refs.queueTab.checked
       ? showSavedMovie('queueMovies')
       : showSavedMovie('watchedMovies');
@@ -77,6 +78,7 @@ const showLibraryHandler = ({ target: { value } }) => {
     globalVars.activeTab = value;
     hideLibraryTabs();
     updateMoviesMarkup.reset();
+    refs.noMoviesMessage.textContent = '';
     updateMoviesMarkup.show(globalVars.moviesArr);
   }
   lazyLoad();
