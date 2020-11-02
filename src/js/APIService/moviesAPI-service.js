@@ -44,7 +44,7 @@ const moviesService = {
 
   incrementPage() {
     this._page += 1;
-    console.log('increment page:', this._page);
+    console.log('incremented page:', this._page);
   },
 
   async fetchPopularMovies() {
@@ -53,41 +53,57 @@ const moviesService = {
         const popularMovies = await fetch(
           `${popularURL}&page=${this.page}`,
           options
-        ).then((res) => {
-          if (res.status === 200) {
-            return res.json();
-          }
-          throw new Error("Oops, something happened, we're are fixing it");
-        });
+        )
+          .then((res) => {
+            if (res.status === 200) {
+              return res.json();
+            }
+            throw new Error('Oops, something happened, we are fixing it');
+          })
+          .then((res) => {
+            if (!res.results.length) {
+              throw new Error(
+                "Unfortunately, we can't get popular movies right now"
+              );
+            }
+            this.totalPages = res.total_pages;
+            return res.results;
+          });
         console.log(popularMovies);
-        this.totalPages = popularMovies.total_pages;
         this.incrementPage();
-        return popularMovies.results;
+        return popularMovies;
       } catch (err) {
         throw err;
       }
     }
   },
 
-  fetchMovies() {
+  async fetchMovies() {
     if (this.page <= this.totalPages) {
-      return fetch(
-        `${searchURL}&query=${globalVars.searchQuery}&page=${this.page}`,
-        options
-      )
-        .then((res) => res.json())
-        .then((res) => {
-          if (!res.results.length) {
-            throw new Error('Unfortunately, your request not found.');
-          }
-          console.log(res);
-          this.totalPages = res.total_pages;
-          this.incrementPage();
-          return res.results;
-        })
-        .catch((err) => {
-          searchErrorNotFound(err);
-        });
+      try {
+        const searchedMovies = await fetch(
+          `${searchURL}&query=${globalVars.searchQuery}&page=${this.page}`,
+          options
+        )
+          .then((res) => {
+            if (res.status === 200) {
+              return res.json();
+            }
+            throw new Error('Oops, something happened, we are fixing it');
+          })
+          .then((res) => {
+            if (!res.results.length) {
+              throw new Error('Unfortunately, your request not found.');
+            }
+            this.totalPages = res.total_pages;
+            return res.results;
+          });
+        console.log(searchedMovies);
+        this.incrementPage();
+        return searchedMovies;
+      } catch (err) {
+        throw err;
+      }
     }
   },
 
