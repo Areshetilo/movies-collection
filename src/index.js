@@ -24,7 +24,7 @@ import {
   checkFilmHandler,
   closeModalEscapeHandler,
 } from './js/components/modal/modalListener';
-import showSavedMovie from './js/showSavedMovie';
+// import showSavedMovie from './js/showSavedMovie';
 
 loadOnScroll();
 console.log('running populars fetch');
