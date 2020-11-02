@@ -23,11 +23,7 @@ function checkFilmHandler(event) {
 }
 
 function closeModalEscapeHandler(event) {
-  if (
-    event.code === 'Escape' ||
-    event.target.className === 'lightbox_closeBtn' ||
-    event.target.className === 'lightbox'
-  ) {
+  if (event.code === 'Escape') {
     document
       .querySelector('.basicLightbox')
       .classList.remove('basicLightbox--visible');

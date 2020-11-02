@@ -7,7 +7,6 @@ import modalOptions from './components/modal/modalOptions';
 import lazyLoad from './components/lazyLoad';
 import Loader from './components/Loader';
 import searchErrorNotFound from './components/notifyErrors';
-import { closeModalEscapeHandler } from './components/modal/modalListener';
 
 const loader = new Loader('.js-loader', 'is-hidden');
 const fetchedMoviesHandler = (queryType) => {
@@ -49,8 +48,6 @@ const fetchedMoviesHandler = (queryType) => {
             modalOptions
           );
           instance.show();
-          window.addEventListener('keydown', closeModalEscapeHandler);
-          document.addEventListener('click', closeModalEscapeHandler);
         })
         .finally(() => {});
     }

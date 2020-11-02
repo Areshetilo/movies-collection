@@ -21,40 +21,12 @@
   left: 0;
   width: 100%;
   height: 100%;
+  background: rgba(0, 0, 0, 0.8);
   opacity: 1;
   transition: opacity 0.4s ease;
   z-index: 1000;
   will-change: opacity;
 }
-.lightbox_closeBtn {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  margin: 0;
-  border-radius: 50%;
-  border: 2px solid white;
-  background-color: transparent;
-  color: var(--white-text-color);
-  cursor: pointer;
-  outline: none;
-  background-position: 50%;
-  background-size: 60%;
-  background-repeat: no-repeat;
-  transition: all .3s ease-in;
-  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeG1sbnM6c3ZnanM9Imh0dHA6Ly9zdmdqcy5jb20vc3ZnanMiIHZlcnNpb249IjEuMSIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHg9IjAiIHk9IjAiIHZpZXdCb3g9IjAgMCAzMTEgMzExLjA3NzMzIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIiBjbGFzcz0iIj48Zz48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0xNi4wMzUxNTYgMzExLjA3ODEyNWMtNC4wOTc2NTYgMC04LjE5NTMxMi0xLjU1ODU5NC0xMS4zMDg1OTQtNC42OTUzMTMtNi4yNS02LjI1LTYuMjUtMTYuMzgyODEyIDAtMjIuNjMyODEybDI3OS4wNjI1LTI3OS4wNjI1YzYuMjUtNi4yNSAxNi4zODI4MTMtNi4yNSAyMi42MzI4MTMgMHM2LjI1IDE2LjM4MjgxMiAwIDIyLjYzNjcxOWwtMjc5LjA1ODU5NCAyNzkuMDU4NTkzYy0zLjEzNjcxOSAzLjExNzE4OC03LjIzNDM3NSA0LjY5NTMxMy0xMS4zMjgxMjUgNC42OTUzMTN6bTAgMCIgZmlsbD0iI2ZmZjhmOCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiIvPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTI5NS4xMTcxODggMzExLjA3ODEyNWMtNC4wOTc2NTcgMC04LjE5MTQwNy0xLjU1ODU5NC0xMS4zMDg1OTQtNC42OTUzMTNsLTI3OS4wODIwMzItMjc5LjA1ODU5M2MtNi4yNS02LjI1MzkwNy02LjI1LTE2LjM4NjcxOSAwLTIyLjYzNjcxOXMxNi4zODI4MTMtNi4yNSAyMi42MzY3MTkgMGwyNzkuMDU4NTk0IDI3OS4wNjI1YzYuMjUgNi4yNSA2LjI1IDE2LjM4MjgxMiAwIDIyLjYzMjgxMi0zLjEzNjcxOSAzLjExNzE4OC03LjIzMDQ2OSA0LjY5NTMxMy0xMS4zMDQ2ODcgNC42OTUzMTN6bTAgMCIgZmlsbD0iI2ZmZjhmOCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiIvPjwvZz48L3N2Zz4K);
-
-
-  &:hover{
-    background-color: #77c1bb;
-  }
-}
-
 
 .details-card {
   max-width: 100%;
@@ -144,7 +116,6 @@
 
 .item_about {
   color: $additional-text;
-  margin-right: 10px;
   @include for-size(tablet) {
     margin-right: 30px;
   }
