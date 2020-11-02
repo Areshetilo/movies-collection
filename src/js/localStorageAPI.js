@@ -1,4 +1,5 @@
 import globalVars from './globalVars/vars';
+import updateMoviesMarkup from '../../../Новая папка/movies-collection/movies-collection/src/js/updateMoviesMarkup';
 
 const localStorageAPI = {
   toggleMovie(flagMovie) {
@@ -28,6 +29,7 @@ const localStorageAPI = {
         'watchedMovies',
         JSON.stringify([movie, ...this.getMovies('watchedMovies')])
       );
+      this.updateView('watchedMovies');
     } else {
       movie.queue = true;
       movie.watched = null;
@@ -35,6 +37,7 @@ const localStorageAPI = {
         'queueMovies',
         JSON.stringify([movie, ...this.getMovies('queueMovies')])
       );
+      this.updateView('queueMovies');
     }
   },
 
@@ -46,6 +49,7 @@ const localStorageAPI = {
           this.getMovies('watchedMovies').filter((film) => film.id !== movieID)
         )
       );
+      this.updateView('watchedMovies');
       return;
     }
     localStorage.setItem(
@@ -54,6 +58,8 @@ const localStorageAPI = {
         this.getMovies('queueMovies').filter((film) => film.id !== movieID)
       )
     );
+
+    this.updateView('queueMovies');
   },
 
   getMovies(keyStorage) {
@@ -64,6 +70,16 @@ const localStorageAPI = {
 
   findForID(ID, key) {
     return this.getMovies(key).find((film) => film.id === +ID);
+  },
+
+  updateView(keyStorage) {
+    if (globalVars.activeTab === keyStorage) {
+      updateMoviesMarkup.reset();
+      updateMoviesMarkup.show(this.getMovies(keyStorage));
+    } else if (globalVars.activeTab === keyStorage) {
+      updateMoviesMarkup.reset();
+      updateMoviesMarkup.show(this.getMovies(keyStorage));
+    }
   },
 
   checkMovie(movieID) {

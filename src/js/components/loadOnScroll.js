@@ -17,8 +17,6 @@ const onEntry = (entries) => {
           fetchedMoviesHandler('popular');
         }
       }
-      showToasty();
-      destroyToasty();
     }
   });
 };
