@@ -1,51 +1,49 @@
-.header-wrap{
+@import '../vars';
+@import '../mixins';
+
+.header-wrap {
   display: flex;
   justify-content: space-between;
 }
 
-.main-header{
+.main-header {
   padding-bottom: 2rem;
   padding-top: 2rem;
-  background-color: #77c1bb;
-  .container{
+  background-color: $accent-color;
+  .container {
     padding-left: 2rem;
     padding-right: 2rem;
   }
 }
 
-.link-logo{
+.link-logo {
   display: flex;
   align-items: center;
-
 }
 
-.link-logo__title{
+.link-logo__title {
   display: none;
   opacity: 0.87;
-  color: #372c48;
+  color: $header-text;
   font-size: 2rem;
   font-weight: 500;
   font-style: normal;
   letter-spacing: normal;
   line-height: 1.6rem;
-
-
 }
-
 
 .head_toggle {
   display: inline-block;
   overflow: hidden;
 }
+
 .toggle-item {
   float: left;
   display: inline-block;
 
-
   /* Style for "my library" */
 
-
-  color: #372c48;
+  color: $header-text;
   font-size: 1.4rem;
   font-weight: 700;
   font-style: normal;
@@ -53,14 +51,12 @@
   line-height: 1.2rem;
   text-align: center;
   text-transform: uppercase;
-
-
-
 }
-.toggle-item input[type=radio] {
+
+.toggle-item input[type='radio'] {
   display: none;
-
 }
+
 .toggle-item label {
   display: inline-block;
   padding: 0.4rem 1.5rem;
@@ -72,35 +68,18 @@
   width: 12.2rem;
 }
 
-
 /* Checked */
-.head_toggle .item input[type=radio]:checked + label {
-
+.head_toggle .item input[type='radio']:checked + label {
   opacity: 1;
-  border-bottom: 2px solid #372c48;
+  border-bottom: 2px solid $header-text;
 }
 
-
-
-
-
-
-
-
-
-
-
 @include for-size(tablet) {
-  .link-logo__title{
+  .link-logo__title {
     display: block;
   }
 
-  .link-logo__img{
+  .link-logo__img {
     margin-right: 1rem;
-
   }
 }
-
-
-
-

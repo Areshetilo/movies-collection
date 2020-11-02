@@ -16,6 +16,7 @@ import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import searchErrorNotFound from './js/components/notifyErrors';
 import showLibraryTabs from './js/libraryTabs/showLibraryTabs';
 import hideLibraryTabs from './js/libraryTabs/hideLibraryTabs';
+import runPreloader from './js/components/preloader';
 import localStorageAPI from './js/localStorageAPI';
 import modalOptions from './js/components/modal/modalOptions';
 import { mySwiper } from './js/swiper';
@@ -23,20 +24,7 @@ import {
   checkFilmHandler,
   closeModalEscapeHandler,
 } from './js/components/modal/modalListener';
-
-function loadData() {
-  return new Promise((resolve) => {
-    setTimeout(resolve, 2000);
-  });
-}
-
-loadData().then(() => {
-  let preloaderEl = document.getElementById('preloader');
-  preloaderEl.classList.add('hidden');
-  preloaderEl.classList.remove('visible');
-});
-
-// const localStorageAPI = new LocalStorageAPI();
+import showSavedMovie from './js/showSavedMovie';
 
 loadOnScroll();
 console.log('running populars fetch');
@@ -62,7 +50,7 @@ const submitHandler = (e) => {
 
 const galleryClickHandler = ({ target }) => {
   const card = target.closest('.movie-card');
-  if (target.closest('.movie-card').nodeName === 'DIV') {
+  if (card && card.nodeName === 'DIV') {
     const movieID = card.children[0].dataset.id;
     if (localStorageAPI.checkMovie(movieID)) {
       const instance = basicLightbox.create(
@@ -94,6 +82,7 @@ const showLibraryHandler = ({ target: { value } }) => {
   if (value === 'library') {
     showLibraryTabs();
     updateMoviesMarkup.reset();
+    refs.noMoviesMessage.textContent = '';
     refs.queueTab.checked
       ? showSavedMovie('queueMovies')
       : showSavedMovie('watchedMovies');
@@ -103,6 +92,7 @@ const showLibraryHandler = ({ target: { value } }) => {
     globalVars.activeTab = value;
     hideLibraryTabs();
     updateMoviesMarkup.reset();
+    refs.noMoviesMessage.textContent = '';
     updateMoviesMarkup.show(globalVars.moviesArr);
   }
   lazyLoad();
@@ -118,26 +108,6 @@ const showSavedMovieFromGrade = (e) => {
     }
     lazyLoad();
   }
-};
-
-// const showSavedMovieWatched = () => {
-//   globalVars.activeTab = 'watched';
-//   localStorageAPI.getMovies('watchedMovies').length > 0
-//     ? updateMoviesMarkup.show(localStorageAPI.getMovies('watchedMovies'))
-//     : updateMoviesMarkup.defaultMsg('Вы не просмотрели ни одного фильма');
-// };
-//
-// const showSavedMovieQueue = () => {
-//   globalVars.activeTab = 'queue';
-//   localStorageAPI.getMovies('queueMovies').length > 0
-//     ? updateMoviesMarkup.show(localStorageAPI.getMovies('queueMovies'))
-//     : updateMoviesMarkup.defaultMsg('У вас нет очереди к просмотру');
-// };
-
-const tmdbButtonHandler = () => {
-  fetchSessionID(globalVars.requestToken).then(
-    (sessionID) => (globalVars.sessionID = sessionID)
-  );
 };
 
 refs.gallery.addEventListener('click', galleryClickHandler);
