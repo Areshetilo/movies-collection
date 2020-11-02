@@ -1,4 +1,5 @@
 import refs from '../refs';
+import { showToasty, destroyToasty } from '../updateToasyMarkup';
 import globalVars from '../globalVars/vars';
 import fetchedMoviesHandler from '../fetchedMoviesHandler';
 
@@ -15,11 +16,9 @@ const onEntry = (entries) => {
           console.log('running populars fetch');
           fetchedMoviesHandler('popular');
         }
-      } else if (globalVars.activeTab === 'watched') {
-        //updateMoviesMarkup.show(updateMoviesLocalStorage.getWatchedMovies());
-      } else if (globalVars.activeTab === 'queue') {
-        //updateMoviesMarkup.show(updateMoviesLocalStorage.getQueueMovies());
       }
+      showToasty();
+      destroyToasty();
     }
   });
 };
