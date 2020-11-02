@@ -1,12 +1,16 @@
 import refs from '../refs';
+import { showToasty, destroyToasty } from '../updateToasyMarkup';
 import globalVars from '../globalVars/vars';
 import fetchedMoviesHandler from '../fetchedMoviesHandler';
-import localStorageAPI from '../localStorageAPI';
 
 const options = { rootMargin: '400px' };
 const onEntry = (entries) => {
   entries.forEach((entry) => {
+    console.log('зашли');
     if (entry.isIntersecting) {
+      console.log('зашли isIntersecting');
+      console.log(globalVars.activeTab);
+
       console.log('intersecting!');
       if (globalVars.activeTab === 'homePage') {
         if (globalVars.searchQuery) {
@@ -16,10 +20,12 @@ const onEntry = (entries) => {
           console.log('running populars fetch');
           fetchedMoviesHandler('popular');
         }
-      } else if (globalVars.activeTab === 'watched') {
-        //updateMoviesMarkup.show(updateMoviesLocalStorage.getWatchedMovies());
-      } else if (globalVars.activeTab === 'queue') {
-        //updateMoviesMarkup.show(updateMoviesLocalStorage.getQueueMovies());
+      } else if (
+        globalVars.activeTab === 'watchedMovies' ||
+        globalVars.activeTab === 'queueMovies'
+      ) {
+        showToasty();
+        destroyToasty();
       }
     }
   });

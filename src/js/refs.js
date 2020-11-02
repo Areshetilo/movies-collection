@@ -11,5 +11,7 @@ const refs = {
   toTop: document.getElementById('goto-topJS'),
   modalWrap: document.querySelector('.modal-wrap'),
   body: document.querySelector('body'),
+  toasty: document.querySelector('.toasty-wrap'),
+  toastySound: document.querySelector('#pocikAudo'),
 };
 export default refs;

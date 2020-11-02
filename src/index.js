@@ -78,6 +78,7 @@ const galleryClickHandler = ({ target }) => {
 };
 
 const showSavedMovie = (idTab) => {
+  globalVars.activeTab = idTab;
   if (localStorageAPI.getMovies(idTab).length > 0) {
     updateMoviesMarkup.show(localStorageAPI.getMovies(idTab));
   } else if (idTab === 'watchedMovies') {
@@ -116,7 +117,6 @@ const showLibraryHandler = ({ target: { value } }) => {
 const showSavedMovieFromGrade = (e) => {
   if (e.target.tagName === 'INPUT') {
     updateMoviesMarkup.reset();
-    globalVars.activeTab = e.target.value;
 
     if (e.target.value === 'watchedMovies') {
       showSavedMovie(e.target.value);
