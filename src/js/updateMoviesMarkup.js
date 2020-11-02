@@ -13,7 +13,7 @@ const updateMoviesMarkup = {
   },
 
   defaultMsg(msg) {
-    refs.gallery.innerHTML = `${msg}`;
+    refs.noMoviesMessage.textContent = `${msg}`;
   },
 
   showModalTemplate(movie) {
