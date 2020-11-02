@@ -22,6 +22,7 @@ import {
   checkFilmHandler,
   closeModalEscapeHandler,
 } from './js/components/modal/modalListener';
+import mySwiper from './js/components/swiper';
 
 function loadData() {
   return new Promise((resolve) => {
