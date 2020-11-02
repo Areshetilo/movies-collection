@@ -1,4 +1,18 @@
+import swiperMarkup from '../templates/swiperCard.hbs';
+import refs from './refs';
 import Swiper from 'swiper/bundle';
+import 'swiper/swiper-bundle.css';
+
+const updateSwiperMarkup = {
+  show(movies) {
+    const markup = swiperMarkup(movies);
+    refs.swiperWrap.insertAdjacentHTML('beforeend', markup);
+  },
+  reset() {
+    refs.swiperWrap.innerHTML = '';
+    console.log('убираем разметку');
+  },
+};
 
 const mySwiper = new Swiper('.swiper-container', {
   // Optional parameters
@@ -18,7 +32,7 @@ const mySwiper = new Swiper('.swiper-container', {
     slideShadows: true,
   },
   autoplay: {
-    delay: 5000,
+    delay: 3000,
   },
 
   // If we need pagination
@@ -33,3 +47,5 @@ const mySwiper = new Swiper('.swiper-container', {
     prevEl: '.swiper-button-prev',
   },
 });
+
+export default { updateSwiperMarkup, mySwiper };

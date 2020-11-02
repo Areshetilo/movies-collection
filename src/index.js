@@ -1,5 +1,4 @@
 import './scss/main.scss';
-import 'swiper/swiper-bundle.css';
 import '@pnotify/core/dist/PNotify.css';
 import '@pnotify/core/dist/BrightTheme.css';
 import 'basiclightbox/dist/basicLightbox.min.css';
@@ -7,12 +6,13 @@ import throttle from 'lodash.throttle';
 import refs from './js/refs';
 import moviesService from './js/APIService/moviesAPI-service';
 import updateMoviesMarkup from './js/updateMoviesMarkup';
+import updateSwiperMarkup from './js/swiper';
+import mySwiper from './js/swiper';
 import lazyLoad from './js/components/lazyLoad';
 import loadOnScroll from './js/components/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
 import * as basicLightbox from 'basiclightbox';
-import Swiper from 'swiper';
 import globalVars from './js/globalVars/vars';
 import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import searchErrorNotFound from './js/components/notifyErrors';
@@ -38,44 +38,12 @@ loadData().then(() => {
 });
 
 // const localStorageAPI = new LocalStorageAPI();
+updateSwiperMarkup.show('popular');
+mySwiper.init();
 
 loadOnScroll();
 console.log('running populars fetch');
 fetchedMoviesHandler('popular');
-
-const mySwiper = new Swiper('.swiper-container', {
-  // Optional parameters
-  direction: 'horizontal',
-  effect: 'coverflow',
-  grabCursor: true,
-  centeredSlides: true,
-  slidesPerView: 3,
-  loop: true,
-  speed: 300,
-  spaceBetween: 30,
-  coverflowEffect: {
-    rotate: 50,
-    stretch: 0,
-    depth: 100,
-    modifier: 1,
-    slideShadows: true,
-  },
-  autoplay: {
-    delay: 5000,
-  },
-
-  // If we need pagination
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-  },
-
-  // Navigation arrows
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-});
 
 const submitHandler = (e) => {
   e.preventDefault();

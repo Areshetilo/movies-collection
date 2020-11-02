@@ -7,9 +7,9 @@ const refs = {
   searchForm: document.querySelector('#search-form'),
   sectionWatched: document.querySelector('.main-watched'),
   toTop: document.getElementById('goto-topJS'),
-  modalWrap: document.querySelector('.modal-wrap'),
   body: document.querySelector('body'),
   toasty: document.querySelector('.toasty-wrap'),
   toastySound: document.querySelector('#pocikAudo'),
+  swiperWrap: document.querySelector('.swiper-wrapper'),
 };
 export default refs;
