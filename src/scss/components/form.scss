@@ -40,3 +40,36 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.search-input::-webkit-input-placeholder {
+  text-indent: 0;
+  transition: text-indent 0.4s ease-in-out;
+}
+.search-input::-moz-placeholder {
+  text-indent: 0;
+  transition: text-indent 0.4s ease-in-out;
+}
+.search-input:-moz-placeholder {
+  text-indent: 0;
+  transition: text-indent 0.4s ease-in-out;
+}
+.search-input:-ms-input-placeholder {
+  text-indent: 0;
+  transition: text-indent 0.4s ease-in-out;
+}
+.search-input:focus::-webkit-input-placeholder {
+  text-indent: 700px;
+  transition: text-indent 0.4s ease-in-out;
+}
+.search-input:focus::-moz-placeholder {
+  text-indent: 700px;
+  transition: text-indent 0.4s ease-in-out;
+}
+.search-input:focus:-moz-placeholder {
+  text-indent: 700px;
+  transition: text-indent 0.4s ease-in-out;
+}
+.search-input:focus:-ms-input-placeholder {
+  text-indent: 700px;
+  transition: text-indent 0.4s ease-in-out;
+}

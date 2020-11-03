@@ -1,0 +1,26 @@
+@import '../vars.scss';
+
+.btn {
+  &-jelly {
+    &:hover {
+      animation: jelly 0.5s;
+      color: $primary-white;
+      background-color: $accent-color;
+      border: 1px solid $accent-color;
+    }
+  }
+
+  @keyframes jelly {
+    25% {
+      transform: scale(0.9, 1.1);
+    }
+
+    50% {
+      transform: scale(1.1, 0.9);
+    }
+
+    75% {
+      transform: scale(0.95, 1.05);
+    }
+  }
+}
