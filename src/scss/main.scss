@@ -53,8 +53,8 @@ body {
   background-color: white;
 }
 
+@import './components/button';
 @import './components/header';
-@import './components/watched';
 @import './components/form';
 @import './components/gallery';
 @import './components/parallax';
@@ -62,5 +62,6 @@ body {
 @import './components/backToTop';
 @import './components/footer';
 @import './components/lightbox';
-@import './visibility';
 @import './pnotifyCustom';
+@import './watched';
+@import './visibility';

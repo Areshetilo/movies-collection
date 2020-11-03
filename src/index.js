@@ -1,19 +1,20 @@
-import './scss/main.scss';
-import '@pnotify/core/dist/PNotify.css';
-import '@pnotify/core/dist/BrightTheme.css';
-import 'basiclightbox/dist/basicLightbox.min.css';
 import throttle from 'lodash.throttle';
-import refs from './js/refs';
-import moviesService from './js/APIService/moviesAPI-service';
-import updateMoviesMarkup from './js/updateMoviesMarkup';
+import * as basicLightbox from 'basiclightbox';
+
+import runPreloader from './js/components/preloader';
 import lazyLoad from './js/components/lazyLoad';
 import loadOnScroll from './js/components/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
-import * as basicLightbox from 'basiclightbox';
-import globalVars from './js/globalVars/vars';
-import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import searchErrorNotFound from './js/components/notifyErrors';
+import modalOptions from './js/components/modal/modalOptions';
+
+import refs from './js/refs';
+import moviesService from './js/APIService/moviesAPI-service';
+import updateMoviesMarkup from './js/updateMoviesMarkup';
+import globalVars from './js/globalVars/vars';
+import localStorageAPI from './js/localStorageAPI';
+import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import showLibraryTabs from './js/libraryTabs/showLibraryTabs';
 import hideLibraryTabs from './js/libraryTabs/hideLibraryTabs';
 import runPreloader from './js/components/preloader';
@@ -22,12 +23,19 @@ import modalOptions from './js/components/modal/modalOptions';
 import { mySwiper } from './js/swiper';
 import fetchedTopRated from './js/fetchedTopRated';
 import {
-  checkFilmHandler,
+  checkMovieHandler,
   closeModalEscapeHandler,
 } from './js/components/modal/modalListener';
 import showSavedMovie from './js/showSavedMovie';
+import footerObserver from './js/components/footerObserver';
+
+import './scss/main.scss';
+import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/core/dist/BrightTheme.css';
+import 'basiclightbox/dist/basicLightbox.min.css';
 
 loadOnScroll();
+footerObserver();
 console.log('running populars fetch');
 fetchedTopRated('topRated');
 fetchedMoviesHandler('popular');
@@ -61,6 +69,7 @@ const galleryClickHandler = ({ target }) => {
       );
       instance.show();
       window.addEventListener('keydown', closeModalEscapeHandler);
+      document.addEventListener('click', closeModalEscapeHandler);
     } else {
       fetchedMoviesHandler(movieID);
     }
@@ -108,8 +117,7 @@ refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
 refs.toTop.addEventListener('click', function () {
   scrollToTop(30);
 });
-
 refs.headNav.addEventListener('click', showLibraryHandler);
 refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
-document.addEventListener('click', checkFilmHandler);
+document.addEventListener('click', checkMovieHandler);
 window.addEventListener('scroll', throttle(isVisible, 500));

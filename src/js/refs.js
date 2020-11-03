@@ -11,9 +11,8 @@ const refs = {
   toasty: document.querySelector('.toasty-wrap'),
   toastySound: document.querySelector('#toastySound'),
   toTop: document.getElementById('goto-topJS'),
-  body: document.querySelector('body'),
-  toasty: document.querySelector('.toasty-wrap'),
-  toastySound: document.querySelector('#pocikAudo'),
+  footer: document.querySelector('.main-footer'),
+  btnW: document.querySelector('#btnW'),
   swiperWrap: document.querySelector('.swiper-wrapper'),
 };
 export default refs;

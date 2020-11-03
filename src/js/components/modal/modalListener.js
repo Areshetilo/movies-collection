@@ -2,28 +2,59 @@ import globalVars from '../../globalVars/vars';
 import localStorageAPI from '../../localStorageAPI';
 import refs from '../../refs';
 
-function checkFilmHandler(event) {
-  if (event.target.id === 'btnW') {
-    localStorageAPI.toggleMovie(globalVars.watched);
-    if (event.target.textContent === 'add to watched') {
-      document.querySelector('#btnW').innerHTML = 'delete from watched';
-      document.querySelector('#btnQ').innerHTML = 'add to queue';
-    } else {
-      document.querySelector('#btnW').innerHTML = 'add to watched';
-    }
-  } else if (event.target.id === 'btnQ') {
-    localStorageAPI.toggleMovie(globalVars.queue);
-    if (event.target.textContent === 'add to queue') {
-      document.querySelector('#btnQ').innerHTML = 'delete from queue';
-      document.querySelector('#btnW').innerHTML = 'add to watched';
-    } else {
-      document.querySelector('#btnQ').innerHTML = 'add to queue';
-    }
+function toggleButtonClass(btnW, btnQ) {
+  if (btnW.textContent === 'add to watched') {
+    btnW.classList.remove('modal-btn--warning');
+  } else {
+    btnW.classList.add('modal-btn--warning');
+  }
+  if (btnQ.textContent === 'add to queue') {
+    btnQ.classList.remove('modal-btn--warning');
+  } else {
+    btnQ.classList.add('modal-btn--warning');
   }
 }
 
-function closeModalEscapeHandler(event) {
-  if (event.code === 'Escape') {
+function toggleButtonContent(elTextContent, elClicked, btnW, btnQ) {
+  if (elClicked === 'btnW') {
+    if (elTextContent === 'add to watched') {
+      btnW.innerHTML = 'delete from watched';
+      btnQ.innerHTML = 'add to queue';
+      return;
+    }
+    btnW.innerHTML = 'add to watched';
+    return;
+  }
+  if (elTextContent === 'add to queue') {
+    btnQ.innerHTML = 'delete from queue';
+    btnW.innerHTML = 'add to watched';
+    return;
+  }
+  btnQ.innerHTML = 'add to queue';
+}
+
+function checkMovieHandler({ target }) {
+  const btnWatch = document.querySelector('#btnW');
+  const btnQueue = document.querySelector('#btnQ');
+
+  if (target.id === 'btnW') {
+    localStorageAPI.toggleMovie(globalVars.watched);
+    toggleButtonContent(target.textContent, target.id, btnWatch, btnQueue);
+  } else if (target.id === 'btnQ') {
+    localStorageAPI.toggleMovie(globalVars.queue);
+    toggleButtonContent(target.textContent, target.id, btnWatch, btnQueue);
+  }
+  if (btnWatch || btnQueue) {
+    toggleButtonClass(btnWatch, btnQueue);
+  }
+}
+
+function closeModalEscapeHandler({ code, target }) {
+  if (
+    code === 'Escape' ||
+    target.className === 'lightbox_closeBtn' ||
+    target.className === 'lightbox'
+  ) {
     document
       .querySelector('.basicLightbox')
       .classList.remove('basicLightbox--visible');
@@ -33,4 +64,4 @@ function closeModalEscapeHandler(event) {
   }
 }
 
-export { closeModalEscapeHandler, checkFilmHandler };
+export { closeModalEscapeHandler, checkMovieHandler };
