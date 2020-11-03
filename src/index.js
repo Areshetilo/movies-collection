@@ -62,6 +62,7 @@ const galleryClickHandler = ({ target }) => {
         modalOptions
       );
       instance.show();
+
       window.addEventListener('keydown', closeModalEscapeHandler);
       document.addEventListener('click', closeModalEscapeHandler);
     } else {
@@ -111,5 +112,4 @@ refs.toTop.addEventListener('click', function () {
 });
 refs.headNav.addEventListener('click', showLibraryHandler);
 refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
-document.addEventListener('click', checkMovieHandler);
 window.addEventListener('scroll', throttle(isVisible, 500));

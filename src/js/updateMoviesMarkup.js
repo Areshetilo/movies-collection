@@ -15,7 +15,7 @@ const updateMoviesMarkup = {
   },
 
   defaultMsg(msg) {
-    refs.gallery.innerHTML = `${msg}`;
+    refs.gallery.innerHTML = `<p class="default-msg">${msg}</p>`;
   },
 
   showModalTemplate(movie) {
