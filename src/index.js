@@ -2,10 +2,7 @@ import throttle from 'lodash.throttle';
 import * as basicLightbox from 'basiclightbox';
 
 import runPreloader from './js/components/preloader';
-import {
-  footerObserver,
-  intersectionObserver,
-} from './js/components/observers/footerObserver';
+import { footerObserver } from './js/components/observers/footerObserver';
 import lazyLoad from './js/components/observers/lazyLoad';
 import loadOnScroll from './js/components/observers/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
@@ -118,5 +115,4 @@ refs.toTop.addEventListener('click', function () {
 });
 refs.headNav.addEventListener('click', showLibraryHandler);
 refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
-
 window.addEventListener('scroll', throttle(isVisible, 500));

@@ -1,4 +1,4 @@
-import { destroyToasty, showToasty } from '../../updateToasyMarkup';
+import { destroyToasty, showToasty } from '../../updateToastyMarkup';
 import refs from '../../refs';
 
 const options = { rootMargin: '-60px' };
