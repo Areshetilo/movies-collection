@@ -22,7 +22,7 @@
   width: 100%;
   height: 100%;
   opacity: 1;
-  transition: opacity .4s ease;
+  transition: opacity 0.4s ease;
   z-index: 1000;
   will-change: opacity;
 }
@@ -47,11 +47,10 @@
   background-position: 50%;
   background-size: 60%;
   background-repeat: no-repeat;
-  transition: all .3s ease-in;
+  transition: all 0.3s ease-in;
   background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeG1sbnM6c3ZnanM9Imh0dHA6Ly9zdmdqcy5jb20vc3ZnanMiIHZlcnNpb249IjEuMSIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHg9IjAiIHk9IjAiIHZpZXdCb3g9IjAgMCAzMTEgMzExLjA3NzMzIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIiBjbGFzcz0iIj48Zz48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0xNi4wMzUxNTYgMzExLjA3ODEyNWMtNC4wOTc2NTYgMC04LjE5NTMxMi0xLjU1ODU5NC0xMS4zMDg1OTQtNC42OTUzMTMtNi4yNS02LjI1LTYuMjUtMTYuMzgyODEyIDAtMjIuNjMyODEybDI3OS4wNjI1LTI3OS4wNjI1YzYuMjUtNi4yNSAxNi4zODI4MTMtNi4yNSAyMi42MzI4MTMgMHM2LjI1IDE2LjM4MjgxMiAwIDIyLjYzNjcxOWwtMjc5LjA1ODU5NCAyNzkuMDU4NTkzYy0zLjEzNjcxOSAzLjExNzE4OC03LjIzNDM3NSA0LjY5NTMxMy0xMS4zMjgxMjUgNC42OTUzMTN6bTAgMCIgZmlsbD0iI2ZmZjhmOCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiIvPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTI5NS4xMTcxODggMzExLjA3ODEyNWMtNC4wOTc2NTcgMC04LjE5MTQwNy0xLjU1ODU5NC0xMS4zMDg1OTQtNC42OTUzMTNsLTI3OS4wODIwMzItMjc5LjA1ODU5M2MtNi4yNS02LjI1MzkwNy02LjI1LTE2LjM4NjcxOSAwLTIyLjYzNjcxOXMxNi4zODI4MTMtNi4yNSAyMi42MzY3MTkgMGwyNzkuMDU4NTk0IDI3OS4wNjI1YzYuMjUgNi4yNSA2LjI1IDE2LjM4MjgxMiAwIDIyLjYzMjgxMi0zLjEzNjcxOSAzLjExNzE4OC03LjIzMDQ2OSA0LjY5NTMxMy0xMS4zMDQ2ODcgNC42OTUzMTN6bTAgMCIgZmlsbD0iI2ZmZjhmOCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiIvPjwvZz48L3N2Zz4K);
 
-
-  &:hover{
+  &:hover {
     background-color: #77c1bb;
   }
 }
@@ -63,21 +62,21 @@
   }
 
   &__wrapper {
-    width: 290px;
+    width: 29rem;
     background-color: $primary-white;
     color: $main-text;
     @include font(1.2, 1.2rem, 500);
     text-align: left;
-    padding: 10px 20px 5px;
+    padding: 1rem 2rem 0.5rem;
 
     @include for-size(tablet) {
       display: flex;
       justify-content: space-between;
-      width: 640px;
+      width: 64rem;
     }
     @include for-size(tablet-landscape) {
-      width: 920px;
-      padding: 10px 40px;
+      width: 92rem;
+      padding: 1rem 4rem;
     }
   }
 }
@@ -88,95 +87,95 @@
   border-radius: 1rem;
   box-shadow: 0 0 12px 4px rgba(119, 193, 187, 1);
   @include for-size(tablet) {
-    width: 260px;
+    width: 26rem;
   }
   @include for-size(tablet-landscape) {
-    width: 350px;
+    width: 35rem;
   }
 
   &__wrapper {
     text-align: center;
     @include for-size(tablet) {
-      padding: 10px 0;
+      padding: 1rem 0;
     }
     @include for-size(tablet-landscape) {
-      margin-right: 30px;
+      margin-right: 3rem;
     }
   }
 }
 
 .card-info__wrapper {
-  padding: 10px 0;
+  padding: 1rem 0;
   @include for-size(tablet) {
-    max-width: 320px;
+    max-width: 32rem;
   }
   @include for-size(tablet-landscape) {
-    max-width: 470px;
-    padding: 20px 0;
+    max-width: 47rem;
+    padding: 2rem 0;
   }
 }
 
 .card-title {
   @include font(1.2, 2rem, 500);
   text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
   @include for-size(tablet) {
     @include font(1.1, 3rem, 500);
   }
   @include for-size(tablet-landscape) {
     @include font(1.1, 4rem, 500);
-    margin-bottom: 40px;
+    margin-bottom: 4rem;
   }
 }
 
 .movie-info__list {
-  margin-bottom: 10px;
-  font-size: 12px;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
   @include for-size(tablet-landscape) {
-    font-size: 14px;
-    margin-bottom: 20px;
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
   }
 }
 
 .movie-info__item {
   display: flex;
   &:not(:last-child) {
-    margin-bottom: 5px;
+    margin-bottom: 0.5rem;
   }
 }
 
 .item_about {
   color: $additional-text;
-  margin-right: 10px;
+  margin-right: 1rem;
   @include for-size(tablet) {
-    margin-right: 30px;
+    margin-right: 3rem;
   }
   @include for-size(tablet-landscape) {
-    width: 90px;
+    width: 9rem;
   }
 }
 
 .item_description {
   text-transform: uppercase;
-  width: 155px;
+  width: 15.5rem;
 }
 
 .about-description__title {
   text-transform: uppercase;
-  margin-bottom: 5px;
-  font-size: 12px;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
   @include for-size(tablet-landscape) {
-    font-size: 16px;
+    font-size: 1.6rem;
   }
 }
 
 .description__about {
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
   @include font(1.6, 1.2rem, 400);
-  max-height: 80px;
+  max-height: 8rem;
   overflow: auto;
   box-shadow: 0 0 1px;
-  padding-left: 5px;
+  padding-left: 0.5rem;
   @include for-size(tablet-landscape) {
     @include font(1.6, 1.4rem, 400);
     box-shadow: none;
@@ -189,11 +188,11 @@
   flex-wrap: wrap;
   justify-content: space-between;
   @include for-size(tablet) {
-    padding: 5px 0;
+    padding: 0.5rem 0;
     justify-content: space-evenly;
   }
   @include for-size(tablet-landscape) {
-    padding: 30px 0;
+    padding: 3rem 0;
     justify-content: flex-start;
   }
 }
@@ -203,21 +202,19 @@
   color: $main-text;
   background-color: transparent;
   text-transform: uppercase;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   outline: none;
-  padding: 10px 5px;
-  width: 120px;
+  padding: 1rem 0.5rem;
+  width: 12rem;
   cursor: pointer;
   @include font(1.1, 1.2rem, 400);
   box-shadow: 0 0 1px;
   transition: all 0.3s ease-in;
 
-  &:hover {
-    color: $primary-white;
-    background-color: $accent-color;
-    border: 1px solid $accent-color;
-  }
   @include for-size(tablet) {
-    margin-right: 10px;
+    margin-right: 1rem;
+  }
+  &--warning {
+    background-color: #e6b7bc;
   }
 }

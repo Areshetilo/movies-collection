@@ -2,23 +2,36 @@ import globalVars from '../../globalVars/vars';
 import localStorageAPI from '../../localStorageAPI';
 import refs from '../../refs';
 
-function checkFilmHandler(event) {
-  if (event.target.id === 'btnW') {
+function checkMovieHandler({ target }) {
+  const btnWatch = document.querySelector('#btnW');
+  const btnQueue = document.querySelector('#btnQ');
+
+  if (target.id === 'btnW') {
     localStorageAPI.toggleMovie(globalVars.watched);
-    if (event.target.textContent === 'add to watched') {
-      document.querySelector('#btnW').innerHTML = 'delete from watched';
-      document.querySelector('#btnQ').innerHTML = 'add to queue';
+    if (target.textContent === 'add to watched') {
+      btnWatch.innerHTML = 'delete from watched';
+      btnQueue.innerHTML = 'add to queue';
     } else {
-      document.querySelector('#btnW').innerHTML = 'add to watched';
+      btnWatch.innerHTML = 'add to watched';
     }
-  } else if (event.target.id === 'btnQ') {
+  } else if (target.id === 'btnQ') {
     localStorageAPI.toggleMovie(globalVars.queue);
-    if (event.target.textContent === 'add to queue') {
-      document.querySelector('#btnQ').innerHTML = 'delete from queue';
-      document.querySelector('#btnW').innerHTML = 'add to watched';
+    if (target.textContent === 'add to queue') {
+      btnQueue.innerHTML = 'delete from queue';
+      btnWatch.innerHTML = 'add to watched';
     } else {
-      document.querySelector('#btnQ').innerHTML = 'add to queue';
+      btnQueue.innerHTML = 'add to queue';
     }
+  }
+  if (btnWatch.textContent === 'add to watched') {
+    btnWatch.classList.remove('modal-btn--warning');
+  } else {
+    btnWatch.classList.add('modal-btn--warning');
+  }
+  if (btnQueue.textContent === 'add to queue') {
+    btnQueue.classList.remove('modal-btn--warning');
+  } else {
+    btnQueue.classList.add('modal-btn--warning');
   }
 }
 
@@ -37,4 +50,4 @@ function closeModalEscapeHandler(event) {
   }
 }
 
-export { closeModalEscapeHandler, checkFilmHandler };
+export { closeModalEscapeHandler, checkMovieHandler };

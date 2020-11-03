@@ -20,7 +20,7 @@ import runPreloader from './js/components/preloader';
 import localStorageAPI from './js/localStorageAPI';
 import modalOptions from './js/components/modal/modalOptions';
 import {
-  checkFilmHandler,
+  checkMovieHandler,
   closeModalEscapeHandler,
 } from './js/components/modal/modalListener';
 import showSavedMovie from './js/showSavedMovie';
@@ -109,5 +109,5 @@ refs.toTop.addEventListener('click', function () {
 
 refs.headNav.addEventListener('click', showLibraryHandler);
 refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
-document.addEventListener('click', checkFilmHandler);
+document.addEventListener('click', checkMovieHandler);
 window.addEventListener('scroll', throttle(isVisible, 500));
