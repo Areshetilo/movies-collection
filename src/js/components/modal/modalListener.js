@@ -2,44 +2,58 @@ import globalVars from '../../globalVars/vars';
 import localStorageAPI from '../../localStorageAPI';
 import refs from '../../refs';
 
+function toggleButtonClass(btnW, btnQ) {
+  if (btnW.textContent === 'add to watched') {
+    btnW.classList.remove('modal-btn--warning');
+  } else {
+    btnW.classList.add('modal-btn--warning');
+  }
+  if (btnQ.textContent === 'add to queue') {
+    btnQ.classList.remove('modal-btn--warning');
+  } else {
+    btnQ.classList.add('modal-btn--warning');
+  }
+}
+
+function toggleButtonContent(elTextContent, elClicked, btnW, btnQ) {
+  if (elClicked === 'btnW') {
+    if (elTextContent === 'add to watched') {
+      btnW.innerHTML = 'delete from watched';
+      btnQ.innerHTML = 'add to queue';
+      return;
+    }
+    btnW.innerHTML = 'add to watched';
+    return;
+  }
+  if (elTextContent === 'add to queue') {
+    btnQ.innerHTML = 'delete from queue';
+    btnW.innerHTML = 'add to watched';
+    return;
+  }
+  btnQ.innerHTML = 'add to queue';
+}
+
 function checkMovieHandler({ target }) {
   const btnWatch = document.querySelector('#btnW');
   const btnQueue = document.querySelector('#btnQ');
 
   if (target.id === 'btnW') {
     localStorageAPI.toggleMovie(globalVars.watched);
-    if (target.textContent === 'add to watched') {
-      btnWatch.innerHTML = 'delete from watched';
-      btnQueue.innerHTML = 'add to queue';
-    } else {
-      btnWatch.innerHTML = 'add to watched';
-    }
+    toggleButtonContent(target.textContent, target.id, btnWatch, btnQueue);
   } else if (target.id === 'btnQ') {
     localStorageAPI.toggleMovie(globalVars.queue);
-    if (target.textContent === 'add to queue') {
-      btnQueue.innerHTML = 'delete from queue';
-      btnWatch.innerHTML = 'add to watched';
-    } else {
-      btnQueue.innerHTML = 'add to queue';
-    }
+    toggleButtonContent(target.textContent, target.id, btnWatch, btnQueue);
   }
-  if (btnWatch.textContent === 'add to watched') {
-    btnWatch.classList.remove('modal-btn--warning');
-  } else {
-    btnWatch.classList.add('modal-btn--warning');
-  }
-  if (btnQueue.textContent === 'add to queue') {
-    btnQueue.classList.remove('modal-btn--warning');
-  } else {
-    btnQueue.classList.add('modal-btn--warning');
+  if (btnWatch || btnQueue) {
+    toggleButtonClass(btnWatch, btnQueue);
   }
 }
 
-function closeModalEscapeHandler(event) {
+function closeModalEscapeHandler({ code, target }) {
   if (
-    event.code === 'Escape' ||
-    event.target.className === 'lightbox_closeBtn' ||
-    event.target.className === 'lightbox'
+    code === 'Escape' ||
+    target.className === 'lightbox_closeBtn' ||
+    target.className === 'lightbox'
   ) {
     document
       .querySelector('.basicLightbox')
