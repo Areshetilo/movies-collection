@@ -4,7 +4,7 @@ import moviesService from './APIService/moviesAPI-service';
 import globalVars from './globalVars/vars';
 import updateMoviesMarkup from './updateMoviesMarkup';
 import modalOptions from './components/modal/modalOptions';
-import lazyLoad from './components/lazyLoad';
+import lazyLoad from './components/observers/lazyLoad';
 import Loader from './components/Loader';
 import searchErrorNotFound from './components/notifyErrors';
 import {
