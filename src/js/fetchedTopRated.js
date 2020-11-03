@@ -31,7 +31,7 @@ const fetchedTopRated = (queryType) => {
             updateSwiperMarkup.show(movies);
             const mySwiper = new Swiper('.swiper-container', {
               direction: 'horizontal',
-              effect: 'slide',
+              effect: 'coverflow',
               grabCursor: true,
               centeredSlides: true,
               slidesPerView: 3,
