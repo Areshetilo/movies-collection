@@ -23,7 +23,7 @@ const fetchedTopRated = (queryType) => {
     if (queryType === 'topRated') {
       getMovies()
         .then((moviesArr) => {
-          const movies = moviesArr ?? [];
+          const movies = moviesArr.results;
           console.log('topRated:', movies);
           if (movies.length) {
             globalVars.moviesArr = [...globalVars.moviesArr, ...movies];
