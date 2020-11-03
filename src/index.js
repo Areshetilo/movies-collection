@@ -1,6 +1,5 @@
 import throttle from 'lodash.throttle';
 import * as basicLightbox from 'basiclightbox';
-
 import runPreloader from './js/components/preloader';
 import lazyLoad from './js/components/lazyLoad';
 import loadOnScroll from './js/components/loadOnScroll';
@@ -8,20 +7,15 @@ import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
 import searchErrorNotFound from './js/components/notifyErrors';
 import modalOptions from './js/components/modal/modalOptions';
-
 import refs from './js/refs';
 import moviesService from './js/APIService/moviesAPI-service';
 import updateMoviesMarkup from './js/updateMoviesMarkup';
 import globalVars from './js/globalVars/vars';
 import localStorageAPI from './js/localStorageAPI';
+import fetchedTopRated from './js/fetchedTopRated';
 import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import showLibraryTabs from './js/libraryTabs/showLibraryTabs';
 import hideLibraryTabs from './js/libraryTabs/hideLibraryTabs';
-import runPreloader from './js/components/preloader';
-import localStorageAPI from './js/localStorageAPI';
-import modalOptions from './js/components/modal/modalOptions';
-import { mySwiper } from './js/swiper';
-import fetchedTopRated from './js/fetchedTopRated';
 import {
   checkMovieHandler,
   closeModalEscapeHandler,
@@ -75,8 +69,6 @@ const galleryClickHandler = ({ target }) => {
     }
   }
 };
-
-mySwiper.init();
 
 const showLibraryHandler = ({ target: { value } }) => {
   if (value === 'library') {
