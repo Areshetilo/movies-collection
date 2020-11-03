@@ -75,9 +75,14 @@ const localStorageAPI = {
   updateView(keyStorage) {
     if (globalVars.activeTab === keyStorage) {
       updateMoviesMarkup.reset();
-      updateMoviesMarkup.show(this.getMovies(keyStorage));
+      this.getMovies(keyStorage).length > 0
+        ? updateMoviesMarkup.show(this.getMovies(keyStorage))
+        : updateMoviesMarkup.defaultMsg('You do not have any watched movies:(');
     } else if (globalVars.activeTab === keyStorage) {
       updateMoviesMarkup.reset();
+      this.getMovies(keyStorage).length > 0
+        ? updateMoviesMarkup.show(this.getMovies(keyStorage))
+        : updateMoviesMarkup.defaultMsg('You do not have any queued movies:(');
       updateMoviesMarkup.show(this.getMovies(keyStorage));
     }
   },

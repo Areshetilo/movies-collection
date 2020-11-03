@@ -30,3 +30,13 @@
 .show-toasty {
   transform: translateX(0);
 }
+
+.default-msg {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+}

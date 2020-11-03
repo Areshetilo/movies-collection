@@ -1,9 +1,8 @@
-import refs from '../refs';
-import { showToasty, destroyToasty } from '../updateToasyMarkup';
-import globalVars from '../globalVars/vars';
-import fetchedMoviesHandler from '../fetchedMoviesHandler';
+import refs from '../../refs';
+import globalVars from '../../globalVars/vars';
+import fetchedMoviesHandler from '../../fetchedMoviesHandler';
 
-const options = { rootMargin: '400px' };
+const options = { rootMargin: '800px' };
 const onEntry = (entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {

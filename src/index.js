@@ -2,8 +2,9 @@ import throttle from 'lodash.throttle';
 import * as basicLightbox from 'basiclightbox';
 
 import runPreloader from './js/components/preloader';
-import lazyLoad from './js/components/lazyLoad';
-import loadOnScroll from './js/components/loadOnScroll';
+import { footerObserver } from './js/components/observers/footerObserver';
+import lazyLoad from './js/components/observers/lazyLoad';
+import loadOnScroll from './js/components/observers/loadOnScroll';
 import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
 import searchErrorNotFound from './js/components/notifyErrors';
@@ -22,7 +23,6 @@ import {
   closeModalEscapeHandler,
 } from './js/components/modal/modalListener';
 import showSavedMovie from './js/showSavedMovie';
-import footerObserver from './js/components/footerObserver';
 
 import './scss/main.scss';
 import '@pnotify/core/dist/PNotify.css';
@@ -30,7 +30,7 @@ import '@pnotify/core/dist/BrightTheme.css';
 import 'basiclightbox/dist/basicLightbox.min.css';
 
 loadOnScroll();
-footerObserver();
+
 console.log('running populars fetch');
 fetchedMoviesHandler('popular');
 
@@ -46,6 +46,7 @@ const submitHandler = (e) => {
   }
   globalVars.searchQuery = inputValue;
   globalVars.moviesArr = [];
+  footerObserver();
   updateMoviesMarkup.reset();
   moviesService.resetPage();
   fetchedMoviesHandler('search');
@@ -62,8 +63,10 @@ const galleryClickHandler = ({ target }) => {
         modalOptions
       );
       instance.show();
+
       window.addEventListener('keydown', closeModalEscapeHandler);
       document.addEventListener('click', closeModalEscapeHandler);
+      document.addEventListener('click', checkMovieHandler);
     } else {
       fetchedMoviesHandler(movieID);
     }
@@ -88,6 +91,7 @@ const showLibraryHandler = ({ target: { value } }) => {
     updateMoviesMarkup.show(globalVars.moviesArr);
   }
   lazyLoad();
+  footerObserver();
 };
 
 const showSavedMovieFromGrade = (e) => {
@@ -111,5 +115,4 @@ refs.toTop.addEventListener('click', function () {
 });
 refs.headNav.addEventListener('click', showLibraryHandler);
 refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
-document.addEventListener('click', checkMovieHandler);
 window.addEventListener('scroll', throttle(isVisible, 500));
