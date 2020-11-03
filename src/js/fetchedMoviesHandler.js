@@ -54,7 +54,7 @@ const fetchedMoviesHandler = (queryType) => {
         })
         .finally(() => {});
     }
-  })();
+  }());
 };
 
 export default fetchedMoviesHandler;
