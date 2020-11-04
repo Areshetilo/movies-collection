@@ -1,6 +1,7 @@
 const globalVars = {
   _activeTab: 'homePage',
   _moviesArr: [],
+  _topMoviesArr: [],
   _queue: 'queue',
   _searchQuery: '',
   _watched: 'watched',
@@ -25,6 +26,13 @@ const globalVars = {
   },
   get moviesArr() {
     return this._moviesArr;
+  },
+
+  set topMoviesArr(arr) {
+    this._topMoviesArr = arr;
+  },
+  get topMoviesArr() {
+    return this._topMoviesArr;
   },
 
   set queue(str) {
