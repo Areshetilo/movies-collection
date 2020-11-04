@@ -19,6 +19,7 @@ import localStorageAPI from './js/localStorageAPI';
 import fetchedTopRated from './js/fetchedTopRated';
 import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import showLibraryTabs from './js/libraryTabs/showLibraryTabs';
+import showHomePage from './js/showHomePage';
 import hideLibraryTabs from './js/libraryTabs/hideLibraryTabs';
 import {
   checkMovieHandler,
@@ -80,6 +81,17 @@ const galleryClickHandler = ({ target }) => {
   }
 };
 
+const logoHandler = () => {
+  refs.swiperContainer.classList.remove('swiper-hidden');
+  if (globalVars.activeTab !== 'homePage') {
+    showHomePage();
+    refs.homeTab.checked = true;
+  }
+  if (!refs.gallery.firstElementChild) {
+    fetchedMoviesHandler('popular');
+  }
+};
+
 const showLibraryHandler = ({ target: { value } }) => {
   if (value === 'library') {
     showLibraryTabs();
@@ -92,12 +104,7 @@ const showLibraryHandler = ({ target: { value } }) => {
   }
 
   if (value === 'homePage') {
-    globalVars.activeTab = value;
-    hideLibraryTabs();
-    updateMoviesMarkup.reset();
-    refs.noMoviesMessage.textContent = '';
-    updateMoviesMarkup.show(globalVars.moviesArr);
-    refs.swiperContainer.classList.remove('swiper-hidden');
+    showHomePage();
   }
   lazyLoad();
   footerObserver();
@@ -126,11 +133,4 @@ refs.toTop.addEventListener('click', function () {
 refs.headNav.addEventListener('click', showLibraryHandler);
 refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
 window.addEventListener('scroll', throttle(isVisible, 500));
-document.querySelector('.logo').addEventListener('click', () => {
-  refs.swiperContainer.classList.remove('swiper-hidden');
-  if (!refs.gallery.firstElementChild) {
-    fetchedMoviesHandler('popular');
-    console.log(globalVars.searchQuery);
-    console.log(globalVars.moviesArr);
-  }
-});
+refs.logo.addEventListener('click', logoHandler);
