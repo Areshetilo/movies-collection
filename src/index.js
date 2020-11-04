@@ -11,7 +11,6 @@ import modalOptions from './js/components/modal/modalOptions';
 import refs from './js/refs';
 import moviesService from './js/APIService/moviesAPI-service';
 import updateMoviesMarkup from './js/updateMoviesMarkup';
-import updateSwiperMarkup from './js/updateSwiperMarkup';
 import globalVars from './js/globalVars/vars';
 import localStorageAPI from './js/localStorageAPI';
 import fetchedTopRated from './js/fetchedTopRated';
@@ -49,8 +48,7 @@ const submitHandler = (e) => {
   globalVars.moviesArr = [];
   footerObserver();
   updateMoviesMarkup.reset();
-  updateSwiperMarkup.reset();
-  refs.swiperContainer.style.display = 'none';
+  refs.swiperContainer.classList.add('swiper-hidden');
   moviesService.resetPage();
   fetchedMoviesHandler('search');
   e.currentTarget.reset();
@@ -76,31 +74,11 @@ const galleryClickHandler = ({ target }) => {
   }
 };
 
-// const swiperClickHandler = ({ target }) => {
-//   const card = target.closest('.swiper-card__image');
-//   if (card && card.nodeName === 'DIV') {
-//     const movieID = card.children[0].dataset.id;
-//     if (localStorageAPI.checkMovie(movieID)) {
-//       const instance = basicLightbox.create(
-//         updateSwiperMarkup.showModalTemplate(globalVars.currentMovie),
-//         modalOptions
-//       );
-//       instance.show();
-//
-//       window.addEventListener('keydown', closeModalEscapeHandler);
-//       document.addEventListener('click', closeModalEscapeHandler);
-//       document.addEventListener('click', checkMovieHandler);
-//     } else {
-//       fetchedMoviesHandler(movieID);
-//     }
-//   }
-// };
-
 const showLibraryHandler = ({ target: { value } }) => {
   if (value === 'library') {
     showLibraryTabs();
     updateMoviesMarkup.reset();
-    updateSwiperMarkup.reset();
+    refs.swiperContainer.classList.add('swiper-hidden');
     refs.noMoviesMessage.textContent = '';
     refs.queueTab.checked
       ? showSavedMovie('queueMovies')
@@ -111,10 +89,9 @@ const showLibraryHandler = ({ target: { value } }) => {
     globalVars.activeTab = value;
     hideLibraryTabs();
     updateMoviesMarkup.reset();
-    updateSwiperMarkup.reset();
     refs.noMoviesMessage.textContent = '';
     updateMoviesMarkup.show(globalVars.moviesArr);
-    fetchedTopRated('topRated');
+    refs.swiperContainer.classList.remove('swiper-hidden');
   }
   lazyLoad();
   footerObserver();
@@ -133,7 +110,7 @@ const showSavedMovieFromGrade = (e) => {
 };
 
 refs.gallery.addEventListener('click', galleryClickHandler);
-// refs.swiperSLide.addEventListener('click', galleryClickHandler);
+refs.swiperWrap.addEventListener('click', galleryClickHandler);
 refs.headNav.addEventListener('click', showLibraryHandler);
 refs.searchForm.addEventListener('submit', submitHandler);
 refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);

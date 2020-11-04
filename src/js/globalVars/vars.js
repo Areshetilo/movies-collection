@@ -28,13 +28,6 @@ const globalVars = {
     return this._moviesArr;
   },
 
-  set topMoviesArr(arr) {
-    this._topMoviesArr = arr;
-  },
-  get topMoviesArr() {
-    return this._topMoviesArr;
-  },
-
   set queue(str) {
     this._queue = str;
   },

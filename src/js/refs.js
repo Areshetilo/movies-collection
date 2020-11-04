@@ -14,7 +14,6 @@ const refs = {
   footer: document.querySelector('.main-footer'),
   btnW: document.querySelector('#btnW'),
   swiperWrap: document.querySelector('.swiper-wrapper'),
-  swiperSLide: document.querySelector('.swiper-slide'),
   swiperContainer: document.querySelector('.swiper-container'),
 };
 export default refs;
