@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "basiclightbox": "^5.0.3",
+    "browser-sync": "^2.26.13",
     "core-js": "^3.6.5",
     "eslint": "^7.12.1",
     "handlebars": "^4.7.6",

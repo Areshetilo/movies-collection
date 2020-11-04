@@ -57,6 +57,7 @@
   </head>
 
   <body>
+    <h1 class="visually-hidden">MovieLibrary</h1>
     <div id="preloader" class="visible">
       <p class="preloader__text">Please, wait, we're doing our best!</p>
       <img
@@ -69,17 +70,7 @@
     <header class="main-header">
       <div class="main__container">
         <div class="header-wrap">
-          <a href="#" class="link-logo">
-            <img
-              src="./images/video-camera.png"
-              alt="logo"
-              width="24"
-              height="24"
-              class="link-logo__img"
-            />
-            <h2 class="link-logo__title">MovieLibrary</h2>
-          </a>
-
+          <button class="logo" type="button">MovieLibrary</button>
           <div class="head_toggle">
             <div class="toggle-item item">
               <input
@@ -141,8 +132,7 @@
               <button class="submit-button btn-jittery" type="submit"></button>
             </form>
             <div class="swiper-container">
-              <div class="swiper-wrapper">
-              </div>
+              <div class="swiper-wrapper"></div>
             </div>
             <div class="wrapper">
               <div class="lds-dual-ring js-loader is-hidden"></div>
@@ -241,10 +231,7 @@
       </div>
     </footer>
     <audio id="toastySound">
-      <source
-        src="#"
-        type="audio/mpeg"
-      />
+      <source src="#" type="audio/mpeg" />
     </audio>
     <div class="toasty-wrap">
       <img src="./images/toasty.png" alt="Ваня, чо каво :)))" />

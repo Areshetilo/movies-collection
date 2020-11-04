@@ -120,3 +120,9 @@ refs.toTop.addEventListener('click', function () {
 refs.headNav.addEventListener('click', showLibraryHandler);
 refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
 window.addEventListener('scroll', throttle(isVisible, 500));
+document.querySelector('.logo').addEventListener('click', () => {
+  refs.swiperContainer.classList.remove('swiper-hidden');
+  if (!refs.gallery.firstElementChild) {
+    fetchedMoviesHandler('popular');
+  }
+});
