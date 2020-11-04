@@ -29,15 +29,28 @@ const fetchedTopRated = (queryType) => {
             globalVars.moviesArr = [...globalVars.moviesArr, ...movies];
             console.log('topRatedArr: ', globalVars.moviesArr);
             updateSwiperMarkup.show(movies);
-            const mySwiper = new Swiper('.swiper-container', {
+            let mySwiper = new Swiper('.swiper-container', {
               direction: 'horizontal',
               effect: 'coverflow',
+              // freeMode: true,
               grabCursor: true,
               centeredSlides: true,
-              slidesPerView: 3,
               loop: true,
               speed: 300,
-              spaceBetween: 30,
+              breakpoints: {
+                320: {
+                  slidesPerView: 1,
+                  spaceBetween: 20,
+                },
+                500: {
+                  slidesPerView: 2,
+                  spaceBetween: 30,
+                },
+                940: {
+                  slidesPerView: 3,
+                  spaceBetween: 40,
+                },
+              },
               coverflowEffect: {
                 rotate: 50,
                 stretch: 0,
@@ -47,6 +60,7 @@ const fetchedTopRated = (queryType) => {
               },
               autoplay: {
                 delay: 3000,
+                disableOnInteraction: false,
               },
             });
             mySwiper.init();
