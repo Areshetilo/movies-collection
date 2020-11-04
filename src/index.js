@@ -124,5 +124,7 @@ document.querySelector('.logo').addEventListener('click', () => {
   refs.swiperContainer.classList.remove('swiper-hidden');
   if (!refs.gallery.firstElementChild) {
     fetchedMoviesHandler('popular');
+    console.log(globalVars.searchQuery);
+    console.log(globalVars.moviesArr);
   }
 });

@@ -39,7 +39,10 @@ const fetchedMoviesHandler = (queryType) => {
             lazyLoad();
           }
         })
-        .catch((err) => searchErrorNotFound(err))
+        .catch((err) => {
+          searchErrorNotFound(err);
+          globalVars.searchQuery = '';
+        })
         .finally(() => {
           loader.hide();
         });
