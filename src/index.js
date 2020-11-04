@@ -1,6 +1,7 @@
 import throttle from 'lodash.throttle';
 import * as basicLightbox from 'basiclightbox';
 import runPreloader from './js/components/preloader';
+
 import { footerObserver } from './js/components/observers/footerObserver';
 import lazyLoad from './js/components/observers/lazyLoad';
 import loadOnScroll from './js/components/observers/loadOnScroll';
@@ -8,8 +9,10 @@ import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
 import searchErrorNotFound from './js/components/notifyErrors';
 import modalOptions from './js/components/modal/modalOptions';
+
 import refs from './js/refs';
 import moviesService from './js/APIService/moviesAPI-service';
+import isMobile from './js/isMobile';
 import updateMoviesMarkup from './js/updateMoviesMarkup';
 import globalVars from './js/globalVars/vars';
 import localStorageAPI from './js/localStorageAPI';
@@ -29,6 +32,9 @@ import '@pnotify/core/dist/BrightTheme.css';
 import 'basiclightbox/dist/basicLightbox.min.css';
 
 loadOnScroll();
+isMobile.any()
+  ? refs.body.classList.add('is-touch')
+  : refs.body.classList.add('no-touch');
 
 console.log('running populars fetch');
 fetchedTopRated('topRated');
