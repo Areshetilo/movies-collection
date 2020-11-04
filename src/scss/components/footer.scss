@@ -1,16 +1,13 @@
 @import '../vars';
+@import '../mixins';
 
 .main-footer {
   background-color: $accent-color;
-  padding: 3.6rem 0;
+  padding: 2rem 0;
 }
 
 .footer-title {
   color: $header-text;
-  font-size: 16px;
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: normal;
-  line-height: 16px;
+  @include font(1.2, 1.6rem, 500);
   text-align: center;
 }

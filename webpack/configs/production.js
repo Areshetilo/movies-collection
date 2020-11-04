@@ -2,7 +2,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-module.exports = env => ({
+module.exports = (env) => ({
   devtool: 'source-map',
   output: {
     filename: '[name].[contenthash].js',

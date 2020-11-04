@@ -60,6 +60,8 @@ function closeModalEscapeHandler({ code, target }) {
       .classList.remove('basicLightbox--visible');
     refs.body.classList.remove('modal-open');
     window.removeEventListener('keydown', closeModalEscapeHandler);
+    document.removeEventListener('click', closeModalEscapeHandler);
+    document.removeEventListener('click', closeModalEscapeHandler);
     setTimeout(() => document.querySelector('.basicLightbox').remove(), 410);
   }
 }

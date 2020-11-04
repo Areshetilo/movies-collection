@@ -1,5 +1,5 @@
-import { destroyToasty, showToasty } from '../updateToasyMarkup';
-import refs from '../refs';
+import { destroyToasty, showToasty } from '../../updateToastyMarkup';
+import refs from '../../refs';
 
 const options = { rootMargin: '-60px' };
 const onEntry = (entries) => {
@@ -17,4 +17,4 @@ const footerObserver = () => {
   console.log('observer is running');
 };
 
-export default footerObserver;
+export { footerObserver, intersectionObserver };

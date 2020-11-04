@@ -1,8 +1,11 @@
 import refs from './refs';
+import audio from '../audio/toasty.mp3';
+
+const audioPlayer = new Audio(audio);
 
 function showToasty() {
   refs.toasty.classList.add('show-toasty');
-  refs.toastySound.play();
+  audioPlayer.play();
 }
 
 function destroyToasty() {

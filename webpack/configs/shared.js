@@ -3,7 +3,7 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const paths = require('../utils/paths');
 
-module.exports = env => ({
+module.exports = (env) => ({
   mode: env.mode,
   context: paths.SRC_DIR,
   entry: './index.js',
@@ -56,6 +56,14 @@ module.exports = env => ({
             },
           },
         ],
+      },
+      {
+        test: /\.mp3$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: 'audio/',
+        },
       },
       {
         test: /\.html$/,

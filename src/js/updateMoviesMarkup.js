@@ -1,7 +1,7 @@
 import movieCardTemplate from '../templates/movieCard.hbs';
 import movieModalTemplate from '../templates/imageLightbox.hbs';
 import refs from './refs';
-import lazyLoad from './components/lazyLoad';
+import lazyLoad from './components/observers/lazyLoad';
 
 const updateMoviesMarkup = {
   show(movies) {
@@ -15,7 +15,7 @@ const updateMoviesMarkup = {
   },
 
   defaultMsg(msg) {
-    refs.gallery.innerHTML = `${msg}`;
+    refs.gallery.innerHTML = `<p class="default-msg">${msg}</p>`;
   },
 
   showModalTemplate(movie) {
