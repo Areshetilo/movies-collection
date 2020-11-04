@@ -111,6 +111,7 @@ const showLibraryHandler = ({ target: { value } }) => {
     globalVars.activeTab = value;
     hideLibraryTabs();
     updateMoviesMarkup.reset();
+    updateSwiperMarkup.reset();
     refs.noMoviesMessage.textContent = '';
     updateMoviesMarkup.show(globalVars.moviesArr);
     fetchedTopRated('topRated');
@@ -132,7 +133,7 @@ const showSavedMovieFromGrade = (e) => {
 };
 
 refs.gallery.addEventListener('click', galleryClickHandler);
-// refs.swiperSLide.addEventListener('click', swiperClickHandler);
+// refs.swiperSLide.addEventListener('click', galleryClickHandler);
 refs.headNav.addEventListener('click', showLibraryHandler);
 refs.searchForm.addEventListener('submit', submitHandler);
 refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
