@@ -1,6 +1,5 @@
 import throttle from 'lodash.throttle';
 import * as basicLightbox from 'basiclightbox';
-
 import runPreloader from './js/components/preloader';
 import { footerObserver } from './js/components/observers/footerObserver';
 import lazyLoad from './js/components/observers/lazyLoad';
@@ -9,12 +8,12 @@ import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
 import searchErrorNotFound from './js/components/notifyErrors';
 import modalOptions from './js/components/modal/modalOptions';
-
 import refs from './js/refs';
 import moviesService from './js/APIService/moviesAPI-service';
 import updateMoviesMarkup from './js/updateMoviesMarkup';
 import globalVars from './js/globalVars/vars';
 import localStorageAPI from './js/localStorageAPI';
+import fetchedTopRated from './js/fetchedTopRated';
 import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import showLibraryTabs from './js/libraryTabs/showLibraryTabs';
 import hideLibraryTabs from './js/libraryTabs/hideLibraryTabs';
@@ -32,6 +31,7 @@ import 'basiclightbox/dist/basicLightbox.min.css';
 loadOnScroll();
 
 console.log('running populars fetch');
+fetchedTopRated('topRated');
 fetchedMoviesHandler('popular');
 
 const submitHandler = (e) => {
@@ -48,6 +48,7 @@ const submitHandler = (e) => {
   globalVars.moviesArr = [];
   footerObserver();
   updateMoviesMarkup.reset();
+  refs.swiperContainer.classList.add('swiper-hidden');
   moviesService.resetPage();
   fetchedMoviesHandler('search');
   e.currentTarget.reset();
@@ -77,6 +78,7 @@ const showLibraryHandler = ({ target: { value } }) => {
   if (value === 'library') {
     showLibraryTabs();
     updateMoviesMarkup.reset();
+    refs.swiperContainer.classList.add('swiper-hidden');
     refs.noMoviesMessage.textContent = '';
     refs.queueTab.checked
       ? showSavedMovie('queueMovies')
@@ -89,6 +91,7 @@ const showLibraryHandler = ({ target: { value } }) => {
     updateMoviesMarkup.reset();
     refs.noMoviesMessage.textContent = '';
     updateMoviesMarkup.show(globalVars.moviesArr);
+    refs.swiperContainer.classList.remove('swiper-hidden');
   }
   lazyLoad();
   footerObserver();
@@ -107,6 +110,7 @@ const showSavedMovieFromGrade = (e) => {
 };
 
 refs.gallery.addEventListener('click', galleryClickHandler);
+refs.swiperWrap.addEventListener('click', galleryClickHandler);
 refs.headNav.addEventListener('click', showLibraryHandler);
 refs.searchForm.addEventListener('submit', submitHandler);
 refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);

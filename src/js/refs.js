@@ -13,5 +13,7 @@ const refs = {
   toTop: document.getElementById('goto-topJS'),
   footer: document.querySelector('.main-footer'),
   btnW: document.querySelector('#btnW'),
+  swiperWrap: document.querySelector('.swiper-wrapper'),
+  swiperContainer: document.querySelector('.swiper-container'),
 };
 export default refs;

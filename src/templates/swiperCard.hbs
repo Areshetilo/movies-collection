@@ -1,0 +1,8 @@
+{{#each this}}
+    <div class="movie-card swiper-slide">
+        <img class="swiper-card__image" src="https://image.tmdb.org/t/p/w500{{poster_path}}"
+             data-id="{{id}}" alt="{{title}}"/>
+      <span class="movie-card__title">{{title}}</span>
+      <span class="movie-card__vote">{{vote_average}}</span>
+    </div>
+{{/each}}

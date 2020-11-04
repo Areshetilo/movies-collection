@@ -1,6 +1,7 @@
 const globalVars = {
   _activeTab: 'homePage',
   _moviesArr: [],
+  _topMoviesArr: [],
   _queue: 'queue',
   _searchQuery: '',
   _watched: 'watched',
