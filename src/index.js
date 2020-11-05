@@ -1,6 +1,7 @@
 import throttle from 'lodash.throttle';
 import * as basicLightbox from 'basiclightbox';
 import runPreloader from './js/components/preloader';
+
 import { footerObserver } from './js/components/observers/footerObserver';
 import lazyLoad from './js/components/observers/lazyLoad';
 import loadOnScroll from './js/components/observers/loadOnScroll';
@@ -8,14 +9,17 @@ import scrollToTop from './js/components/scrollToTop';
 import isVisible from './js/components/isScrollBtnVisible';
 import searchErrorNotFound from './js/components/notifyErrors';
 import modalOptions from './js/components/modal/modalOptions';
+
 import refs from './js/refs';
 import moviesService from './js/APIService/moviesAPI-service';
+import isMobile from './js/isMobile';
 import updateMoviesMarkup from './js/updateMoviesMarkup';
 import globalVars from './js/globalVars/vars';
 import localStorageAPI from './js/localStorageAPI';
 import fetchedTopRated from './js/fetchedTopRated';
 import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import showLibraryTabs from './js/libraryTabs/showLibraryTabs';
+import showHomePage from './js/showHomePage';
 import hideLibraryTabs from './js/libraryTabs/hideLibraryTabs';
 import {
   checkMovieHandler,
@@ -29,6 +33,9 @@ import '@pnotify/core/dist/BrightTheme.css';
 import 'basiclightbox/dist/basicLightbox.min.css';
 
 loadOnScroll();
+isMobile.any()
+  ? refs.body.classList.add('is-touch')
+  : refs.body.classList.add('no-touch');
 
 console.log('running populars fetch');
 fetchedTopRated('topRated');
@@ -74,6 +81,17 @@ const galleryClickHandler = ({ target }) => {
   }
 };
 
+const logoHandler = () => {
+  refs.swiperContainer.classList.remove('swiper-hidden');
+  if (globalVars.activeTab !== 'homePage') {
+    showHomePage();
+    refs.homeTab.checked = true;
+  }
+  if (!refs.gallery.firstElementChild) {
+    fetchedMoviesHandler('popular');
+  }
+};
+
 const showLibraryHandler = ({ target: { value } }) => {
   if (value === 'library') {
     showLibraryTabs();
@@ -86,12 +104,7 @@ const showLibraryHandler = ({ target: { value } }) => {
   }
 
   if (value === 'homePage') {
-    globalVars.activeTab = value;
-    hideLibraryTabs();
-    updateMoviesMarkup.reset();
-    refs.noMoviesMessage.textContent = '';
-    updateMoviesMarkup.show(globalVars.moviesArr);
-    refs.swiperContainer.classList.remove('swiper-hidden');
+    showHomePage();
   }
   lazyLoad();
   footerObserver();
@@ -120,9 +133,4 @@ refs.toTop.addEventListener('click', function () {
 refs.headNav.addEventListener('click', showLibraryHandler);
 refs.sectionWatched.addEventListener('click', showSavedMovieFromGrade);
 window.addEventListener('scroll', throttle(isVisible, 500));
-document.querySelector('.logo').addEventListener('click', () => {
-  refs.swiperContainer.classList.remove('swiper-hidden');
-  if (!refs.gallery.firstElementChild) {
-    fetchedMoviesHandler('popular');
-  }
-});
+refs.logo.addEventListener('click', logoHandler);

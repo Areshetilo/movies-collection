@@ -59,12 +59,7 @@
   font-size: 30px !important;
   transition: 1.5s ease-out;
 }
-.footer-buttons__item:hover .footer-buttons__layer {
-  z-index: 1000;
-  transition: 0.3s;
-  color: #fff;
-  box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.5);
-}
+
 .footer-buttons__layer--github {
   background-color: #07c79e;
 }
@@ -77,35 +72,42 @@
 .footer-buttons__layer--lkdin3 {
   background-color: #63911d;
 }
-.footer-buttons__item:hover .footer-buttons__layer:nth-child(5) {
+
+body.no-touch .footer-buttons__item:hover .footer-buttons__layer {
+  z-index: 1000;
+  transition: 0.3s;
+  color: #fff;
+  box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+body.no-touch .footer-buttons__item:hover .footer-buttons__layer:nth-child(5) {
   transform: translate(40px, -40px);
   opacity: 1;
 }
-.footer-buttons__item:hover .footer-buttons__layer:nth-child(4) {
+body.no-touch .footer-buttons__item:hover .footer-buttons__layer:nth-child(4) {
   transform: translate(30px, -30px);
   opacity: 0.8;
 }
-.footer-buttons__item:hover .footer-buttons__layer:nth-child(3) {
+body.no-touch .footer-buttons__item:hover .footer-buttons__layer:nth-child(3) {
   transform: translate(20px, -20px);
   opacity: 0.6;
 }
-.footer-buttons__item:hover .footer-buttons__layer:nth-child(2) {
+body.no-touch .footer-buttons__item:hover .footer-buttons__layer:nth-child(2) {
   transform: translate(10px, -10px);
   opacity: 0.4;
 }
-.footer-buttons__item:hover .footer-buttons__layer:nth-child(1) {
+body.no-touch .footer-buttons__item:hover .footer-buttons__layer:nth-child(1) {
   transform: translate(0px, 0px);
   opacity: 0.2;
 }
-.footer-buttons__item:nth-child(1):hover .footer-buttons__layer {
+body.no-touch .footer-buttons__item:nth-child(1):hover .footer-buttons__layer {
   background: #52e19f !important;
 }
-.footer-buttons__item:nth-child(2):hover .footer-buttons__layer {
+body.no-touch .footer-buttons__item:nth-child(2):hover .footer-buttons__layer {
   background: #2c3456 !important;
 }
-.footer-buttons__item:nth-child(3):hover .footer-buttons__layer {
+body.no-touch .footer-buttons__item:nth-child(3):hover .footer-buttons__layer {
   background: #ea6e96 !important;
 }
-.footer-buttons__item:nth-child(4):hover .footer-buttons__layer {
+body.no-touch .footer-buttons__item:nth-child(4):hover .footer-buttons__layer {
   background: #fceb00 !important;
 }
