@@ -5,6 +5,5 @@ const searchErrorNotFound = (err) =>
     title: 'Oops!',
     text: `${err}`,
     delay: 3000,
-    // sticker: false,
   });
 export default searchErrorNotFound;

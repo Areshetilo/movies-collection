@@ -12,10 +12,6 @@ const lazyLoad = () => {
   };
   const intersectionObserver = new IntersectionObserver(onEntry, options);
   imagesArr.forEach((image) => intersectionObserver.observe(image));
-
-
 };
-
-
 
 export default lazyLoad;

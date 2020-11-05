@@ -36,7 +36,6 @@ isMobile.any()
   ? refs.body.classList.add('is-touch')
   : refs.body.classList.add('no-touch');
 
-console.log('running populars fetch');
 fetchedTopRated('topRated');
 fetchedMoviesHandler('popular');
 
