@@ -122,10 +122,15 @@ const moviesService = {
       }
     }
   },
-
+  fetchForTrailer(targetID) {
+    return fetch(
+      `${url}/movie/${targetID}/videos?api_key=${API_V4}>>&language=en-US`,
+      options
+    ).then((res) => res.json());
+  },
   fetchForID(targetID) {
     return fetch(
-      `https://api.themoviedb.org/3/movie/${targetID}?api_key=${API_V4}>>&language=en-US`,
+      `${url}/movie/${targetID}?api_key=${API_V4}>>&language=en-US`,
       options
     ).then((res) => res.json());
   },
