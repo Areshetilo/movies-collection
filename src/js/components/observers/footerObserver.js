@@ -14,7 +14,6 @@ const intersectionObserver = new IntersectionObserver(onEntry, options);
 
 const footerObserver = () => {
   intersectionObserver.observe(refs.footer);
-  console.log('observer is running');
 };
 
 export { footerObserver, intersectionObserver };

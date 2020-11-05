@@ -20,6 +20,7 @@ const fetchedMoviesHandler = (queryType) => {
       : moviesService.fetchPopularMovies();
   };
 
+  // eslint-disable-next-line no-shadow
   const getMovieFromID = async (queryType) => {
     const url = 'https://www.youtube.com/embed/';
     const responseTrailer = await moviesService.fetchForTrailer(queryType);
@@ -35,8 +36,6 @@ const fetchedMoviesHandler = (queryType) => {
       key = responseTrailer.results[0].key;
       responseMovie.trailerLink = `${url}${key}`;
     }
-
-    console.log(`${url}${key}`);
 
     globalVars.currentMovie = responseMovie;
     const instance = basicLightbox.create(
@@ -55,10 +54,8 @@ const fetchedMoviesHandler = (queryType) => {
       getMovies()
         .then((moviesArr) => {
           const movies = moviesArr ?? [];
-          console.log('movies:', movies);
           if (movies.length) {
             globalVars.moviesArr = [...globalVars.moviesArr, ...movies];
-            console.log('moviesArr: ', globalVars.moviesArr);
             updateMoviesMarkup.show(movies);
             lazyLoad();
           }

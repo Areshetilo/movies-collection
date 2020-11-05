@@ -1,8 +1,6 @@
-import searchErrorNotFound from '../components/notifyErrors';
 import globalVars from '../globalVars/vars';
+import API_V4 from './APIKey/APIKey';
 
-const API_V4 =
-  'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmYmMzYmM2YzkxZTJiZjQxMGI3YmJmNmZmNTU2NzUyNSIsInN1YiI6IjVlY2U0YTQxYWFlYzcxMDAyMDY2ZTE3MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.slIvk3yfJxfRtir2YlHit8J3E08usmxRcmm8Plgt87I';
 const url = 'https://api.themoviedb.org/3';
 const popularURL = `${url}/movie/popular?language=en-US`;
 const searchURL = `${url}/search/movie?language=en-US&include_adult=true`;
@@ -27,12 +25,10 @@ const moviesService = {
   },
   set page(value) {
     this._page = value;
-    console.log('set page:', this._page);
   },
 
   set totalPages(value) {
     this._totalPages = value;
-    console.log('totalPages: ', this._totalPages);
   },
   get totalPages() {
     return this._totalPages;
@@ -40,12 +36,10 @@ const moviesService = {
 
   resetPage() {
     this._page = 1;
-    console.log('reset page:', this._page);
   },
 
   incrementPage() {
     this._page += 1;
-    console.log('incremented page:', this._page);
   },
 
   async fetchPopularMovies() {
@@ -70,7 +64,6 @@ const moviesService = {
             this.totalPages = res.total_pages;
             return res.results;
           });
-        console.log(popularMovies);
         this.incrementPage();
         return popularMovies;
       } catch (err) {
@@ -81,14 +74,12 @@ const moviesService = {
 
   async topRatedMovies() {
     try {
-      const topRated = await fetch(`${topRatedURL}`, options).then((res) => {
+      return await fetch(`${topRatedURL}`, options).then((res) => {
         if (res.status === 200) {
           return res.json();
         }
         throw new Error('Oops, something happened, we are fixing it');
       });
-      console.log(topRated);
-      return topRated;
     } catch (err) {
       throw err;
     }
@@ -114,7 +105,6 @@ const moviesService = {
             this.totalPages = res.total_pages;
             return res.results;
           });
-        console.log(searchedMovies);
         this.incrementPage();
         return searchedMovies;
       } catch (err) {
