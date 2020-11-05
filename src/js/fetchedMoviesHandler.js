@@ -21,6 +21,13 @@ const fetchedMoviesHandler = (queryType) => {
   };
 
   // eslint-disable-next-line no-shadow
+  const getTrailerFromID = async (queryType) => {
+    const url = 'https://www.youtube.com/watch?v=';
+    const response = await moviesService.fetchForTrailer(queryType);
+    const key = await response.results[0].key;
+    return `${url}${key}`;
+  };
+  // eslint-disable-next-line no-shadow
   const getMovieFromID = async (queryType) => {
     return moviesService.fetchForID(queryType);
   };
@@ -46,21 +53,24 @@ const fetchedMoviesHandler = (queryType) => {
         .finally(() => {
           loader.hide();
         });
-    } else {
-      getMovieFromID(queryType)
-        .then((movie) => {
-          globalVars.currentMovie = movie;
-          const instance = basicLightbox.create(
-            updateMoviesMarkup.showModalTemplate(movie),
-            modalOptions
-          );
-          instance.show();
-          window.addEventListener('keydown', closeModalEscapeHandler);
-          document.addEventListener('click', closeModalEscapeHandler);
-          document.addEventListener('click', checkMovieHandler);
-        })
-        .finally(() => {});
+      return;
     }
+    getTrailerFromID(queryType).then((trailerLink) =>
+      console.log('trailerLink:', trailerLink)
+    );
+    getMovieFromID(queryType)
+      .then((movie) => {
+        globalVars.currentMovie = movie;
+        const instance = basicLightbox.create(
+          updateMoviesMarkup.showModalTemplate(movie),
+          modalOptions
+        );
+        instance.show();
+        window.addEventListener('keydown', closeModalEscapeHandler);
+        document.addEventListener('click', closeModalEscapeHandler);
+        document.addEventListener('click', checkMovieHandler);
+      })
+      .finally(() => {});
   })();
 };
 

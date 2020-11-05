@@ -20,7 +20,6 @@ import fetchedTopRated from './js/fetchedTopRated';
 import fetchedMoviesHandler from './js/fetchedMoviesHandler';
 import showLibraryTabs from './js/libraryTabs/showLibraryTabs';
 import showHomePage from './js/showHomePage';
-import hideLibraryTabs from './js/libraryTabs/hideLibraryTabs';
 import {
   checkMovieHandler,
   closeModalEscapeHandler,
