@@ -5,6 +5,9 @@
   align-items: center;
   justify-content: center;
   min-height: 20vh;
+  @media (orientation: landscape) and (max-width: 992px){
+    min-height: 38vh;
+  }
 }
 .footer-buttons__list {
   position: relative;

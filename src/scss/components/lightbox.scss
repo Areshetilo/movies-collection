@@ -62,6 +62,10 @@
   @media screen and (max-width: 360px) {
     height: 100vh;
   }
+  @media (orientation: landscape) and (max-width: 64em) and (min-width: 361px){
+    overflow: auto;
+    height: 100vh;
+  }
 
 }
 .trailer-wrapper{
