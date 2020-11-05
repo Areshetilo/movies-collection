@@ -42,6 +42,7 @@ fetchedMoviesHandler('popular');
 
 const submitHandler = (e) => {
   e.preventDefault();
+  refs.swiperContainer.classList.add('swiper-hidden');
   const reg = /^[0-9a-zа-яё\s]+$/iu;
   const inputValue = e.currentTarget.elements.query.value.trim().match(reg);
   if (!inputValue) {
@@ -54,7 +55,6 @@ const submitHandler = (e) => {
   globalVars.moviesArr = [];
   footerObserver();
   updateMoviesMarkup.reset();
-  refs.swiperContainer.classList.add('swiper-hidden');
   moviesService.resetPage();
   fetchedMoviesHandler('search');
   e.currentTarget.reset();
