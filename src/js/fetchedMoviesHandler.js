@@ -20,16 +20,33 @@ const fetchedMoviesHandler = (queryType) => {
       : moviesService.fetchPopularMovies();
   };
 
-  // eslint-disable-next-line no-shadow
-  const getTrailerFromID = async (queryType) => {
-    const url = 'https://www.youtube.com/watch?v=';
-    const response = await moviesService.fetchForTrailer(queryType);
-    const key = await response.results[0].key;
-    return `${url}${key}`;
-  };
-  // eslint-disable-next-line no-shadow
   const getMovieFromID = async (queryType) => {
-    return moviesService.fetchForID(queryType);
+    const url = 'https://www.youtube.com/embed/';
+    const responseTrailer = await moviesService.fetchForTrailer(queryType);
+    const responseMovie = await moviesService
+      .fetchForID(queryType)
+      .then((movie) => movie);
+    let key;
+
+    if (responseTrailer.results.length === 0) {
+      key = null;
+      responseMovie.trailerLink = null;
+    } else {
+      key = responseTrailer.results[0].key;
+      responseMovie.trailerLink = `${url}${key}`;
+    }
+
+    console.log(`${url}${key}`);
+
+    globalVars.currentMovie = responseMovie;
+    const instance = basicLightbox.create(
+      updateMoviesMarkup.showModalTemplate(responseMovie),
+      modalOptions
+    );
+    instance.show();
+    window.addEventListener('keydown', closeModalEscapeHandler);
+    document.addEventListener('click', closeModalEscapeHandler);
+    document.addEventListener('click', checkMovieHandler);
   };
 
   (function () {
@@ -55,22 +72,8 @@ const fetchedMoviesHandler = (queryType) => {
         });
       return;
     }
-    getTrailerFromID(queryType).then((trailerLink) =>
-      console.log('trailerLink:', trailerLink)
-    );
-    getMovieFromID(queryType)
-      .then((movie) => {
-        globalVars.currentMovie = movie;
-        const instance = basicLightbox.create(
-          updateMoviesMarkup.showModalTemplate(movie),
-          modalOptions
-        );
-        instance.show();
-        window.addEventListener('keydown', closeModalEscapeHandler);
-        document.addEventListener('click', closeModalEscapeHandler);
-        document.addEventListener('click', checkMovieHandler);
-      })
-      .finally(() => {});
+
+    getMovieFromID(queryType);
   })();
 };
 

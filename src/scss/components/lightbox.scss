@@ -57,27 +57,53 @@
 
 .details-card {
   max-width: 100%;
+  background: $primary-white;
+  padding-bottom: 1rem;
   @media screen and (max-width: 360px) {
     height: 100vh;
   }
 
-  &__wrapper {
-    width: 29rem;
-    background-color: $primary-white;
-    color: $main-text;
-    @include font(1.2, 1.2rem, 500);
-    text-align: left;
-    padding: 1rem 2rem 0.5rem;
+}
+.trailer-wrapper{
+  display: flex;
+  justify-content: center;
+  width: 29rem;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  @include for-size(tablet) {
+    width: 64rem;
+  }
+  .lds-dual-ring{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+  iframe{
+    position: relative;
+    z-index: 2;
+  }
 
-    @include for-size(tablet) {
-      display: flex;
-      justify-content: space-between;
-      width: 64rem;
-    }
-    @include for-size(tablet-landscape) {
-      width: 92rem;
-      padding: 1rem 4rem;
-    }
+}
+
+.info-wrapper{
+  width: 29rem;
+  background-color: $primary-white;
+  color: $main-text;
+  @include font(1.2, 1.2rem, 500);
+  text-align: left;
+  padding: 1rem 2rem 0.5rem;
+
+  @include for-size(tablet) {
+    display: flex;
+    justify-content: space-between;
+    width: 64rem;
+  }
+  @include for-size(tablet-landscape) {
+    width: 92rem;
+    padding: 1rem 4rem;
   }
 }
 
@@ -207,6 +233,7 @@
   padding: 1rem 0.5rem;
   width: 12rem;
   cursor: pointer;
+  height: 48px;
   @include font(1.1, 1.2rem, 400);
   box-shadow: 0 0 1px;
   transition: all 0.3s ease-in;
