@@ -38,6 +38,16 @@
     background-size: 24px;
   }
 }
+.logo-title {
+  display: none;
+}
+
+  @include for-size(tablet) {
+    .logo-title{
+      display: block;
+    }
+
+}
 
 .head_toggle {
   display: inline-block;
