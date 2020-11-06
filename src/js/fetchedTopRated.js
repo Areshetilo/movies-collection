@@ -19,8 +19,10 @@ const fetchedTopRated = (queryType) => {
           let mySwiper = new Swiper('.swiper-container', {
             preloadImages: false,
             lazy: {
+              loadPrevNext: true,
+              loadPrevNextAmount: 2,
               watchSlidesVisibility: true,
-              loadOnTransitionStart: true,
+              loadOnTransitionStart: false,
             },
             direction: 'horizontal',
             effect: 'coverflow',
@@ -28,7 +30,6 @@ const fetchedTopRated = (queryType) => {
             centeredSlides: true,
             loop: true,
             speed: 500,
-
             breakpoints: {
               320: {
                 slidesPerView: 1,
