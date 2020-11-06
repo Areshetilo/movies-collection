@@ -2,6 +2,8 @@ import movieCardTemplate from '../templates/movieCard.hbs';
 import movieModalTemplate from '../templates/imageLightbox.hbs';
 import refs from './refs';
 import lazyLoad from './components/observers/lazyLoad';
+import '../images/noPoster.jpg';
+import '../images/noImageCard.jpg';
 
 const updateMoviesMarkup = {
   show(movies) {
