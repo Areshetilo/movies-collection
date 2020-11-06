@@ -75,14 +75,9 @@ const localStorageAPI = {
   updateView(keyStorage) {
     if (globalVars.activeTab === keyStorage) {
       updateMoviesMarkup.reset();
-      this.getMovies(keyStorage).length > 0
-        ? updateMoviesMarkup.show(this.getMovies(keyStorage))
-        : updateMoviesMarkup.defaultMsg('You do not have any watched movies:(');
+      updateMoviesMarkup.show(this.getMovies(keyStorage));
     } else if (globalVars.activeTab === keyStorage) {
       updateMoviesMarkup.reset();
-      this.getMovies(keyStorage).length > 0
-        ? updateMoviesMarkup.show(this.getMovies(keyStorage))
-        : updateMoviesMarkup.defaultMsg('You do not have any queued movies:(');
       updateMoviesMarkup.show(this.getMovies(keyStorage));
     }
   },
@@ -93,14 +88,10 @@ const localStorageAPI = {
       this.getMovies('queueMovies').length > 0
     ) {
       if (this.findForID(movieID, 'watchedMovies')) {
-        globalVars.currentMovie = this.getMovies('watchedMovies').find(
-          (film) => film.id === +movieID
-        );
+        globalVars.currentMovie = this.findForID(movieID, 'watchedMovies');
         return globalVars.watched;
       } else if (this.findForID(movieID, 'queueMovies')) {
-        globalVars.currentMovie = this.getMovies('queueMovies').find(
-          (film) => film.id === +movieID
-        );
+        globalVars.currentMovie = this.findForID(movieID, 'queueMovies');
         return globalVars.queue;
       }
     }
