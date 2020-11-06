@@ -8,16 +8,16 @@
   - **[Arthur Plyuschevsky](https://github.com/massqeen)**
   - **[Yaroslav Paltsun](https://github.com/yaarchee)**
  
-- ### Main project goal:
+- ### Main project goals:
   - **Improving teamwork skills**
-  
+  - **Improving JavaScript skills**
 
 - ### Technologies used:
 
+  - **JavaScript**
   - **HTML**
   - **CSS**
   - **SCSS**
-  - **JavaScript**
   - **Webpack**
   
 - ### API:
