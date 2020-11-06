@@ -12,19 +12,23 @@
   - **Improving teamwork skills**
   - **Improving JavaScript skills**
 
-- ### Technologies used:
+- ### Technologies and tools used:
 
-  - **JavaScript**
-  - **HTML**
-  - **CSS**
+  - **JavaScript ES6+**
+  - **HTML5**
+  - **CSS3**
   - **SCSS**
   - **Webpack**
+  - **GIT**
+  - **Avocode**
+  - **AJAX**
+  - **Trello**
   
 - ### API:
 
   - **https://www.themoviedb.org**
 
-- ### Realised Version:
+- ### Release v 1.0.0:
 
   - **[MyMovies](https://mymovies.com.ua/)**
 
