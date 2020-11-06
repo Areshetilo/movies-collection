@@ -59,16 +59,19 @@
   max-width: 100%;
   background: $primary-white;
   padding-bottom: 1rem;
-  @media screen and (max-width: 360px) {
+  @media screen and (max-width: 767px) {
     height: 100vh;
   }
-  @media (orientation: landscape) and (max-width: 64em) and (min-width: 361px){
+  @media (orientation: landscape) and (max-width: 64em) and (min-width: 361px) {
     overflow: auto;
     height: 100vh;
   }
-
+  @media (max-height: 1023px) and (min-width: 769px) and (max-width: 1366px) {
+    overflow: auto;
+    height: 100vh;
+  }
 }
-.trailer-wrapper{
+.trailer-wrapper {
   display: flex;
   justify-content: center;
   width: 29rem;
@@ -78,21 +81,20 @@
   @include for-size(tablet) {
     width: 64rem;
   }
-  .lds-dual-ring{
+  .lds-dual-ring {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
   }
-  iframe{
+  iframe {
     position: relative;
     z-index: 2;
   }
-
 }
 
-.info-wrapper{
+.info-wrapper {
   width: 29rem;
   background-color: $primary-white;
   color: $main-text;
