@@ -1,0 +1,47 @@
+@import './vars';
+@import './mixins';
+
+.main-watched {
+  text-align: center;
+  padding-top: 1.5rem;
+  padding-bottom: 1.2rem;
+  box-shadow: 0 5px 9px 1px rgba(0, 0, 0, 0.23);
+  visibility: hidden;
+  display: none;
+  opacity: 0;
+  transition: 0.3s;
+  background-color: #f3f6f6;
+
+  .toggle-item label {
+    display: inline-block;
+    padding-bottom: 1rem;
+    padding-top: 1.2rem;
+    text-align: center;
+    text-transform: none;
+    opacity: 1;
+    border-right: none;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    width: 12.2rem;
+    border-bottom: 2px solid #9895a2;
+    color: $h2-text;
+    font-size: 1.6rem;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: normal;
+    line-height: 1.6rem;
+  }
+
+  .head_toggle .item input[type='radio']:checked + label {
+    border-bottom: 2px solid $accent-color;
+    background-color: $accent-color;
+    color: $primary-white;
+  }
+}
+
+.noMoviesMessage {
+  padding: 1rem;
+  text-align: center;
+  @include font(1.2, 2rem, 500);
+}

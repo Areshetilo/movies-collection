@@ -1,0 +1,68 @@
+@import '../vars.scss';
+
+.btn {
+  &-jelly {
+    &:hover {
+      animation: jelly 0.5s;
+    }
+  }
+
+  &-jittery {
+    animation: jittery 4s 10;
+  }
+
+  @keyframes jittery {
+    5%,
+    50% {
+      transform: scale(1);
+    }
+
+    10% {
+      transform: scale(0.9);
+    }
+
+    15% {
+      transform: scale(1.15);
+    }
+
+    20% {
+      transform: scale(1.15) rotate(-5deg);
+    }
+
+    25% {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    30% {
+      transform: scale(1.15) rotate(-3deg);
+    }
+
+    35% {
+      transform: scale(1.15) rotate(2deg);
+    }
+
+    40% {
+      transform: scale(1.15) rotate(0);
+    }
+  }
+
+  @keyframes jelly {
+    25% {
+      transform: scale(0.9, 1.1);
+    }
+
+    50% {
+      transform: scale(1.1, 0.9);
+    }
+
+    75% {
+      transform: scale(0.95, 1.05);
+    }
+  }
+}
+
+body.no-touch .btn-jelly:hover {
+  color: $primary-white;
+  background-color: $accent-color;
+  border: 1px solid $accent-color;
+}

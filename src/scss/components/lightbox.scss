@@ -1,0 +1,253 @@
+@import '../vars.scss';
+@import '../mixins.scss';
+
+.basicLightbox {
+  overflow: auto;
+  @include for-size(tablet-landscape) {
+    overflow: hidden;
+  }
+}
+
+.lightbox--visible {
+  opacity: 1;
+}
+
+.lightbox {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+  z-index: 1000;
+  will-change: opacity;
+}
+
+.lightbox_closeBtn {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  border-radius: 50%;
+  border: 2px solid white;
+  background-color: transparent;
+  color: var(--white-text-color);
+  cursor: pointer;
+  outline: none;
+  background-position: 50%;
+  background-size: 60%;
+  background-repeat: no-repeat;
+  transition: all 0.3s ease-in;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeG1sbnM6c3ZnanM9Imh0dHA6Ly9zdmdqcy5jb20vc3ZnanMiIHZlcnNpb249IjEuMSIgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHg9IjAiIHk9IjAiIHZpZXdCb3g9IjAgMCAzMTEgMzExLjA3NzMzIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIiBjbGFzcz0iIj48Zz48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0xNi4wMzUxNTYgMzExLjA3ODEyNWMtNC4wOTc2NTYgMC04LjE5NTMxMi0xLjU1ODU5NC0xMS4zMDg1OTQtNC42OTUzMTMtNi4yNS02LjI1LTYuMjUtMTYuMzgyODEyIDAtMjIuNjMyODEybDI3OS4wNjI1LTI3OS4wNjI1YzYuMjUtNi4yNSAxNi4zODI4MTMtNi4yNSAyMi42MzI4MTMgMHM2LjI1IDE2LjM4MjgxMiAwIDIyLjYzNjcxOWwtMjc5LjA1ODU5NCAyNzkuMDU4NTkzYy0zLjEzNjcxOSAzLjExNzE4OC03LjIzNDM3NSA0LjY5NTMxMy0xMS4zMjgxMjUgNC42OTUzMTN6bTAgMCIgZmlsbD0iI2ZmZjhmOCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiIvPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTI5NS4xMTcxODggMzExLjA3ODEyNWMtNC4wOTc2NTcgMC04LjE5MTQwNy0xLjU1ODU5NC0xMS4zMDg1OTQtNC42OTUzMTNsLTI3OS4wODIwMzItMjc5LjA1ODU5M2MtNi4yNS02LjI1MzkwNy02LjI1LTE2LjM4NjcxOSAwLTIyLjYzNjcxOXMxNi4zODI4MTMtNi4yNSAyMi42MzY3MTkgMGwyNzkuMDU4NTk0IDI3OS4wNjI1YzYuMjUgNi4yNSA2LjI1IDE2LjM4MjgxMiAwIDIyLjYzMjgxMi0zLjEzNjcxOSAzLjExNzE4OC03LjIzMDQ2OSA0LjY5NTMxMy0xMS4zMDQ2ODcgNC42OTUzMTN6bTAgMCIgZmlsbD0iI2ZmZjhmOCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiIvPjwvZz48L3N2Zz4K);
+
+  &:hover {
+    background-color: #77c1bb;
+  }
+}
+
+.details-card {
+  max-width: 100%;
+  background: $primary-white;
+  padding-bottom: 1rem;
+  @media screen and (max-width: 767px) {
+    height: 100vh;
+  }
+  @media (orientation: landscape) and (max-width: 64em) and (min-width: 361px) {
+    overflow: auto;
+    height: 100vh;
+  }
+  @media (max-height: 1023px) and (min-width: 769px) and (max-width: 1366px) {
+    overflow: auto;
+    height: 100vh;
+  }
+}
+.trailer-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 29rem;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto;
+  @include for-size(tablet) {
+    width: 64rem;
+  }
+  .lds-dual-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+  iframe {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.info-wrapper {
+  width: 29rem;
+  background-color: $primary-white;
+  color: $main-text;
+  @include font(1.2, 1.2rem, 500);
+  text-align: left;
+  padding: 1rem 2rem 0.5rem;
+
+  @include for-size(tablet) {
+    display: flex;
+    justify-content: space-between;
+    width: 64rem;
+  }
+  @include for-size(tablet-landscape) {
+    width: 92rem;
+    padding: 1rem 4rem;
+  }
+}
+
+.card-img {
+  width: 25rem;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 0 12px 4px rgba(119, 193, 187, 1);
+  @include for-size(tablet) {
+    width: 26rem;
+  }
+  @include for-size(tablet-landscape) {
+    width: 35rem;
+  }
+
+  &__wrapper {
+    text-align: center;
+    @include for-size(tablet) {
+      padding: 1rem 0;
+    }
+    @include for-size(tablet-landscape) {
+      margin-right: 3rem;
+    }
+  }
+}
+
+.card-info__wrapper {
+  padding: 1rem 0;
+  @include for-size(tablet) {
+    max-width: 32rem;
+  }
+  @include for-size(tablet-landscape) {
+    max-width: 47rem;
+    padding: 2rem 0;
+  }
+}
+
+.card-title {
+  @include font(1.2, 2rem, 500);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  @include for-size(tablet) {
+    @include font(1.1, 3rem, 500);
+  }
+  @include for-size(tablet-landscape) {
+    @include font(1.1, 4rem, 500);
+    margin-bottom: 4rem;
+  }
+}
+
+.movie-info__list {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  @include for-size(tablet-landscape) {
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.movie-info__item {
+  display: flex;
+  &:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.item_about {
+  color: $additional-text;
+  margin-right: 1rem;
+  @include for-size(tablet) {
+    margin-right: 3rem;
+  }
+  @include for-size(tablet-landscape) {
+    width: 9rem;
+  }
+}
+
+.item_description {
+  text-transform: capitalize;
+  width: 15.5rem;
+}
+
+.about-description__title {
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  @include for-size(tablet-landscape) {
+    font-size: 1.6rem;
+  }
+}
+
+.description__about {
+  margin-bottom: 1rem;
+  @include font(1.6, 1.2rem, 400);
+  max-height: 8rem;
+  overflow: auto;
+  box-shadow: 0 0 1px;
+  padding-left: 0.5rem;
+  @include for-size(tablet-landscape) {
+    @include font(1.6, 1.4rem, 400);
+    box-shadow: none;
+    padding-left: 0;
+  }
+}
+
+.card-button__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  @include for-size(tablet) {
+    padding: 0.5rem 0;
+    justify-content: space-evenly;
+  }
+  @include for-size(tablet-landscape) {
+    padding: 3rem 0;
+    justify-content: flex-start;
+  }
+}
+
+.modal-btn {
+  border: 1px solid $additional-text;
+  color: $main-text;
+  background-color: transparent;
+  text-transform: uppercase;
+  border-radius: 0.5rem;
+  outline: none;
+  padding: 1rem 0.5rem;
+  width: 12rem;
+  cursor: pointer;
+  height: 48px;
+  @include font(1.1, 1.2rem, 400);
+  box-shadow: 0 0 1px;
+  transition: all 0.3s ease-in;
+
+  @include for-size(tablet) {
+    margin-right: 1rem;
+  }
+  &--warning {
+    background-color: #e6b7bc;
+  }
+}

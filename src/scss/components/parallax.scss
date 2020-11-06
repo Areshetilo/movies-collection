@@ -1,0 +1,12 @@
+.parallax {
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.6),
+      rgba(119, 193, 187, 0.8)
+    ),
+    url(../images/background.jpg);
+  padding-bottom: 30px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: repeat-y;
+  background-size: cover;
+}

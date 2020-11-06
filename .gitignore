@@ -1,17 +1,21 @@
+### Webstorm ###
+# User-specific stuff
+.idea/
+
+### VisualStudioCode ###
+.vscode/*
+.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+
 # production
 /build
-/src
-/webpack
-.babelrc
-.browserslistrc
-.editorconfig
-.prettierrc
-eslintrc
-package.json
-package-lock.json
-postcss.config.js
-prettierrc
-
 
 # Logs
 logs

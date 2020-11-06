@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      property="og:title"
+      content="PushMaster team project - TMDB Movie Collection"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.mymovies.com.ua" />
+    <meta
+      property="og:image"
+      content="https://image.tmdb.org/t/p/w500/1n00NlOGRFZVs8coBxyZLm5l4EC.jpg"
+    />
+    <meta
+      property="og:description"
+      content="All about your favorite movies: popular, top rated, descriptions and trailers. Search any of it. Create your own library with watched and queue lists."
+    />
+    <style>
+      #preloader {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 999;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        background-color: #fbfbfb;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .preloader__text {
+        font-size: 20px;
+        font-weight: 500;
+      }
+      .visible {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 2s linear;
+      }
+
+      .hidden {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s 2s, opacity 2s linear;
+      }
+    </style>
+    <link
+      rel="shortcut icon"
+      href="./images/video-camera.png"
+      type="image/png"
+    />
+    <title>Movies</title>
+  </head>
+
+  <body>
+    <h1 class="visually-hidden">MovieLibrary</h1>
+    <div id="preloader" class="visible">
+      <p class="preloader__text">Please, wait, we're doing our best!</p>
+      <img
+        class="preloader__img"
+        src="./images/preloader.svg"
+        alt="preloader"
+      />
+    </div>
+
+    <header class="main-header">
+      <div class="main__container">
+        <div class="header-wrap">
+          <button class="logo" type="button">
+            <span class="logo-title">MovieLibrary</span>
+          </button>
+          <div class="head_toggle">
+            <div class="toggle-item item">
+              <input
+                id="home"
+                type="radio"
+                name="radio"
+                value="homePage"
+                checked
+              />
+              <label for="home">HOME</label>
+            </div>
+            <div class="toggle-item item">
+              <input id="library" type="radio" name="radio" value="library" />
+              <label for="library">My library</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <div id="up"></div>
+      <main>
+        <div class="main-watched">
+          <div class="head_toggle">
+            <div class="toggle-item item">
+              <input
+                id="watched"
+                type="radio"
+                name="radioW"
+                value="watchedMovies"
+              />
+              <label for="watched">Watched</label>
+            </div>
+            <div class="toggle-item item">
+              <input
+                id="queue"
+                type="radio"
+                name="radioW"
+                value="queueMovies"
+                checked
+              />
+              <label for="queue">Queue</label>
+            </div>
+          </div>
+        </div>
+        <div class="parallax">
+          <div class="main__container">
+            <form class="search-form" id="search-form">
+              <input
+                class="search-input"
+                type="search"
+                name="query"
+                autocomplete="off"
+                required
+                minlength="2"
+                placeholder="Enter the movie you like ;)"
+              />
+              <button class="submit-button btn-jittery" type="submit"></button>
+            </form>
+            <div class="swiper-container">
+              <div class="swiper-wrapper"></div>
+            </div>
+            <div class="wrapper">
+              <div class="lds-dual-ring js-loader is-hidden"></div>
+            </div>
+            <div class="gallery-wrapper">
+              <div class="noMoviesMessage"></div>
+              <ul class="gallery"></ul>
+              <div class="bottom"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <div class="modal-wrap"></div>
+      <i class="back-to-top simplescrollup__button--hide" id="goto-topJS"></i>
+    </div>
+    <footer class="main-footer">
+      <div class="main__container">
+        <div class="footer__wrapper">
+          <h2 class="footer-title">PushMaster team, 2020</h2>
+          <div class="footer-buttons__wrapper">
+            <div>
+              <ul class="footer-buttons__list">
+                <li class="footer-buttons__item">
+                  <a
+                    href="https://github.com/Areshetilo/movies-collection/blob/master/README.md"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="footer-buttons__link"
+                  >
+                    <span class="footer-buttons__layer"></span>
+                    <span class="footer-buttons__layer"></span>
+                    <span class="footer-buttons__layer"></span>
+                    <span class="footer-buttons__layer"></span>
+                    <span
+                      class="footer-buttons__layer footer-buttons__layer--github"
+                      ><i class="icon-github-circled"></i
+                    ></span>
+                  </a>
+                </li>
+                <li class="footer-buttons__item">
+                  <a
+                    href="https://www.linkedin.com/in/a-reshetilo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="footer-buttons__link"
+                  >
+                    <span class="footer-buttons__layer"></span>
+                    <span class="footer-buttons__layer"></span>
+                    <span class="footer-buttons__layer"></span>
+                    <span class="footer-buttons__layer"></span>
+                    <span
+                      class="footer-buttons__layer footer-buttons__layer--lkdin1"
+                      ><i class="icon-linkedin"></i
+                    ></span>
+                  </a>
+                </li>
+                <li class="footer-buttons__item">
+                  <a
+                    href="https://www.linkedin.com/in/arthurplyusch/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="footer-buttons__link"
+                  >
+                    <span class="footer-buttons__layer"></span>
+                    <span class="footer-buttons__layer"></span>
+                    <span class="footer-buttons__layer"></span>
+                    <span class="footer-buttons__layer"></span>
+                    <span
+                      class="footer-buttons__layer footer-buttons__layer--lkdin2"
+                      ><i class="icon-linkedin"></i
+                    ></span>
+                  </a>
+                </li>
+                <li class="footer-buttons__item">
+                  <!--TODO add Yarik's linkedin profile link-->
+                  <a
+                    href="https://www.linkedin.com/in/yaroslav-paltsun-6553421a8/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="footer-buttons__link"
+                  >
+                    <span class="footer-buttons__layer"></span>
+                    <span class="footer-buttons__layer"></span>
+                    <span class="footer-buttons__layer"></span>
+                    <span class="footer-buttons__layer"></span>
+                    <span
+                      class="footer-buttons__layer footer-buttons__layer--lkdin3"
+                      ><i class="icon-linkedin"></i
+                    ></span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <audio id="toastySound">
+      <source src="#" type="audio/mpeg" />
+    </audio>
+    <div class="toasty-wrap">
+      <img src="./images/toasty.png" alt="Ваня, чо каво :)))" />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+@import '../vars';
+@import '../mixins';
+
+.main-footer {
+  background-color: $accent-color;
+  padding: 2rem 0;
+}
+
+.footer-title {
+  color: $header-text;
+  @include font(1.2, 1.6rem, 500);
+  text-align: center;
+}

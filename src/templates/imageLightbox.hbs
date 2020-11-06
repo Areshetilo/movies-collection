@@ -1,0 +1,78 @@
+  <div class="lightbox">
+    <button type="button" class="lightbox_closeBtn" data-action="closeBtn"></button>
+    <div class="details-card">
+      <div class="details-card__wrapper">
+        <div class="info-wrapper">
+          <div class="card-img__wrapper">
+            {{#if backdrop_path}}
+              <img src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{original_title}}" class="card-img">
+            {{else}}
+              <img src="./images/noPoster.jpg" alt="{{original_title}}" class="card-img">
+            {{/if}}
+          </div>
+          <div class="card-info__wrapper">
+            <h2 class="card-title">
+              {{original_title}}
+            </h2>
+            <ul class="movie-info__list">
+              <li class="movie-info__item">
+                <p class="item_about">Vote / Votes</p>
+                <p class="item_description">
+                  <span class="item-vote">{{vote_average}}</span>
+                  <span style="color:rgb(140, 140, 140)">/</span>
+                  <span class="item-votes">{{vote_count}}</span>
+                </p>
+              </li>
+              <li class="movie-info__item">
+                <p class="item_about">Popularity</p>
+                <p class="item_description">{{popularity}}</p>
+              </li>
+              <li class="movie-info__item">
+                <p class="item_about">Original Title</p>
+                <p class="item_description">{{original_title}}</p>
+              </li>
+              <li class="movie-info__item">
+                <p class="item_about">Genre</p>
+                <p class="item_description">
+                  {{#each genres}}
+                    <span class="card-item__genre">{{name}}</span>
+                  {{/each}}
+                </p>
+              </li>
+              <li class="movie-info__item cast">
+                <p class="item_about">Status</p>
+                <p class="item_description">{{status}}</p>
+              </li>
+            </ul>
+            <p class="about-description__title">About</p>
+            <p class="description__about">
+              {{overview}}
+            </p>
+            <div class="card-button__wrapper">
+
+              {{#if watched}}
+                <button data-name="watched" class="modal-btn modal-btn--warning btn-jelly card-button__watched" id="btnW" type="button">delete from watched</button>
+              {{else}}
+                <button data-name="watched" class="modal-btn btn-jelly card-button__watched" id="btnW" type="button">add to watched</button>
+              {{/if}}
+
+              {{#if queue}}
+                <button data-name="queue" class="modal-btn modal-btn--warning btn-jelly card-button__queue" id="btnQ" type="button">delete from queue</button>
+              {{else}}
+                <button data-name="queue" class="modal-btn btn-jelly card-button__queue" id="btnQ" type="button">add to queue</button>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+        <div class="trailer-wrapper" >
+          {{#if trailerLink}}
+          <div class="lds-dual-ring js-loader"></div>
+          <iframe width="560" height="315" src="{{trailerLink}}" allowfullscreen></iframe>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+

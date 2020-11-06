@@ -1,0 +1,56 @@
+@import 'minireset.scss';
+@import 'normalize.scss';
+@import 'fonts.scss';
+@import 'vars.scss';
+@import 'mixins.scss';
+
+:root {
+  font-size: 62.5%;
+}
+
+//reset margin from normalize
+h1 {
+  margin-top: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  @include font(1.2, 1.6rem, 400);
+  color: $main-text;
+  background-color: #fff;
+}
+
+.main__container {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+
+  @media (max-width: 576px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.load-more {
+  width: 100px;
+  height: 30px;
+}
+
+@import './components/button';
+@import './components/header';
+@import './components/form';
+@import './components/gallery';
+@import './components/parallax';
+@import './components/loader';
+@import './components/backToTop';
+@import './components/footer';
+@import './components/footerBtns';
+@import './components/lightbox';
+@import 'components/fontello/fontello';
+@import 'components/fontello/fontello-codes';
+@import 'components/fontello/fontello-embedded';
+@import './components/swiper';
+@import './pnotifyCustom';
+@import './watched';
+@import './visibility';

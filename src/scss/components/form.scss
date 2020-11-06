@@ -1,0 +1,75 @@
+@import '../vars';
+
+.search-form {
+  padding-top: 30px;
+  position: relative;
+  width: 50%;
+  margin: 0 auto;
+
+  @media (max-width: 576px) {
+    width: 100%;
+  }
+}
+
+.search-input {
+  width: 100%;
+  min-height: 42px;
+  border-radius: 6px;
+  border-bottom: 2px solid $accent-color;
+  margin-bottom: 20px;
+  padding-left: 60px;
+  text-align: left;
+  outline: none;
+  color: $header-text;
+
+  &::placeholder {
+    text-align: left;
+    color: $header-text;
+  }
+}
+
+.submit-button {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: $accent-color url(../images/search.svg) no-repeat center;
+  background-size: cover;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-input::-webkit-input-placeholder {
+  text-indent: 0;
+  transition: text-indent 0.4s ease-in-out;
+}
+.search-input::-moz-placeholder {
+  text-indent: 0;
+  transition: text-indent 0.4s ease-in-out;
+}
+.search-input:-moz-placeholder {
+  text-indent: 0;
+  transition: text-indent 0.4s ease-in-out;
+}
+.search-input:-ms-input-placeholder {
+  text-indent: 0;
+  transition: text-indent 0.4s ease-in-out;
+}
+.search-input:focus::-webkit-input-placeholder {
+  text-indent: 700px;
+  transition: text-indent 0.4s ease-in-out;
+}
+.search-input:focus::-moz-placeholder {
+  text-indent: 700px;
+  transition: text-indent 0.4s ease-in-out;
+}
+.search-input:focus:-moz-placeholder {
+  text-indent: 700px;
+  transition: text-indent 0.4s ease-in-out;
+}
+.search-input:focus:-ms-input-placeholder {
+  text-indent: 700px;
+  transition: text-indent 0.4s ease-in-out;
+}

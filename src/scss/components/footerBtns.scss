@@ -1,0 +1,116 @@
+@import '../mixins';
+
+.footer-buttons__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 20vh;
+  @media (orientation: landscape) and (max-width: 992px){
+    min-height: 38vh;
+  }
+}
+.footer-buttons__list {
+  position: relative;
+  display: flex;
+  transform: rotate(-16deg) skew(25deg);
+  transform-style: preserve-3d;
+}
+.footer-buttons__item {
+  position: relative;
+  list-style: none;
+  width: 5rem;
+  height: 5rem;
+  margin: 0 1rem;
+  @include for-size(tablet) {
+    width: 6rem;
+    height: 6rem;
+    margin: 0 2rem;
+  }
+}
+.footer-buttons__item::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: -1px;
+  width: 100%;
+  height: 10px;
+  background: #838282;
+  transform-origin: top;
+  transform: skewX(-41deg);
+}
+.footer-buttons__item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -9px;
+  width: 9px;
+  height: 100%;
+  background: #838282;
+  transform-origin: right;
+  transform: skewY(-49deg);
+}
+.footer-buttons__layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 30px !important;
+  transition: 1.5s ease-out;
+}
+
+.footer-buttons__layer--github {
+  background-color: #07c79e;
+}
+.footer-buttons__layer--lkdin1 {
+  background-color: #afff33;
+}
+.footer-buttons__layer--lkdin2 {
+  background-color: #7bc707;
+}
+.footer-buttons__layer--lkdin3 {
+  background-color: #63911d;
+}
+
+body.no-touch .footer-buttons__item:hover .footer-buttons__layer {
+  z-index: 1000;
+  transition: 0.3s;
+  color: #fff;
+  box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+body.no-touch .footer-buttons__item:hover .footer-buttons__layer:nth-child(5) {
+  transform: translate(40px, -40px);
+  opacity: 1;
+}
+body.no-touch .footer-buttons__item:hover .footer-buttons__layer:nth-child(4) {
+  transform: translate(30px, -30px);
+  opacity: 0.8;
+}
+body.no-touch .footer-buttons__item:hover .footer-buttons__layer:nth-child(3) {
+  transform: translate(20px, -20px);
+  opacity: 0.6;
+}
+body.no-touch .footer-buttons__item:hover .footer-buttons__layer:nth-child(2) {
+  transform: translate(10px, -10px);
+  opacity: 0.4;
+}
+body.no-touch .footer-buttons__item:hover .footer-buttons__layer:nth-child(1) {
+  transform: translate(0px, 0px);
+  opacity: 0.2;
+}
+body.no-touch .footer-buttons__item:nth-child(1):hover .footer-buttons__layer {
+  background: #52e19f !important;
+}
+body.no-touch .footer-buttons__item:nth-child(2):hover .footer-buttons__layer {
+  background: #2c3456 !important;
+}
+body.no-touch .footer-buttons__item:nth-child(3):hover .footer-buttons__layer {
+  background: #ea6e96 !important;
+}
+body.no-touch .footer-buttons__item:nth-child(4):hover .footer-buttons__layer {
+  background: #fceb00 !important;
+}

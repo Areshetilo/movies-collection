@@ -1,0 +1,72 @@
+@mixin retina($x) {
+  @media (-webkit-min-device-pixel-ratio: $x), (min-resolution: 96dpi*$x) {
+    @content;
+  }
+}
+
+@mixin for-size($size) {
+  //>576px
+  @if $size==phone-only {
+    @media (min-width: 36em) {
+      @content;
+    }
+  }
+
+  //>768px
+  @else if $size==tablet {
+    @media (min-width: 48em) {
+      @content;
+    }
+  }
+
+  //>1024px
+  @else if $size==tablet-landscape {
+    @media (min-width: 64em) {
+      @content;
+    }
+  }
+
+  //>1280px
+  @else if $size==desktop {
+    @media (min-width: 80em) {
+      @content;
+    }
+  }
+  //>1680px
+  @else if $size==large-desktop {
+    @media (min-width: 105em) {
+      @content;
+    }
+  }
+}
+
+@mixin font($lineheight, $fontsize, $fontweight) {
+  line-height: $lineheight;
+  font-size: $fontsize;
+  font-weight: $fontweight;
+}
+
+//vertical centering any element
+@mixin vertical-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+//absolute positioning
+@mixin abs-position($top, $left) {
+  position: absolute;
+  top: $top;
+  left: $left;
+}
+
+//flex center
+@mixin flex-center($justify: center, $align: center) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+%transition {
+  transition: all 0.3s ease-in-out;
+}

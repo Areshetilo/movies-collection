@@ -1,0 +1,21 @@
+const refs = {
+  body: document.querySelector('body'),
+  bottom: document.querySelector('.bottom'),
+  btnW: document.querySelector('#btnW'),
+  footer: document.querySelector('.main-footer'),
+  gallery: document.querySelector('.gallery'),
+  headNav: document.querySelector('.head_toggle'),
+  homeTab: document.querySelector('#home'),
+  logo: document.querySelector('.logo'),
+  modalWrap: document.querySelector('.modal-wrap'),
+  noMoviesMessage: document.querySelector('.noMoviesMessage'),
+  queueTab: document.querySelector('#queue'),
+  searchForm: document.querySelector('#search-form'),
+  sectionWatched: document.querySelector('.main-watched'),
+  swiperWrap: document.querySelector('.swiper-wrapper'),
+  swiperContainer: document.querySelector('.swiper-container'),
+  toasty: document.querySelector('.toasty-wrap'),
+  toastySound: document.querySelector('#toastySound'),
+  toTop: document.getElementById('goto-topJS'),
+};
+export default refs;
