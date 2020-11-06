@@ -17,12 +17,18 @@ const fetchedTopRated = (queryType) => {
           globalVars.topMoviesArr = moviesArr.results;
           updateSwiperMarkup.show(globalVars.topMoviesArr);
           let mySwiper = new Swiper('.swiper-container', {
+            preloadImages: false,
+            lazy: true,
+            loadPrevNext: true,
+            loadPrevNextAmount: 2,
+            watchSlidesVisibility: true,
             direction: 'horizontal',
             effect: 'coverflow',
             grabCursor: true,
             centeredSlides: true,
             loop: true,
-            speed: 700,
+            speed: 2000,
+
             breakpoints: {
               320: {
                 slidesPerView: 1,
@@ -45,8 +51,8 @@ const fetchedTopRated = (queryType) => {
               slideShadows: true,
             },
             autoplay: {
-              delay: 3000,
-              disableOnInteraction: false,
+              delay: 6000,
+              disableOnInteraction: true,
             },
           });
           mySwiper.init();

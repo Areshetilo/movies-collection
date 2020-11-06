@@ -1,8 +1,9 @@
 {{#each this}}
-    <div class="movie-card swiper-slide">
-        <img class="swiper-card__image" src="https://image.tmdb.org/t/p/w500{{poster_path}}"
-             data-id="{{id}}" alt="{{title}}"/>
-      <span class="movie-card__title">{{title}}</span>
-      <span class="movie-card__vote">{{vote_average}}</span>
-    </div>
+  <div class="movie-card swiper-slide">
+    <img class="swiper-card__image swiper-lazy" data-src="https://image.tmdb.org/t/p/w400{{poster_path}}"
+      data-id="{{id}}" alt="{{title}}"/>
+    <span class="movie-card__title">{{title}}</span>
+    <span class="movie-card__vote">{{vote_average}}</span>
+    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+  </div>
 {{/each}}
