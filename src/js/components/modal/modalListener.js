@@ -1,6 +1,7 @@
 import globalVars from '../../globalVars/vars';
 import localStorageAPI from '../../localStorageAPI';
 import refs from '../../refs';
+import { enableBodyScroll } from 'body-scroll-lock';
 
 function toggleButtonClass(btnW, btnQ) {
   if (btnW.textContent === 'add to watched') {
@@ -59,6 +60,7 @@ function closeModalEscapeHandler({ code, target }) {
       .querySelector('.basicLightbox')
       .classList.remove('basicLightbox--visible');
     refs.body.classList.remove('modal-open');
+    enableBodyScroll(refs.body);
     window.removeEventListener('keydown', closeModalEscapeHandler);
     document.removeEventListener('click', closeModalEscapeHandler);
     document.removeEventListener('click', closeModalEscapeHandler);

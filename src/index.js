@@ -1,5 +1,10 @@
 import throttle from 'lodash.throttle';
 import * as basicLightbox from 'basiclightbox';
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks,
+} from 'body-scroll-lock';
 import runPreloader from './js/components/preloader';
 
 import { footerObserver } from './js/components/observers/footerObserver';
@@ -68,6 +73,7 @@ const galleryClickHandler = ({ target }) => {
         updateMoviesMarkup.showModalTemplate(globalVars.currentMovie),
         modalOptions
       );
+      disableBodyScroll(refs.body);
       instance.show();
 
       window.addEventListener('keydown', closeModalEscapeHandler);
