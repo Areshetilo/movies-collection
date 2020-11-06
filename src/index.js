@@ -1,10 +1,7 @@
 import throttle from 'lodash.throttle';
 import * as basicLightbox from 'basiclightbox';
-import {
-  disableBodyScroll,
-  enableBodyScroll,
-  clearAllBodyScrollLocks,
-} from 'body-scroll-lock';
+const bodyScrollLock = require('body-scroll-lock');
+const disableBodyScroll = bodyScrollLock.disableBodyScroll;
 import runPreloader from './js/components/preloader';
 
 import { footerObserver } from './js/components/observers/footerObserver';
@@ -73,9 +70,9 @@ const galleryClickHandler = ({ target }) => {
         updateMoviesMarkup.showModalTemplate(globalVars.currentMovie),
         modalOptions
       );
-      disableBodyScroll(refs.body);
       instance.show();
-
+      console.log('вот тут блокируем скролл');
+      disableBodyScroll(document.querySelector('.details-card'));
       window.addEventListener('keydown', closeModalEscapeHandler);
       document.addEventListener('click', closeModalEscapeHandler);
       document.addEventListener('click', checkMovieHandler);

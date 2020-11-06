@@ -11,7 +11,9 @@ import {
   checkMovieHandler,
   closeModalEscapeHandler,
 } from './components/modal/modalListener';
-
+import refs from './refs';
+const bodyScrollLock = require('body-scroll-lock');
+const disableBodyScroll = bodyScrollLock.disableBodyScroll;
 const loader = new Loader('.js-loader', 'is-hidden');
 const fetchedMoviesHandler = (queryType) => {
   const getMovies = async () => {
@@ -43,6 +45,8 @@ const fetchedMoviesHandler = (queryType) => {
       modalOptions
     );
     instance.show();
+    console.log('вот тут блокируем скролл');
+    disableBodyScroll(document.querySelector('.details-card'));
     window.addEventListener('keydown', closeModalEscapeHandler);
     document.addEventListener('click', closeModalEscapeHandler);
     document.addEventListener('click', checkMovieHandler);

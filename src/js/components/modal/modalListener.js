@@ -1,7 +1,8 @@
 import globalVars from '../../globalVars/vars';
 import localStorageAPI from '../../localStorageAPI';
 import refs from '../../refs';
-import { enableBodyScroll } from 'body-scroll-lock';
+const bodyScrollLock = require('body-scroll-lock');
+const enableBodyScroll = bodyScrollLock.enableBodyScroll;
 
 function toggleButtonClass(btnW, btnQ) {
   if (btnW.textContent === 'add to watched') {
@@ -60,7 +61,8 @@ function closeModalEscapeHandler({ code, target }) {
       .querySelector('.basicLightbox')
       .classList.remove('basicLightbox--visible');
     refs.body.classList.remove('modal-open');
-    enableBodyScroll(refs.body);
+    console.log('вот тут разблокируем скролл');
+    enableBodyScroll(document.querySelector('.details-card'));
     window.removeEventListener('keydown', closeModalEscapeHandler);
     document.removeEventListener('click', closeModalEscapeHandler);
     document.removeEventListener('click', closeModalEscapeHandler);
