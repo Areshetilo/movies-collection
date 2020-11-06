@@ -2,9 +2,9 @@
     <li>
       <div class="movie-card">
         {{#if backdrop_path}}
-          <img class="movie-card__image" src="" data-source="https://image.tmdb.org/t/p/w500{{backdrop_path}}"
+          <img class="movie-card__image" data-source="https://image.tmdb.org/t/p/w400{{backdrop_path}}"
                data-id="{{id}}" alt="{{title}}"
-               data-lazy="https://image.tmdb.org/t/p/w500{{backdrop_path}}"/>
+               data-lazy="https://image.tmdb.org/t/p/w400{{backdrop_path}}"/>
         {{else}}
           <img class="movie-card__image" src="" data-source="./images/noImageCard.jpg"
                data-id="{{id}}" alt="{{title}}"
