@@ -14,6 +14,7 @@ import {
 import refs from './refs';
 const bodyScrollLock = require('body-scroll-lock');
 const disableBodyScroll = bodyScrollLock.disableBodyScroll;
+
 const loader = new Loader('.js-loader', 'is-hidden');
 const fetchedMoviesHandler = (queryType) => {
   const getMovies = async () => {
@@ -45,8 +46,13 @@ const fetchedMoviesHandler = (queryType) => {
       modalOptions
     );
     instance.show();
-    console.log('вот тут блокируем скролл');
-    disableBodyScroll(document.querySelector('.details-card'));
+
+    // TODO put it somewhere here
+    console.log('не в библиотеке блокируем скролл');
+    const test = document.querySelector('.details-card');
+    console.log(test);
+    disableBodyScroll(test);
+
     window.addEventListener('keydown', closeModalEscapeHandler);
     document.addEventListener('click', closeModalEscapeHandler);
     document.addEventListener('click', checkMovieHandler);

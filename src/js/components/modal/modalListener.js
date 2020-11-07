@@ -62,6 +62,7 @@ function closeModalEscapeHandler({ code, target }) {
       .classList.remove('basicLightbox--visible');
     refs.body.classList.remove('modal-open');
     console.log('вот тут разблокируем скролл');
+    console.log(document.querySelector('.details-card'));
     enableBodyScroll(document.querySelector('.details-card'));
     window.removeEventListener('keydown', closeModalEscapeHandler);
     document.removeEventListener('click', closeModalEscapeHandler);

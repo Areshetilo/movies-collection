@@ -71,8 +71,10 @@ const galleryClickHandler = ({ target }) => {
         modalOptions
       );
       instance.show();
-      console.log('вот тут блокируем скролл');
-      disableBodyScroll(document.querySelector('.details-card'));
+      console.log('фильмы поисковые блокируем скролл');
+      const test = document.querySelector('.details-card');
+      console.log(test);
+      disableBodyScroll(test);
       window.addEventListener('keydown', closeModalEscapeHandler);
       document.addEventListener('click', closeModalEscapeHandler);
       document.addEventListener('click', checkMovieHandler);
